@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `image` VARCHAR(128) NOT NULL DEFAULT '/img/default.jpg',
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author` INT UNSIGNED NOT NULL,
+  `published` BOOLEAN NOT NULL DEFAULT FALSE,
   CONSTRAINT `FK_posts_user` FOREIGN KEY (`author`) REFERENCES `users`(`id`),
   PRIMARY KEY (`id`)
 );
