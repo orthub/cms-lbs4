@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
 <?php require_once __DIR__ . '/partials/head.php' ?>
