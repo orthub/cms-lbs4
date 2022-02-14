@@ -4,8 +4,8 @@
 <?php require_once __DIR__ . '/partials/head.php' ?>
 
 <body>
+  <?php require_once __DIR__ . '/partials/navbar.php' ?>
   <div class="container">
-    <?php require_once __DIR__ . '/partials/navbar.php' ?>
     <?php require_once __DIR__ . '/../models/posts.php' ?>
     <?php $posts = get_last_five_posts()  ?>
     <div class="content-posts">
