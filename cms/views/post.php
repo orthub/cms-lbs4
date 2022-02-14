@@ -6,8 +6,8 @@
 <body>
   <div class="container">
     <?php require_once __DIR__ . '/partials/navbar.php' ?>
-    <?php require_once __DIR__ . '/../models/posts.php' ?>
-    <?php $single_post = get_full_post_from_id($post_id)  ?>
+    <?php require_once __DIR__ . '/../controllers/posts.php' ?>
+    <?php $single_post = get_full_post_from_id($post_id) ?>
     <div class="content-posts">
       <div class="single-post">
         <div class="post-image">

@@ -6,8 +6,8 @@
 <body>
   <?php require_once __DIR__ . '/partials/navbar.php' ?>
   <div class="container">
-    <?php require_once __DIR__ . '/../models/posts.php' ?>
-    <?php $posts = get_last_five_posts()  ?>
+    <?php require_once __DIR__ . '/../controllers/posts.php' ?>
+    <?php $posts = get_last_five_posts() ?>
     <div class="content-posts">
       <?php foreach ($posts as $post) : ?>
       <div class="post">
