@@ -79,3 +79,7 @@ html, body {
   text-decoration: none;
   text-align: center;
 }
+
+.login-form .form{
+  margin: 0px auto;
+}
