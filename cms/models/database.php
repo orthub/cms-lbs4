@@ -2,7 +2,7 @@
 
 // require_once __DIR__ . '/../config/config.php';
 
-function get_cms_db()
+function get_db()
 {
   static $db;
   if ($db instanceof PDO) {

@@ -12,7 +12,7 @@ function get_last_five_posts()
                     JOIN `users` ON(`author` = `users`.`id`)
                     ORDER BY `created` DESC
                     LIMIT 5';
-  $result_five_posts = get_cms_db()->query($sql_five_posts);
+  $result_five_posts = get_db()->query($sql_five_posts);
   return $result_five_posts->fetchAll();
 }
 
@@ -26,7 +26,7 @@ function get_full_post_from_id(string $post_id)
                       JOIN `users` ON(`author` = `users`.`id`)
                       WHERE `posts`.`id` = :postId';
 
-  $statement_post_from_id = get_cms_db()->prepare($sql_post_from_id);
+  $statement_post_from_id = get_db()->prepare($sql_post_from_id);
   $statement_post_from_id->execute([':postId' => $post_id]);
   $result_post_from_id = $statement_post_from_id->fetch();
   return $result_post_from_id;
