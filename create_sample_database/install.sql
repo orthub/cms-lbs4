@@ -107,10 +107,11 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `quantity` INT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `product_id_user_id` (`product_id`, `user_id`),
+  CONSTRAINT `FK_cart_user` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `FK_cart_product` FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
-CREATE TABLE `delivery_address` (
+CREATE TABLE IF NOT EXISTS `delivery_address` (
   `id` int(16) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(16) unsigned NOT NULL,
   `city` text NOT NULL,
@@ -122,7 +123,7 @@ CREATE TABLE `delivery_address` (
   CONSTRAINT `FK_user_delivery_address` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE `orders` (
+CREATE TABLE IF NOT EXISTS `orders` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `order_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` ENUM("NEW", "PAYED") NOT NULL DEFAULT "NEW",
@@ -135,7 +136,7 @@ CREATE TABLE `orders` (
   CONSTRAINT `FK_order_delivery_address` FOREIGN KEY (`delivery_address_id`) REFERENCES `delivery_address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE `order_products` (
+CREATE TABLE IF NOT EXISTS `order_products` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `order_id` INT UNSIGNED NOT NULL,
   `product_id` INT UNSIGNED NOT NULL,
