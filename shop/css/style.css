@@ -1,0 +1,77 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #cfcfcf;
+}
+
+.space-sm {
+  width: 100%;
+  height: 32px;
+}
+
+.space-md {
+  width: 100%;
+  height: 48px;
+}
+
+.container {
+  margin: 8px auto 0px auto;
+  padding: 6px;
+  width: 800px;
+  max-width: 800px;
+  background-color: #ffe4c4;
+}
+
+.navbar {
+  margin: 0px auto 16px auto;
+  padding: 8px;
+  color: #ec7e00;
+  background-color: #282828;
+}
+
+.navbar-user{
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar a {
+  color: #fdffdf;
+  text-decoration: none;
+}
+
+.errorMessages {
+  padding: 8px;
+  margin: 6px 0px;
+  background-color: #ffc6c6;
+  color: #db0e0e;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table  a {
+  text-decoration: none;
+}
+
+th, td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #000000;
+}
+
+.delivery-address {
+  margin: 6px 16px;
+  display: block;
+  float: left;
+  height: auto;
+}
+
+.clear-left {
+  clear: left;
+}
