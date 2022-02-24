@@ -11,6 +11,7 @@ if (isset($_SESSION['userId'])) {
   <?php if (!isset($_SESSION['userId'])) : ?>
   <?php echo '<a href="/shop/views/login.php">Einloggen</a>' ?>
   <?php endif ?>
+  <a>Kategorien</a>
   <a href="/shop/views/cart.php">Warenkorb (<?php echo ($cartItemsCount === null) ? '0' : $cartItemsCount ?>)</a>
   <?php
   require_once __DIR__ . '/../../models/login.php';
