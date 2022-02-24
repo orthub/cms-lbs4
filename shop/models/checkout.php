@@ -43,7 +43,7 @@ function username_for_order(string $userId)
 function save_order(string $userId, string $orderId, string $addressId): bool
 {
   $sql = 'INSERT INTO `orders`
-          SET `status` = "new",
+          SET `status` = "NEW",
           `user_id` = :userId,
           `orders_id` = :orderId,
           `delivery_address_id` = :addressId';
