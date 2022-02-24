@@ -123,27 +123,50 @@ CREATE TABLE IF NOT EXISTS `delivery_address` (
   CONSTRAINT `FK_user_delivery_address` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `orders` (
+-- CREATE TABLE IF NOT EXISTS `orders` (
+--   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+--   `order_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--   `status` ENUM("NEW", "PAYED") NOT NULL DEFAULT "NEW",
+--   `user_id` INT UNSIGNED NOT NULL,
+--   `orders_id` INT UNSIGNED NOT NULL,
+--   `delivery_address_id` INT UNSIGNED NOT NULL,
+--   PRIMARY KEY (`id`),
+--   UNIQUE KEY (`orders_id`),
+--   CONSTRAINT `FK_order_to_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+--   CONSTRAINT `FK_order_delivery_address` FOREIGN KEY (`delivery_address_id`) REFERENCES `delivery_address` (`id`)
+-- );
+
+CREATE TABLE `orders` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `order_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` ENUM("NEW", "PAYED") NOT NULL DEFAULT "NEW",
+  `status` enum("new", "payed") NOT NULL DEFAULT "new",
   `user_id` INT UNSIGNED NOT NULL,
   `orders_id` INT UNSIGNED NOT NULL,
   `delivery_address_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY (`orders_id`),
-  CONSTRAINT `FK_order_to_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `FK_order_delivery_address` FOREIGN KEY (`delivery_address_id`) REFERENCES `delivery_address` (`id`)
+  CONSTRAINT `FK_order_to_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_order_delivery_address` FOREIGN KEY (`delivery_address_id`) REFERENCES `delivery_address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS `order_products` (
+-- CREATE TABLE IF NOT EXISTS `order_products` (
+--   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+--   `order_id` INT UNSIGNED NOT NULL,
+--   `product_id` INT UNSIGNED NOT NULL,
+--   `quantity` INT UNSIGNED NOT NULL,
+--   PRIMARY KEY (`id`),
+--   CONSTRAINT `FK_order_products_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+--   CONSTRAINT `FK_order_products_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
+--   );
+
+  CREATE TABLE `order_products` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `order_id` INT UNSIGNED NOT NULL,
   `product_id` INT UNSIGNED NOT NULL,
   `quantity` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_order_products_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  CONSTRAINT `FK_order_products_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  CONSTRAINT `FK_order_products_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`orders_id`) ON DELETE NO ACTION ON UPDATE CASCADE
   );
 
 -- ADD SOME PRODUCTS
