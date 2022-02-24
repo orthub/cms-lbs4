@@ -4,7 +4,7 @@ if (session_start() === false) {
 }
 
 if (!isset($_SESSION['userId'])) {
-  die('Zuerst <a href="/views/login.php">einloggen</a>');
+  die('Zuerst <a href="/shop/views/login.php">einloggen</a>');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,5 +13,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $deliveryId = filter_input(INPUT_POST, 'deliveryId', FILTER_SANITIZE_SPECIAL_CHARS);
   $_SESSION['deliveryId'] = $deliveryId;
 
-  header('Location: ' . '/views/checkout.php');
+  header('Location: ' . '/shop/views/checkout.php');
 }

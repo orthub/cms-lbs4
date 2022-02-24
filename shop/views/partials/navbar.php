@@ -2,10 +2,9 @@
 $cartItemsCount = null;
 if (isset($_SESSION['userId'])) {
   $cartItemsCount = count_products_for_user($_SESSION['userId']);
-}
-?>
+} ?>
 <div class="navbar">
-  <a href="/">S H O P</a> |
+  <a href="/">COMPANY</a>
   <?php if (isset($_SESSION['userId'])) : ?>
   <?php echo '<a href="/shop/views/logout.php">Ausloggen</a>' ?>
   <?php endif ?>
@@ -13,7 +12,7 @@ if (isset($_SESSION['userId'])) {
   <?php echo '<a href="/shop/views/login.php">Einloggen</a>' ?>
   <?php echo '<a href="/shop/views/register.php">Registrieren</a>' ?>
   <?php endif ?>
-  <a href="/views/cart.php">Warenkorb (<?php echo ($cartItemsCount === null) ? '0' : $cartItemsCount ?>)</a>
+  <a href="/shop/views/cart.php">Warenkorb (<?php echo ($cartItemsCount === null) ? '0' : $cartItemsCount ?>)</a>
   <?php
   require_once __DIR__ . '/../../models/login.php';
   if (isset($_SESSION['userId'])) {

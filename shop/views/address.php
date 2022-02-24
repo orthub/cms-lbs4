@@ -13,7 +13,7 @@ require_once __DIR__ . '/../controllers/address.php';
       <p>Vorhandene Adresse:</p>
       <?php foreach ($deliveryAddress as $key => $value) : ?>
       <div class="delivery-address">
-        <form action="/controllers/address.php" method="POST">
+        <form action="/shop/controllers/address.php" method="POST">
           <!-- /view/checkout.php -->
           <?php echo $value['city'] . '<br />';
             echo $value['zip_code'] . '<br />';

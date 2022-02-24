@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../controller/cart.php';
+require_once __DIR__ . '/../controllers/cart.php';
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +28,7 @@ require_once __DIR__ . '/../controller/cart.php';
           <td><?php echo ($cartItem['price'] / 100) . '€' ?></td>
           <td><?php echo $cartItem['price'] / 100 * $cartItem['quantity'] . '€'  ?></td>
           <td>
-            <form action="/shop/controller/removeFromCart.php" method="POST">
+            <form action="/shop/controllers/removeFromCart.php" method="POST">
               <input type="hidden" name="productId" value="<?php echo $cartItem['product_id'] ?>">
               <input type="submit" value="Entfernen">
             </form>

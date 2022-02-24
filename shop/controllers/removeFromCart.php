@@ -14,4 +14,4 @@ $productId = $_POST['productId'];
 
 $removeItem = remove_product_from_cart($userId, $productId);
 
-header('Location: ' . '/views/cart.php');
+header('Location: ' . '/shop/views/cart.php');

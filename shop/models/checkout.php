@@ -40,7 +40,7 @@ function username_for_order(string $userId)
   return $stmt->fetch();
 }
 
-function save_order(string $userId, string $orderId, string $addressId) #: bool
+function save_order(string $userId, string $orderId, string $addressId): bool
 {
   $sql = 'INSERT INTO `orders`
           SET `status` = "new",
@@ -53,10 +53,10 @@ function save_order(string $userId, string $orderId, string $addressId) #: bool
     ':orderId' => $orderId,
     ':addressId' => $addressId
   ]);
-
+  $res = $stmt->fetch();
   // return $stmt;
   if ($stmt == true) {
-    return true;
+    return $res;
   }
   return false;
 }
@@ -69,7 +69,7 @@ function get_order_id_from_user(string $userId)
   return $stmt->fetchAll();
 }
 
-function save_order_products(string $userId, string $orderId) #: bool
+function save_order_products(string $userId, string $orderId)
 {
   $cartProducts = get_quantity_product_from_cart($userId);
 
@@ -85,8 +85,7 @@ function save_order_products(string $userId, string $orderId) #: bool
       ':quantity' => $value['quantity']
     ]);
   }
-  // return $stmt;
-  if ($stmt == true) {
+  if ($stmt == 1) {
     return true;
   }
   return false;

@@ -2,7 +2,7 @@
 session_start();
 unset($_SESSION['errors']);
 if (!isset($_SESSION['userId'])) {
-  die('Zuerst <a href="/views/login.php">einloggen</a>');
+  die('Zuerst <a href="/shop/views/login.php">einloggen</a>');
 }
 
 require_once __DIR__ . '/../models/addresses.php';
@@ -18,7 +18,7 @@ $newDeliveryAddress = save_delivery_address($userId, $city, $street, $streetNumb
 
 if ($newDeliveryAddress === false) {
   $_SESSION['errors'] = 'Neue Adresse nicht angelegt!';
-  header('Location: ' . '/views/address.php');
+  header('Location: ' . '/shop/views/address.php');
 }
 
-header('Location: ' . '/views/address.php');
+header('Location: ' . '/shop/views/address.php');

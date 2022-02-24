@@ -73,7 +73,7 @@ CREATE TABLE `order_products` (
   `quantity` int(8) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_order_products_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  CONSTRAINT `FK_order_products_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`orders_id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  CONSTRAINT `FK_order_products_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`orders_id`) ON DELETE CASCADE ON UPDATE CASCADE
   );
 ';
 $db->exec($createTables);
