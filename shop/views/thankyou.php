@@ -19,6 +19,8 @@ unset($_SESSION['cart_products_deleted']);
 
     <h3>Danke für Ihre Bestellung.</h3>
 
+    <a href="/shop/index.php">Weiter Einkaufen?</a>
+
   </div>
 
 </body>
