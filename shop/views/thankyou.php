@@ -12,7 +12,6 @@ unset($_SESSION['cart_products_deleted']);
 <!DOCTYPE html>
 <html>
 <?php require_once __DIR__ . '/partials/head.php' ?>
-<?php var_dump($_SESSION) ?>
 
 <body>
   <div class="container">

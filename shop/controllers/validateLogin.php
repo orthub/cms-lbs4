@@ -27,11 +27,6 @@ if (!empty($_SESSION['errors'])) {
 
 
 $verify = get_login($email);
-echo '<pre>';
-var_dump($verify);
-echo '</pre>';
-echo 'EMAIL:';
-var_dump($email);
 
 if ($email === $verify[0]['email']) {
   $valideEmail = true;

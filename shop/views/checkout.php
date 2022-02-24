@@ -4,14 +4,10 @@ require_once __DIR__ . '/../controllers/checkout.php';
 <!DOCTYPE html>
 <html>
 <?php require_once __DIR__ . '/partials/head.php' ?>
-<pre>
-  <?php print_r($_SESSION) ?>
-</pre>
 
 <body>
   <div class="container">
     <?php require_once __DIR__ . '/partials/navbar.php' ?>
-    <?php echo (isset($saveOrder)) ? var_dump($saveOrder) : '' ?>
     <?php echo (isset($_SESSION['order_saved'])) ? $_SESSION['order_saved'] : '' ?>
     <?php echo (isset($_SESSION['cart_products_saved'])) ? $_SESSION['cart_products_saved'] : '' ?>
     <?php echo (isset($_SESSION['cart_products_deleted'])) ? $_SESSION['cart_products_deleted'] : '' ?>
