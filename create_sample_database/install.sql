@@ -66,7 +66,7 @@ VALUES("2", "Austria", "Vienna", "1100", "Kurzisweg", "1b");
 INSERT INTO `addresses` (`user_id`, `country`, `city`, `zip_code`, `street`, `street_number`)
 VALUES("3", "Austria", "Vienna", "1100", "Kurzerweg", "1c");
 -- CREATE SAMPLE POSTS
-INSERT INTO `posts` (`title`, `body`, `author`)
+INSERT INTO `posts` (`title`, `body`, `author`, `created`)
 VALUES('Post 1', 'Post number one testing, this post should display 50 chars in index.
         If it`s viewed in single post, you should see all and the lorem stuff.
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
@@ -75,19 +75,19 @@ VALUES('Post 1', 'Post number one testing, this post should display 50 chars in 
         It has survived not only five centuries, but also the leap into electronic typesetting, 
         remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
         sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
-        Aldus PageMaker including versions of Lorem Ipsum.', '1');
+        Aldus PageMaker including versions of Lorem Ipsum.', '1', '2021-01-23 02:05:19');
 -- WAITFOR DELAY '00:00:02';
-INSERT INTO `posts` (`title`, `body`, `author`)
-VALUES('Post 2', 'Post number two testing. Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '1');
+INSERT INTO `posts` (`title`, `body`, `author`, `created`)
+VALUES('Post 2', 'Post number two testing. Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '1', '2021-05-11 02:16:37');
+-- WAITFOR DELAY '00:00:02'
+INSERT INTO `posts` (`title`, `body`, `author`, `created`)
+VALUES('Post 3', 'Post number three testing. This is a short post.', '2', '2021-011-10 15:32:01');
 -- WAITFOR DELAY '00:00:02';
-INSERT INTO `posts` (`title`, `body`, `author`)
-VALUES('Post 3', 'Post number three testing. This is a short post.', '2');
+INSERT INTO `posts` (`title`, `body`, `author`, `created`)
+VALUES('Post 4', 'Post number four testing. Hell yeah, i think this will finally work.', '2', '2022-01-16 09:12:53');
 -- WAITFOR DELAY '00:00:02';
-INSERT INTO `posts` (`title`, `body`, `author`)
-VALUES('Post 4', 'Post number four testing. Hell yeah, i think this will finally work.', '2');
--- WAITFOR DELAY '00:00:02';
-INSERT INTO `posts` (`title`, `body`, `author`)
-VALUES('Post 5', 'Post number five testing. So, this script is working, hope the delay works also, for sorting the posts. Meh, not working!', '1');
+INSERT INTO `posts` (`title`, `body`, `author`, `created`)
+VALUES('Post 5', 'Post number five testing. So, this script is working, hope the delay works also, for sorting the posts. Meh, not working!', '1', '2022-02-21 09:35:42');
 
 
 -- CREATE SHOP TABLES
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `quantity` INT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `product_id_user_id` (`product_id`, `user_id`),
-  CONSTRAINT `FK_cart_user` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  -- CONSTRAINT `FK_cart_user` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_cart_product` FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
@@ -132,8 +132,8 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `delivery_address_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY (`orders_id`),
-  CONSTRAINT `FK_order_to_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_order_delivery_address` FOREIGN KEY (`delivery_address_id`) REFERENCES `delivery_address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_order_to_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `FK_order_delivery_address` FOREIGN KEY (`delivery_address_id`) REFERENCES `delivery_address` (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `order_products` (
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `order_products` (
   `product_id` INT UNSIGNED NOT NULL,
   `quantity` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `FK_order_products_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_order_products_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   CONSTRAINT `FK_order_products_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
   );
 
