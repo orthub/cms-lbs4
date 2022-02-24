@@ -18,6 +18,8 @@ session_start();
         id='passwd' /><?php echo (!empty($_SESSION['errors']['password'])) ? $_SESSION['errors']['password'] : '' ?><br /><br />
       <input type='submit' value='Einloggen' />
     </form>
+    <br />
+    <a href="/shop/views/register.php">Keinen Account? Hier gehts zur Registrierung</a>
   </div>
 </body>
 

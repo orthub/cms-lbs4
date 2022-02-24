@@ -18,9 +18,8 @@
         <input type="submit" value="Login" />
       </form>
     </div>
-    <pre>
-      <?php var_dump($_SESSION['login']) ?>
-    </pre>
+    <br />
+    <a href="/cms/views/register.php">Keinen Account? Hier gehts zur Registrierung</a>
     <?php require_once __DIR__ . '/partials/footer.php' ?>
   </div>
 </body>
