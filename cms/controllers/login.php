@@ -27,8 +27,6 @@ if ($method === 'POST') {
 
   $password_match = check_password_on_login($login_email, $login_password);
   $_SESSION['login']['found_password'] = check_password_on_login($login_email, $login_password);
-  var_dump($password_match);
-  // die('/');
 
   if ($email_exist === $login_email && $password_match === 1) {
     header('Location:' . '/cms/views/customer.php');
