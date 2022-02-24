@@ -10,7 +10,6 @@ if (isset($_SESSION['userId'])) {
   <?php endif ?>
   <?php if (!isset($_SESSION['userId'])) : ?>
   <?php echo '<a href="/shop/views/login.php">Einloggen</a>' ?>
-  <?php echo '<a href="/shop/views/register.php">Registrieren</a>' ?>
   <?php endif ?>
   <a href="/shop/views/cart.php">Warenkorb (<?php echo ($cartItemsCount === null) ? '0' : $cartItemsCount ?>)</a>
   <?php
