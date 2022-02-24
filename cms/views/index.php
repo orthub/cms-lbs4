@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="col-4">
-        <h1>SOFTEC</h1>
+        <h1>ORTech</h1>
         <p>The Company</p>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam nesciunt commodi eaque tenetur delectus atque
           cupiditate fugiat.</p>

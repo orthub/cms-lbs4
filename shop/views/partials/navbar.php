@@ -4,7 +4,7 @@ if (isset($_SESSION['userId'])) {
   $cartItemsCount = count_products_for_user($_SESSION['userId']);
 } ?>
 <div class="navbar">
-  <a href="/">COMPANY</a>
+  <a href="/">ORTech</a>
   <?php if (isset($_SESSION['userId'])) : ?>
   <?php echo '<a href="/shop/views/logout.php">Ausloggen</a>' ?>
   <?php endif ?>
