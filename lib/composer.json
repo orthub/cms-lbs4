@@ -1,0 +1,8 @@
+{
+    "autoload": {
+        "psr-4": {"ORTech\\": "src/"}
+    },
+    "require": {
+        "dompdf/dompdf": "^1.2"
+    }
+}

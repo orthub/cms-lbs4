@@ -1,4 +1,6 @@
 <?php
+namespace ORTech;
+
 session_start();
 unset($_SESSION['login']);
 $method = htmlspecialchars($_SERVER['REQUEST_METHOD']);

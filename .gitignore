@@ -1,3 +1,5 @@
 .ddev
 sync.sh
 /cms/config/
+/lib/vendor/
+/lib/composer.lock
