@@ -295,7 +295,12 @@ VALUES(
     `slug` VARCHAR(128) NOT NULL,
     `description` text NOT NULL,
     `price` INT NOT NULL,
-    `category` ENUM("Buntstift", "Kugelschreiber", "Gel-Schreiber"),
+    `category` ENUM(
+      "Buntstift",
+      "Kugelschreiber",
+      "Gel-Schreiber",
+      "Spezial"
+    ),
     `img_url` VARCHAR(128) DEFAULT "/img/products/default.jpg",
     `quantity` INT UNSIGNED DEFAULT "0",
     `status` ENUM("LIVE", "DRAFT") DEFAULT "DRAFT",
