@@ -30,9 +30,7 @@ require_once __DIR__ . '/../controllers/products.php';
       <?php if($category_available) : ?>
       <?php foreach ($category_products as $product) : ?>
       <div class="col-3">
-        <div class="product-image">
-          <img src="<?php echo $product['img_url'] ?>" alt="<?php echo $product['slug']?>">
-        </div>
+        <img class="product-img" src="<?php echo $product['img_url'] ?>" alt="<?php echo $product['slug']?>">
         <p><?php echo $product['title'] ?></p>
         <p><?php echo $product['description'] ?></p>
         <p><?php echo $product['price'] ?></p>
