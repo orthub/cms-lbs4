@@ -23,7 +23,7 @@ if (isset($_SESSION['userId'])) {
     <li><a class="userbar"><i class="fa-solid fa-user"></i> Hallo <?php echo $userName ?></a></li>
     <?php endif ?>
     <?php if ($role === 'ADMIN') : ?>
-    <li><a class="userbar" href="/views/admin-dashboard.php"><i class="fa-solid fa-table-cells"></i> Dashboard</a></li>
+    <li><a class="userbar" href="/views/dashboard.php"><i class="fa-solid fa-table-cells"></i> Dashboard</a></li>
     <?php endif ?>
     <?php if ($role === 'EMPLOYEE' || $role === 'ADMIN') : ?>
     <li><a class="userbar" href="/views/newPost.php"><i class="fa-solid fa-square-plus"></i> Neuen Post</a></li>

@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/userRights.php';
-require_once __DIR__ . '/../models/admin-dashboard.php';
+require_once __DIR__ . '/../models/dashboard.php';
 
 // wenn niemand eingeloggt ist wird auf die startseite umgeleitet
 if (!isset($_SESSION['userId'])) {

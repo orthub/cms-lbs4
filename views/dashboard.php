@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../lib/sessionHelper.php';
-require_once __DIR__ . '/../controllers/admin-dashboard.php';
+require_once __DIR__ . '/../controllers/dashboard.php';
 ?>
 <!DOCTYPE html>
 <html>

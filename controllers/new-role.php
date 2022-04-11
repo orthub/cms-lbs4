@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../lib/sessionHelper.php';
 require_once __DIR__ . '/userRights.php';
-require_once __DIR__ . '/../models/admin-dashboard.php';
+require_once __DIR__ . '/../models/dashboard.php';
 
 if (!isset($_SESSION['userId'])) {
   header('Location: ' . '/');
@@ -23,5 +23,5 @@ if (isset($_SESSION['userId'])) {
   $role = $_POST['user-rights'];
   $userId = $_POST['userId'];
   set_new_role($role, $userId);
-  header('Location: ' . '/views/admin-dashboard.php');
+  header('Location: ' . '/views/dashboard.php');
 }
