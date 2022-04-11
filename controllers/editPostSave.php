@@ -16,19 +16,15 @@ if (isset($_SESSION['userId'])) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once __DIR__ . '/../lib/sessionHelper.php';
 
-    $productId = htmlspecialchars($_POST['productId']);
+    $postId = htmlspecialchars($_POST['postId']);
     $title = htmlspecialchars($_POST['title']);
-    $description = htmlspecialchars($_POST['description']);
-    $price = htmlspecialchars($_POST['price']);
-    $category = htmlspecialchars($_POST['category']);
-    $quantity = htmlspecialchars($_POST['quantity']);
-    $status = filter_input(INPUT_POST, 'productStatus', FILTER_SANITIZE_SPECIAL_CHARS);
+    $body = htmlspecialchars($_POST['body']);
 
-    $save_product = save_edited_product($productId, $title, $description, $price, $category, $quantity, $status);
+    $save_product = save_edited_post($postId, $title, $body);
 
     if ($save_product) {
       unset($_SESSION['edit-product']);
-      header('Location: ' . '/views/product-list.php');
+      header('Location: ' . '/views/post-list.php');
     }
 
 

@@ -74,3 +74,19 @@ $stmt_change_post_status_by_id->execute([
 
 return $stmt_change_post_status_by_id;
 }
+
+function save_edited_post(string $postId, string $title, string $body)
+{
+  $sql_save_edited_post = 'UPDATE `posts`
+                            SET `title` = :postTitle,
+                                `body` = :postBody
+                            WHERE `id` = :postId';
+  $statement_save_edited_post = get_db()->prepare($sql_save_edited_post);
+  $statement_save_edited_post->execute([
+    ':postTitle' => $title,
+    ':postBody' => $body,
+    ':postId' => $postId
+  ]);
+
+  return $statement_save_edited_post;
+}
