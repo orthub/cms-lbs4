@@ -21,7 +21,7 @@ if (isset($_SESSION['userId'])) {
     $new_status = 'DRAFT';
     $changePostStatus = change_post_status_by_id($post_id, $new_status);
     if ($changePostStatus) {
-      $_SESSION['edit-product']['status'] = 'DRAFT';
+      $_SESSION['edit-post']['published'] = 'DRAFT';
       header('Location: ' . '/views/editPost.php');
       exit();
     }
@@ -31,6 +31,7 @@ if (isset($_SESSION['userId'])) {
     $new_status = 'LIVE';
     $changePostStatus = change_post_status_by_id($post_id, $new_status);
     if ($changePostStatus) {
+      $_SESSION['edit-post']['published'] = 'LIVE';
       header('Location: ' . '/views/editPost.php');
       exit();
     }

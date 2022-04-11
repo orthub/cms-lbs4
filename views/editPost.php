@@ -11,9 +11,6 @@ require_once __DIR__ . '/../controllers/editPost.php';
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
 
   <div class="space-big"></div>
-  <pre>
-    <?php var_dump($_SESSION['edit-post']) ?>
-  </pre>
   <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
