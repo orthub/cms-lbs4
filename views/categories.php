@@ -33,7 +33,7 @@ require_once __DIR__ . '/../controllers/products.php';
         <img class="product-img" src="<?php echo $product['img_url'] ?>" alt="<?php echo $product['slug']?>">
         <p><?php echo $product['title'] ?></p>
         <p><?php echo $product['description'] ?></p>
-        <p><?php echo $product['price'] ?></p>
+        <p><?php echo $product['price'] / 100 . '€' ?></p>
         <p><?php echo $product['category'] ?></p>
         <p>Lagernd: <?php echo $product['quantity'] ?></p>
         <?php if ($product['quantity'] >= 1) : ?>
