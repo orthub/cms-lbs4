@@ -27,7 +27,7 @@ require_once __DIR__ . '/../controllers/invoice.php';
         <p>Bestell Nummer: <b><?php echo $_SESSION['base-order']['orders_id'] ?></b></p>
         <p>Bestell Datum: <b><?php echo date('d.m.Y', strtotime($_SESSION['base-order']['order_date'])) ?></b></p>
         <p>Bestell Status:
-          <b><?php echo ($_SESSION['base-order']['status'] === 'new') ? 'Zahlung noch nicht eingelangt' : 'Bezahlt' ?></b>
+          <b><?php echo ($_SESSION['base-order']['status'] === 'new') ? 'Zahlung noch nicht eingegangen' : 'Bezahlt' ?></b>
         </p>
       </div>
       <div class="col-5"></div>
