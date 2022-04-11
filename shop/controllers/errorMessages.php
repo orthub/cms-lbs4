@@ -1,3 +1,0 @@
-<?php
-
-$errorMessages = false;
