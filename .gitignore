@@ -1,5 +1,7 @@
 .ddev
-sync.sh
-/cms/config/
-/lib/vendor/
-/lib/composer.lock
+composer.*
+config/company_data.php
+config/db_conf.php
+config/mail_data.php
+lib/
+storage/

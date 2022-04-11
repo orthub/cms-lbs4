@@ -1,0 +1,3 @@
+<?php
+
+$errorMessages = false;
