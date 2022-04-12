@@ -1,8 +1,6 @@
 {
-    "autoload": {
-        "psr-4": {"ORTech\\": "src/"}
-    },
     "require": {
-        "dompdf/dompdf": "^1.2"
+        "dompdf/dompdf": "^1.2",
+        "swiftmailer/swiftmailer": "^6.3"
     }
 }
