@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
   $userId = $_SESSION['userId'];
   
-  $get_base_order = get_order_with_user_id($userId);
+  $get_base_order = get_order_with_user_and_order_id($userId, $order_id);
   $get_products_from_order = get_products_for_order($order_id);
 
   $_SESSION['order-products-quantity'] = $get_products_from_order;

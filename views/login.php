@@ -1,4 +1,4 @@
-<?php session_start() ?>
+<?php require_once __DIR__ . '/../lib/sessionHelper.php'; ?>
 <!DOCTYPE html>
 <html>
 <?php require_once __DIR__ . '/partials/head.php' ?>

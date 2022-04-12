@@ -1,9 +1,6 @@
 <?php
-session_start();
-
+require_once __DIR__ . '/../lib/sessionHelper.php';
 require_once __DIR__ . '/../controllers/products.php';
-
-
 ?>
 <!DOCTYPE html>
 <html>

@@ -4,6 +4,7 @@ if (!isset($_SESSION['userId'])) {
   die('Zuerst <a href="/views/login.php">einloggen</a>');
 }
 require_once __DIR__ . '/../controllers/invoice.php';
+require_once __DIR__ . '/../config/company_data.php';
 ?>
 
 <!DOCTYPE html>
@@ -45,18 +46,30 @@ require_once __DIR__ . '/../controllers/invoice.php';
               <th>Preis:</th>
             </tr>
           </thead>
-          <?php $endprice = 0; ?>
-          <?php foreach ($_SESSION['products-from-order'] as $value) : ?>
-          <tr>
-            <td><?php echo $value['title'] ?></td>
-            <td><?php echo $value['quantity'] ?></td>
-            <td><?php echo $value['price'] / 100 ?></td>
-            <?php
-            $price = $value['price'] * $value['quantity'];
-            $endprice = $endprice + $price;
-            ?>
-          </tr>
-          <?php endforeach ?>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <?php foreach ($_SESSION['products-from-order'] as $value) : ?>
+            <tr>
+              <td><?php echo $value['title'] ?></td>
+              <td><?php echo $value['quantity'] ?></td>
+              <td><?php echo $value['price'] / 100 . '€'?></td>
+            </tr>
+            <?php endforeach ?>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="text-right">Versandkosten:</td>
+              <td></td>
+              <td>2.55€</td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div class="col-5">
@@ -66,11 +79,12 @@ require_once __DIR__ . '/../controllers/invoice.php';
     </div>
     <div class="row">
       <div class="col-6">
-        <h2>Gesamtpreis (inkl. MwSt) und Versand: <?php echo $endprice / 100 . '€' ?></h2>
+        <h2>Gesamtpreis (inkl. MwSt) und Versand: <?php echo ($_SESSION['base-order']['order_price']) / 100 . '€' ?>
+        </h2>
         <p></p>
-        <form action="/controllers/createInvoice.php" method="POST">
+        <form action="/controllers/downloadInvoice.php" method="POST">
           <input type="hidden" name="order_id" value="<?php echo $_SESSION['base-order']['orders_id'] ?>">
-          <input type="hidden" name="endprice" value="<?php echo $endprice ?>">
+          <input type="hidden" name="endprice" value="<?php echo $_SESSION['base-order']['order_price'] ?>">
           <input class="button" type="submit" name="invoice" value="Rechnung herunterladen">
         </form>
       </div>

@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/../lib/sessionHelper.php';
 require_once __DIR__ . '/../models/products.php';
 $products = get_all_live_products();
 

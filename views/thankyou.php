@@ -3,17 +3,14 @@ require_once __DIR__ . '/../lib/sessionHelper.php';
 unset($_SESSION['totalPrice']);
 unset($_SESSION['deliveryId']);
 unset($_SESSION['deliveryAddressId']);
-unset($_SESSION['before_post']);
-unset($_SESSION['in_post']);
-unset($_SESSION['order_saved']);
-unset($_SESSION['cart_products_saved']);
-unset($_SESSION['cart_products_deleted']);
+unset($_SESSION['order_id']);
 unset($_SESSION['base-order']);
 unset($_SESSION['products-from-order']);
 ?>
 <!DOCTYPE html>
 <html>
 <?php require_once __DIR__ . '/partials/head.php' ?>
+<?php var_dump($_SESSION) ?>
 
 <body>
   <div class="container">
@@ -23,7 +20,8 @@ unset($_SESSION['products-from-order']);
     <div class="row">
       <div class="col-4"></div>
       <div class="col-4 text-center">
-        <h3>Danke für Ihre Bestellung.</h3>
+        <h2>Danke für Ihre Bestellung.</h2>
+        <p>Ihre Rechnung erhalten sie in kürze per Email.</p>
         <div class="space-mid"></div>
         <a href="/views/products.php">Weiter Einkaufen?</a>
       </div>

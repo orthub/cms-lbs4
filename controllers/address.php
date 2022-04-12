@@ -9,6 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $userId = $_SESSION['userId'];
   $deliveryId = filter_input(INPUT_POST, 'deliveryId', FILTER_SANITIZE_SPECIAL_CHARS);
   $_SESSION['deliveryId'] = $deliveryId;
-
+  
   header('Location: ' . '/views/checkout.php');
 }

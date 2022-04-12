@@ -333,6 +333,7 @@ CREATE TABLE `orders` (
     `status` enum("new", "payed") NOT NULL DEFAULT "new",
     `user_id` VARCHAR(28) NOT NULL,
     `orders_id` VARCHAR(128) NOT NULL,
+    `order_price` INT,
     `delivery_address_id` INT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY (`orders_id`),

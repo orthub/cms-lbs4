@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../lib/sessionHelper.php';
 require_once __DIR__ . '/userRights.php';
 require_once __DIR__ . '/../models/dashboard.php';
 

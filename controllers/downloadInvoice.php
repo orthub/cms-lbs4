@@ -13,7 +13,7 @@ use Dompdf\Dompdf;
 
 
 $userId = $_SESSION['userId'];
-$orderId = $_SESSION['order_id'];
+$orderId = $_SESSION['base-order']['orders_id'];
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
 $file = '/storage/' . $userId . '/' . $orderId . '.pdf';

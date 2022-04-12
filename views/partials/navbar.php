@@ -1,4 +1,5 @@
-<?php require_once __DIR__ . '/../../models/cart.php';
+<?php 
+require_once __DIR__ . '/../../models/cart.php';
 require_once __DIR__ . '/../../controllers/products.php';
 require_once __DIR__ . '/../../controllers/userRights.php';
 $cartItemsCount = null;

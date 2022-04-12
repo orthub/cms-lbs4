@@ -2,21 +2,22 @@
 require_once __DIR__ . '/database.php';
 
 
-function get_order_with_user_id(string $user_id)
+function get_order_with_user_and_order_id(string $user_id, string $order_id)
 {
-  $sql_get_order_with_user_id = 'SELECT `orders_id`,`delivery_address_id`,`user_id`, `order_date`, `status`
+  $sql_get_order_with_user_and_order_id = 'SELECT `orders_id`,`delivery_address_id`,`user_id`, `order_date`, `status`, `order_price`
                                   FROM `orders`
-                                  WHERE `user_id` = :userId';
-  $stmt_get_order_with_user_id = get_db()->prepare($sql_get_order_with_user_id);
-  $stmt_get_order_with_user_id->execute([':userId' => $user_id]);
-  $res_get_order_with_user_id = $stmt_get_order_with_user_id->fetch();
+                                  WHERE `user_id` = :userId
+                                  AND `orders_id` = :orderId';
+  $stmt_get_order_with_user_and_order_id = get_db()->prepare($sql_get_order_with_user_and_order_id);
+  $stmt_get_order_with_user_and_order_id->execute([
+    ':userId' => $user_id,
+    ':orderId' => $order_id
+  ]);
+  $res_get_order_with_user_and_order_id = $stmt_get_order_with_user_and_order_id->fetch(PDO::FETCH_ASSOC);
   
-  return $res_get_order_with_user_id;
+  return $res_get_order_with_user_and_order_id;
 }
 
-// ???
-// --`products`.`id`,
-// -- JOIN `products` ON  `product_id` = `products`.`id`
 function get_products_for_order(string $order_id)
 {
   $sql_get_products_for_order = 'SELECT `order_id`, `product_id`, `quantity`
@@ -31,12 +32,12 @@ function get_products_for_order(string $order_id)
 
 function get_product_order_info(int $product_id)
 {
-  $sql_get_product_price = 'SELECT `price`, `title` 
+  $sql_get_product_price = 'SELECT `price`, `title`, `quantity`
                             FROM `products` 
                             WHERE `id` = :productId';
   $stmt_get_product_price = get_db()->prepare($sql_get_product_price);
   $stmt_get_product_price->execute([':productId' => $product_id]);
-  $res_get_product_price = $stmt_get_product_price->fetch();
+  $res_get_product_price = $stmt_get_product_price->fetch(PDO::FETCH_ASSOC);
   
   return $res_get_product_price;
 }

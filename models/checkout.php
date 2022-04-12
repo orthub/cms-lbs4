@@ -40,25 +40,28 @@ function username_for_order(string $userId)
   return $stmt_username_for_order->fetch();
 }
 
-function save_order(string $userId, string $orderId, string $addressId): bool
+function save_order(string $userId, string $orderId, string $addressId, string $totalPrice)
 {
   $sql_save_order = 'INSERT INTO `orders`
                       SET `status` = "NEW",
                       `user_id` = :userId,
                       `orders_id` = :orderId,
-                      `delivery_address_id` = :addressId';
+                      `delivery_address_id` = :addressId,
+                      `order_price` = :totalPrice';
   $stmt_save_order = get_db()->prepare($sql_save_order);
   $stmt_save_order->execute([
     ':userId' => $userId,
     ':orderId' => $orderId,
-    ':addressId' => $addressId
+    ':addressId' => $addressId,
+    ':totalPrice' => $totalPrice
   ]);
-  $res_save_order = $stmt_save_order->fetch();
-  // return $stmt;
-  if ($stmt_save_order == true) {
-    return $res_save_order;
-  }
-  return false;
+  return $stmt_save_order;
+  // $res_save_order = $stmt_save_order->fetch();
+  // // return $stmt;
+  // if ($stmt_save_order == true) {
+  //   return $res_save_order;
+  // }
+  // return false;
 }
 
 function get_order_id_from_user(string $userId)
@@ -92,16 +95,11 @@ function save_order_products(string $userId, string $orderId)
   return false;
 }
 
-function delete_products_from_cart(string $userId) #: bool
+function delete_products_from_cart(string $userId)
 {
   $sql_delete_products_from_cart = 'DELETE FROM `cart` 
                                     WHERE `user_id` = :userId';
   $stmt_delete_products_from_cart = get_db()->prepare($sql_delete_products_from_cart);
   $stmt_delete_products_from_cart->execute([':userId' => $userId]);
-  // return $stmt;
-  if ($stmt_delete_products_from_cart == false) {
-    return false;
-  }
 
-  return true;
 }
