@@ -9,7 +9,6 @@ $products = get_all_live_products();
 <?php require_once __DIR__ . '/partials/head.php' ?>
 
 <body>
-
   <?php unset($_SESSION['errors']['email']) ?>
   <?php unset($_SESSION['errors']['password']) ?>
   <?php require_once __DIR__ . '/partials/navbar.php' ?>

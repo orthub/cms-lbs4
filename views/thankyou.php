@@ -6,11 +6,11 @@ unset($_SESSION['deliveryAddressId']);
 unset($_SESSION['order_id']);
 unset($_SESSION['base-order']);
 unset($_SESSION['products-from-order']);
+unset($_SESSION['order-products-quantity']);
 ?>
 <!DOCTYPE html>
 <html>
 <?php require_once __DIR__ . '/partials/head.php' ?>
-<?php var_dump($_SESSION) ?>
 
 <body>
   <div class="container">
@@ -20,6 +20,7 @@ unset($_SESSION['products-from-order']);
     <div class="row">
       <div class="col-4"></div>
       <div class="col-4 text-center">
+        <?php require_once __DIR__ . '/../helpers/errorMsg.php' ?>
         <h2>Danke für Ihre Bestellung.</h2>
         <p>Ihre Rechnung erhalten sie in kürze per Email.</p>
         <div class="space-mid"></div>

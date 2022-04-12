@@ -41,3 +41,15 @@ function get_product_order_info(int $product_id)
   
   return $res_get_product_price;
 }
+
+function get_user_email_by_id(string $userId)
+{
+  $sql_get_user_email_by_id = 'SELECT `id`, `email`
+                                FROM `users`
+                                WHERE `id` = :userId';
+  $statement_get_user_email_by_id = get_db()->prepare($sql_get_user_email_by_id);
+  $statement_get_user_email_by_id->execute([':userId' => $userId]);
+  $result_get_user_email_by_id = $statement_get_user_email_by_id->fetch(PDO::FETCH_ASSOC);
+
+  return $result_get_user_email_by_id;
+}
