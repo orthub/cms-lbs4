@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../lib/sessionHelper.php';
+require_once __DIR__ . '/../helpers/session.php';
 require_once __DIR__ . '/userRights.php';
 require_once __DIR__ . '/../models/posts.php';
 require_once __DIR__ . '/../models/userRights.php';

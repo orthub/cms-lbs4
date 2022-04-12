@@ -1,12 +1,12 @@
 <?php
-require_once __DIR__ . '/../lib/sessionHelper.php';
+require_once __DIR__ . '/../helpers/session.php';
 unset($_SESSION['errors']);
 if (!isset($_SESSION['userId'])) {
   die('Zuerst <a href="/views/login.php">einloggen</a>');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  require_once __DIR__ . '/../lib/sessionHelper.php';
+  require_once __DIR__ . '/../helpers/session.php';
   $errors = [];
   require_once __DIR__ . '/../models/addresses.php';
 

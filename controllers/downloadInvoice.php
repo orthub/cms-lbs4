@@ -1,6 +1,6 @@
 <?php
 namespace Dompdf;
-require_once __DIR__ . '/../lib/sessionHelper.php';
+require_once __DIR__ . '/../helpers/session.php';
 // namespace Dompdf;
 
 if (!isset($_SESSION['userId'])) {

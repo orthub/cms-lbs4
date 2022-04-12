@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../lib/sessionHelper.php';
+require_once __DIR__ . '/../helpers/session.php';
 require_once __DIR__ . '/../models/userRights.php';
 
 if (isset($_SESSION['userId'])) {

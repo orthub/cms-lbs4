@@ -1,7 +1,6 @@
 <?php
-require_once __DIR__ . '/../lib/sessionHelper.php';
+require_once __DIR__ . '/../helpers/session.php';
 require_once __DIR__ . '/../config/company_data.php';
-// require_once __DIR__ . '/../controllers/checkout.php';
 ?>
 <!DOCTYPE html>
 <html>

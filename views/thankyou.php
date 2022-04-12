@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../lib/sessionHelper.php';
+require_once __DIR__ . '/../helpers/session.php';
 unset($_SESSION['totalPrice']);
 unset($_SESSION['deliveryId']);
 unset($_SESSION['deliveryAddressId']);

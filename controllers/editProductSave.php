@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../lib/sessionHelper.php';
+require_once __DIR__ . '/../helpers/session.php';
 require_once __DIR__ . '/userRights.php';
 require_once __DIR__ . '/../models/products.php';
 require_once __DIR__ . '/../models/userRights.php';
@@ -14,7 +14,7 @@ if (isset($_SESSION['userId'])) {
   $role = $user_role['role'];
   
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once __DIR__ . '/../lib/sessionHelper.php';
+    require_once __DIR__ . '/../helpers/session.php';
 
     $productId = htmlspecialchars($_POST['productId']);
     $title = htmlspecialchars($_POST['title']);

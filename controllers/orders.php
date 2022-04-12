@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../lib/sessionHelper.php';
+require_once __DIR__ . '/../helpers/session.php';
 if (!isset($_SESSION['userId'])) {
   die('Zuerst <a href="/views/login.php">einloggen</a>');
 }
@@ -12,6 +12,6 @@ $orders = get_order_overview_for_user($userId);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $order_id = $_POST['order_id'];
-  require_once __DIR__ . '/../lib/sessionHelper.php';
+  require_once __DIR__ . '/../helpers/session.php';
   require_once __DIR__ . '/invoice.php';
 }

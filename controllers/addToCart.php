@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../lib/sessionHelper.php';
+require_once __DIR__ . '/../helpers/session.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   header('Location: ' . '/views/products.php');

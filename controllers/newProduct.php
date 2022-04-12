@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../lib/sessionHelper.php';
+require_once __DIR__ . '/../helpers/session.php';
 require_once __DIR__ . '/userRights.php';
 require_once __DIR__ . '/../models/userRights.php';
 
@@ -18,7 +18,7 @@ if (isset($_SESSION['userId'])) {
   
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
-    require_once __DIR__ . '/../lib/sessionHelper.php';
+    require_once __DIR__ . '/../helpers/session.php';
     $product_title = filter_input(INPUT_POST, 'product', FILTER_SANITIZE_SPECIAL_CHARS);
     $slug = filter_input(INPUT_POST, 'slug', FILTER_SANITIZE_SPECIAL_CHARS);
     $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS);

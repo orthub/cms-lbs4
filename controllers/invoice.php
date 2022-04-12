@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__ . '/../lib/sessionHelper.php';
+require_once __DIR__ . '/../helpers/session.php';
 if (!isset($_SESSION['userId'])) {
   die('Zuerst <a href="/views/login.php">einloggen</a>');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  require_once __DIR__ . '/../lib/sessionHelper.php';
+  require_once __DIR__ . '/../helpers/session.php';
   require_once __DIR__ . '/../models/invoice.php';
  
   $order_id = $_POST['order_id'];

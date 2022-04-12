@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../lib/sessionHelper.php';
+require_once __DIR__ . '/../helpers/session.php';
 require_once __DIR__ . '/userRights.php';
 require_once __DIR__ . '/../models/posts.php';
 require_once __DIR__ . '/../models/userRights.php';
@@ -15,7 +15,7 @@ if (isset($_SESSION['userId'])) {
   }
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once __DIR__ . '/../lib/sessionHelper.php';
+    require_once __DIR__ . '/../helpers/session.php';
     $post_id = filter_input(INPUT_POST, 'edit-post', FILTER_SANITIZE_SPECIAL_CHARS);
 
     $edit_post = get_post_by_id($post_id);
