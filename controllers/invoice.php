@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . '/../helpers/session.php';
-if (!isset($_SESSION['userId'])) {
-  die('Zuerst <a href="/views/login.php">einloggen</a>');
-}
+require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   require_once __DIR__ . '/../helpers/session.php';
@@ -10,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
   $order_id = $_POST['order_id'];
   
-  $userId = $_SESSION['userId'];
+  $userId = $_SESSION['user_id'];
   
   $get_base_order = get_order_with_user_and_order_id($userId, $order_id);
   $get_products_from_order = get_products_for_order($order_id);

@@ -1,5 +1,5 @@
 <?php
 session_start();
-unlink($_SESSION['userId']);
+unlink($_SESSION['user_id']);
 session_destroy();
 header('Location: ' . '/');

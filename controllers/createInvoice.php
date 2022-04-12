@@ -1,18 +1,14 @@
 <?php
 namespace Dompdf;
 require_once __DIR__ . '/../helpers/session.php';
-// namespace Dompdf;
-
-if (!isset($_SESSION['userId'])) {
-  die('Zuerst <a href="/views/login.php">einloggen</a>');
-}
+require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 
 use Dompdf\Dompdf;
 // use Dompdf\Adapter\CPDF;
 // use Dompdf\Exception;
 
 
-$userId = $_SESSION['userId'];
+$userId = $_SESSION['user_id'];
 $orderId = $_SESSION['order_id'];
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];

@@ -2,16 +2,16 @@
 require_once __DIR__ . '/../../controllers/products.php';
 require_once __DIR__ . '/../../controllers/userRights.php';
 $cartItemsCount = null;
-if (isset($_SESSION['userId'])) {
-  $cartItemsCount = count_products_for_user($_SESSION['userId']);
+if (isset($_SESSION['user_id'])) {
+  $cartItemsCount = count_products_for_user($_SESSION['user_id']);
 } ?>
 
 
 <div class="userbar">
   <?php
   require_once __DIR__ . '/../../models/login.php';
-  if (isset($_SESSION['userId'])) : ?>
-  <?php $userName = get_user_name($_SESSION['userId']); ?>
+  if (isset($_SESSION['user_id'])) : ?>
+  <?php $userName = get_user_name($_SESSION['user_id']); ?>
   <ul>
     <?php if ($role === 'ADMIN') : ?>
     <li><a class="userbar"><i class="fa-solid fa-user-secret"></i> Hallo <?php echo $userName ?></a></li>

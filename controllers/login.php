@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
       if ($isValidLogin) {
         $user_id = get_user_id($loginEmail);
-        $_SESSION['userId'] = $user_id;
+        $_SESSION['user_id'] = $user_id;
         unset($_SESSION['login']);
         header('Location: ' . '/views/main.php');
         exit();

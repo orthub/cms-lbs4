@@ -1,12 +1,9 @@
 <?php
 require_once __DIR__ . '/../helpers/session.php';
-if (!isset($_SESSION['userId'])) {
-  die('Zuerst <a href="/views/login.php">einloggen</a>');
-}
-
+require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 require_once __DIR__ . '/../models/orders.php';
 
-$userId = $_SESSION['userId'];
+$userId = $_SESSION['user_id'];
 
 $orders = get_order_overview_for_user($userId);
 

@@ -3,8 +3,8 @@ require_once __DIR__ . '/../../models/cart.php';
 require_once __DIR__ . '/../../controllers/products.php';
 require_once __DIR__ . '/../../controllers/userRights.php';
 $cartItemsCount = null;
-if (isset($_SESSION['userId'])) {
-  $cartItemsCount = count_products_for_user($_SESSION['userId']);
+if (isset($_SESSION['user_id'])) {
+  $cartItemsCount = count_products_for_user($_SESSION['user_id']);
 } ?>
 
 <navbar>
@@ -31,16 +31,16 @@ if (isset($_SESSION['userId'])) {
       </div>
       </li>
       <li><a href="/index.php"><i class="fas fa-pen-to-square"></i> Kontakt</a></li>
-      <?php if (isset($_SESSION['userId'])) : ?>
+      <?php if (isset($_SESSION['user_id'])) : ?>
       <?php echo '<li><a href="/views/logout.php"><i class="fas fa-right-from-bracket"></i> Ausloggen</a></li>' ?>
       <?php endif ?>
-      <?php if (!isset($_SESSION['userId'])) : ?>
+      <?php if (!isset($_SESSION['user_id'])) : ?>
       <?php echo '<li><a href="/views/login.php"><i class="fas fa-right-to-bracket"></i> Einloggen</a></li>' ?>
       <?php endif ?>
-      <?php if (isset($_SESSION['userId'])) :
-      $cartItemsCount = count_products_for_user($_SESSION['userId']); ?>
+      <?php if (isset($_SESSION['user_id'])) :
+      $cartItemsCount = count_products_for_user($_SESSION['user_id']); ?>
       <?php endif ?>
-      <?php if (isset($_SESSION['userId'])) : ?>
+      <?php if (isset($_SESSION['user_id'])) : ?>
       <li>
         <a href="/views/cart.php"><i class="fa-solid fa-cart-shopping"></i>
           Warenkorb (<?php echo ($cartItemsCount === null) ? '0' : $cartItemsCount ?>)</a>

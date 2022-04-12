@@ -1,16 +1,14 @@
 <?php
 require_once __DIR__ . '/../helpers/session.php';
 unset($_SESSION['errors']);
-if (!isset($_SESSION['userId'])) {
-  die('Zuerst <a href="/views/login.php">einloggen</a>');
-}
+require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   require_once __DIR__ . '/../helpers/session.php';
   $errors = [];
   require_once __DIR__ . '/../models/addresses.php';
 
-  $userId = $_SESSION['userId'];
+  $userId = $_SESSION['user_id'];
   
   $city = htmlspecialchars(filter_input(INPUT_POST, 'city'));
   $street = htmlspecialchars(filter_input(INPUT_POST, 'street'));

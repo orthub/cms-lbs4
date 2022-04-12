@@ -5,13 +5,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   header('Location: ' . '/views/products.php');
 }
 
-if (!isset($_SESSION['userId'])) {
-  header('Location: ' . '/views/login.php');
-}
+require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 
 require_once __DIR__ . '/../models/cart.php';
 
-$userId = $_SESSION['userId'];
+$userId = $_SESSION['user_id'];
 $productId = $_POST['id'];
 $quantity = '1';
 

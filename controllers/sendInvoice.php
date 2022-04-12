@@ -1,16 +1,13 @@
 <?php
 require_once __DIR__ . '/../helpers/session.php';
-
-if (!isset($_SESSION['userId'])) {
-  header('Location: ' . '/');
-}
+require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 
 require_once __DIR__ . '/../lib/vendor/autoload.php';
 require_once __DIR__ . '/../config/mail_data.php';
 require_once __DIR__ . '/../helpers/sendMail.php';
 require_once __DIR__ . '/../models/invoice.php';
 
-$userId = $_SESSION['userId'];
+$userId = $_SESSION['user_id'];
 $orderId = $_SESSION['order_id'];
 $userEmail = get_user_email_by_id($userId);
 

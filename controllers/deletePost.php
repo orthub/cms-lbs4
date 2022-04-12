@@ -4,8 +4,8 @@ require_once __DIR__ . '/userRights.php';
 require_once __DIR__ . '/../models/posts.php';
 require_once __DIR__ . '/../models/userRights.php';
 
-if (isset($_SESSION['userId'])) {
-  $userId = $_SESSION['userId'];
+if (isset($_SESSION['user_id'])) {
+  $userId = $_SESSION['user_id'];
   $user_role = check_user_role($userId);
   $role = $user_role['role'];
   
