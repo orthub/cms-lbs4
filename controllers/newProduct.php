@@ -27,23 +27,23 @@ if (isset($_SESSION['user_id'])) {
     $quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_NUMBER_INT);
 
     if ((bool)$product_title === false) {
-      $_SESSION['errors']['title'] = 'Titel darf nicht leer sein';
+      $_SESSION['error']['title'] = 'Titel darf nicht leer sein';
       $errors[] = 1;
     }
     if ((bool)$slug === false) {
-      $_SESSION['errors']['slug'] = 'Slug darf nicht leer sein';
+      $_SESSION['error']['slug'] = 'Slug darf nicht leer sein';
       $errors[] = 1;
     }
     if ((bool)$description === false) {
-      $_SESSION['errors']['description'] = 'Bitte eine Beschreibung für das Produkt eingeben';
+      $_SESSION['error']['description'] = 'Bitte eine Beschreibung für das Produkt eingeben';
       $errors[] = 1;
     }
     if ((bool)$price === false) {
-      $_SESSION['errors']['price'] = 'Preis darf nicht leer sein';
+      $_SESSION['error']['price'] = 'Preis darf nicht leer sein';
       $errors[] = 1;
     }
     if ((bool)$quantity === false) {
-      $_SESSION['errors']['quantity'] = 'Stückzahl wird benötigt';
+      $_SESSION['error']['quantity'] = 'Stückzahl wird benötigt';
       $errors[] = 1;
     }
     
@@ -77,7 +77,7 @@ if (isset($_SESSION['user_id'])) {
       $slugExists = check_slugs($slug);
     
       if ($slugExists === $slug){
-        $_SESSION['errors']['slug-exists'] = 'Slug wird schon verwendet, bitte einen neuen wählen';
+        $_SESSION['error']['slug-exists'] = 'Slug wird schon verwendet, bitte einen neuen wählen';
         header('Location: ' . '/views/newProduct.php');
         exit();
       }
@@ -88,7 +88,7 @@ if (isset($_SESSION['user_id'])) {
     if ($create_new_product){
       $_SESSION['new-product'] = 'Neues Produkt erfolgreich angelegt';
       unset($_SESSION['newProduct']);
-      unset($_SESSION['errors']);
+      unset($_SESSION['error']);
       header('Location: ' . '/views/products.php');
     }
     

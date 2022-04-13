@@ -17,11 +17,11 @@ if (isset($_SESSION['user_id'])) {
     $body = filter_input(INPUT_POST, 'new-body', FILTER_SANITIZE_SPECIAL_CHARS);
 
     if ((bool)$title === false) {
-      $_SESSION['errors']['title'] = 'Titel darf nicht leer sein';
+      $_SESSION['error']['title'] = 'Titel darf nicht leer sein';
       $errors[] = 1;
     }
     if ((bool)$body === false) {
-      $_SESSION['errors']['body'] = 'Post darf nicht leer sein';
+      $_SESSION['error']['body'] = 'Post darf nicht leer sein';
       $errors[] = 1;
     }
     
@@ -45,7 +45,7 @@ if (isset($_SESSION['user_id'])) {
 
     if ($create_new_post){
       $_SESSION['new-post'] = 'Neuer Post wurde erfolgreich erstellt';
-      unset($_SESSION['errors']);
+      unset($_SESSION['error']);
       unset($_SESSION['newPost']);
       header('Location: ' . '/views/posts.php');
     }

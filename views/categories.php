@@ -9,14 +9,8 @@ require_once __DIR__ . '/../controllers/products.php';
 <body>
   <?php require_once __DIR__ . '/partials/navbar.php' ?>
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
-  <?php if (isset($_SESSION['errors'])) {
-      echo '<div class="errorMessages">';
-      foreach ($_SESSION['errors'] as $key => $value) {
-        echo $value . '<br />';
-      }
-      echo '</div>';
-    }
-    ?>
+  <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
+
   <div class="space-big"></div>
   <div class="products">
     <h2><?php echo $get_category ?></h2>

@@ -2,8 +2,8 @@
 require_once __DIR__ . '/../helpers/session.php';
 
 
-if (isset($_SESSION['errors'])) {
-  unset($_SESSION['errors']);
+if (isset($_SESSION['error'])) {
+  unset($_SESSION['error']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -19,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $loginPasswd = filter_input(INPUT_POST, 'passwd');
 
   if ((bool)$loginEmail === false) {
-    $_SESSION['errors']['login-mail'] = 'Bitte Email eingeben';
+    $_SESSION['error']['login-mail'] = 'Bitte Email eingeben';
     $errors[] = 1;
   }
   if ((bool)$loginPasswd === false) {
-    $_SESSION['errors']['login-passwd'] = 'Bitte Passwort eingeben';
+    $_SESSION['error']['login-passwd'] = 'Bitte Passwort eingeben';
     $errors[] = 1;
   }
 
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emailExist = search_mail($loginEmail, $loginPasswd);
 
     if ((bool)$emailExist === false) {
-      $_SESSION['errors']['login-fail'] = 'Email oder Passwort stimmt nicht';
+      $_SESSION['error']['login-fail'] = 'Email oder Passwort stimmt nicht';
       $errors[] = 1;
     }
     
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $isValidLogin = password_verify($loginPasswd, $match);
       
       if (!$isValidLogin) {
-        $_SESSION['errors']['login-fail'] = 'Email oder Passwort stimmt nicht';
+        $_SESSION['error']['login-fail'] = 'Email oder Passwort stimmt nicht';
         header('Location: ' . '/views/login.php');
       }
   

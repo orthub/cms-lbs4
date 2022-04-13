@@ -11,7 +11,7 @@
       <div class="col-4"></div>
       <div class="col-4">
 
-        <?php require_once __DIR__ . '/../lib/register_errors.php' ?>
+        <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
         <h1><a name="reg_anker">Registrieren</a></h1>
         <form action="/controllers/register.php" method="POST">
           <label for="first_name">Vorname</label>

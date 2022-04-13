@@ -10,7 +10,7 @@
       <div class="col-4"></div>
       <div class="col-4">
         <h1>Login</h1>
-        <?php require_once __DIR__ . '/../lib/login_errors.php' ?>
+        <?php require_once __DIR__ . '/../helpers/flashLogin.php' ?>
         <div class="login-form">
           <form action="/controllers/login.php" method="POST">
             <label for="email-login">Email:</label><br />

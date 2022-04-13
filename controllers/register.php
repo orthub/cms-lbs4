@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/../helpers/session.php';
 
-if (isset($_SESSION['errors'])) {
-  unset($_SESSION['errors']);
+if (isset($_SESSION['error'])) {
+  unset($_SESSION['error']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -21,23 +21,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $registerPasswordConfirm = filter_input(INPUT_POST, 'confirm_passwd');
   
   if((bool)$registerFirstname === false) {
-    $_SESSION['errors']['register-firstname'] = 'Bitte Vornamen eingeben';
+    $_SESSION['error']['register-firstname'] = 'Bitte Vornamen eingeben';
     $errors[] = 1;
   }
   if((bool)$registerLastname === false) {
-    $_SESSION['errors']['register-lastname'] = 'Bitte Nachnamen eingeben';
+    $_SESSION['error']['register-lastname'] = 'Bitte Nachnamen eingeben';
     $errors[] = 1;
   }
   if((bool)$registerEmail === false) {
-    $_SESSION['errors']['register-email'] = 'Bitte Email eingeben';
+    $_SESSION['error']['register-email'] = 'Bitte Email eingeben';
     $errors[] = 1;
   }
   if((bool)$registerPassword === false) {
-    $_SESSION['errors']['register-password'] = 'Bitte Passwort eingeben';
+    $_SESSION['error']['register-password'] = 'Bitte Passwort eingeben';
     $errors[] = 1;
   }
   if((bool)$registerPasswordConfirm === false) {
-    $_SESSION['errors']['register-password-confirm'] = 'Bestätigen sie ihr Passwort';
+    $_SESSION['error']['register-password-confirm'] = 'Bestätigen sie ihr Passwort';
     $errors[] = 1;
   }
 
@@ -60,11 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
   if (count($errors) === 0) {
     if (mb_strlen($registerPassword) < 8) {
-      $_SESSION['errors']['register-password-length'] = 'Passwort muss mindestens 8 Zeichen lang sein';
+      $_SESSION['error']['register-password-length'] = 'Passwort muss mindestens 8 Zeichen lang sein';
       $errors[] = 1;
     }
     if ($registerPassword != $registerPasswordConfirm) {
-      $_SESSION['errors']['password-not-confirmed'] = 'Passwörter stimmen nicht überein';
+      $_SESSION['error']['password-not-confirmed'] = 'Passwörter stimmen nicht überein';
       $errors[] = 1;
     }
     
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       foreach ($email_exists_already as $email) {
         if ($email['email'] === $registerEmail) {
           $email_exists_in_database = true;
-          $_SESSION['errors']['can-not-use-email'] = 'Email kann nicht verwendet werden';
+          $_SESSION['error']['can-not-use-email'] = 'Email kann nicht verwendet werden';
           $errors[] = 1;
         }
       }

@@ -38,34 +38,30 @@ require_once __DIR__ . '/../controllers/orders.php';
       </div>
       <?php endforeach ?>
     </div>
-    <div class="space-mid"></div>
     <div class="clear-float"></div>
-    <pre>
-      <?php var_dump($_SESSION) ?>
-    </pre>
     <div class="row">
       <div class="col-4"></div>
       <div class="col-4">
-        <?php echo (!empty($_SESSION['errors']['no-new-address'])) ? $_SESSION['errors']['no-new-address'] : '' ?>
+        <?php echo (!empty($_SESSION['error']['no-new-address'])) ? $_SESSION['error']['no-new-address'] : '' ?>
         <h2>Neue Lieferadresse:</h2>
         <div class="space-small"></div>
 
         <form action="/controllers/newDeliveryAddress.php" method="POST">
           <label for='street'>Straße:</label><br />
           <input type='text' name='street' id='street' />
-          <?php echo (!empty($_SESSION['errors']['new-street'])) ? '<span class="error-msg">' . $_SESSION['errors']['new-street'] . '</span>' : '' ?>
+          <?php echo (!empty($_SESSION['error']['new-street'])) ? '<span class="error-msg">' . $_SESSION['error']['new-street'] . '</span>' : '' ?>
           <br /><br />
           <label for='streetNumber'>Straßennummer:</label><br />
           <input type='text' name='streetNumber' id='streetNumber' />
-          <?php echo (!empty($_SESSION['errors']['new-streetNumber'])) ? '<span class="error-msg">' . $_SESSION['errors']['new-streetNumber'] . '</span>' : '' ?>
+          <?php echo (!empty($_SESSION['error']['new-streetNumber'])) ? '<span class="error-msg">' . $_SESSION['error']['new-streetNumber'] . '</span>' : '' ?>
           <br /><br />
           <label for='city'>Stadt:</label><br />
           <input type='text' name='city' id='city' />
-          <?php echo (!empty($_SESSION['errors']['new-city'])) ? '<span class="error-msg">' . $_SESSION['errors']['new-city'] . '</span>' : '' ?>
+          <?php echo (!empty($_SESSION['error']['new-city'])) ? '<span class="error-msg">' . $_SESSION['error']['new-city'] . '</span>' : '' ?>
           <br /><br />
           <label for='zip'>Postleitzahl:</label><br />
           <input type='text' name='zip' id='text' />
-          <?php echo (!empty($_SESSION['errors']['new-zip'])) ? '<span class="error-msg"> ' . $_SESSION['errors']['new-zip'] . '</span>' : '' ?>
+          <?php echo (!empty($_SESSION['error']['new-zip'])) ? '<span class="error-msg"> ' . $_SESSION['error']['new-zip'] . '</span>' : '' ?>
           <br /><br />
           <input class="button" type='submit' value='Lieferadresse hinzufügen' />
         </form>
@@ -75,7 +71,7 @@ require_once __DIR__ . '/../controllers/orders.php';
     </div>
   </div>
   <div class="space-big"></div>
-  <?php unset($_SESSION['errors']) ?>
+  <?php unset($_SESSION['error']) ?>
   <?php require_once __DIR__ .'/partials/footer.php' ?>
 </body>
 
