@@ -18,6 +18,9 @@ h4,
 h5,
 h6,
 p,
+th,
+td,
+small,
 a {
   font-family: 'Montserrat';
 }
@@ -408,6 +411,7 @@ textarea {
 
 
 input {
+  font-family: 'Montserrat';
   margin-bottom: 4px;
   padding: 6px 4px;
   width: 100%;
