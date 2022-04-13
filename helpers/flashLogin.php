@@ -1,10 +1,10 @@
 <?php
-if (isset($_SESSION['errors']) && !empty($_SESSION['errors'])) {
-  foreach ($_SESSION['errors'] as $error) {
+if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+  foreach ($_SESSION['error'] as $error) {
     echo '<p class="error-msg"><b>' . $error . '</b></p>';
   } 
 }
-unset($_SESSION['errors']);
+unset($_SESSION['error']);
 
 if (isset($_SESSION['new-user'])) {
   echo '<p class="success-msg">' . $_SESSION['new-user'] . '</p>';
