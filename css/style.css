@@ -15,7 +15,7 @@ navbar {
 }
 
 .comp-logo {
-  max-width: 75px;
+  max-width: 160px;
   float: left;
   padding: 14px 0px;
 }
@@ -389,8 +389,9 @@ textarea {
   height: 80px;
 }
 
+
 input {
-  margin: 4px 0px 16px 0px;
+  margin-bottom: 4px;
   padding: 6px 4px;
   width: 100%;
 }

@@ -5,3 +5,4 @@ config/db_conf.php
 config/mail_data.php
 lib/
 storage/
+/img/comp/logo.png

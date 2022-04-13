@@ -9,7 +9,7 @@ require_once __DIR__ . '/../models/invoice.php';
 
 $userId = $_SESSION['user_id'];
 $orderId = $_SESSION['order_id'];
-$userEmail = get_user_email_by_id($userId);
+$userEmail = get_user_data_by_id($userId);
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
 $file = '/storage/' . $userId . '/' . $orderId . '.pdf';

@@ -38,10 +38,13 @@ if (!file_exists($filePath)) {
   require_once __DIR__ . '/../lib/vendor/autoload.php';
   require_once __DIR__ . '/../lib/vendor/dompdf/dompdf/src/Autoloader.php';
   require_once __DIR__ . '/../models/invoice.php';
+  require_once __DIR__ . '/../config/company_data.php';
   $renderTableProducts = '';
   
   $get_base_order = get_order_with_user_and_order_id($userId, $orderId);
   $get_products_from_order = get_products_for_order($orderId);
+  $deliveryAddress = get_delivery_address_for_order($userId, $get_base_order['delivery_address_id']);
+  $userData = get_user_data_by_id($userId);
 
   $_SESSION['order-products-quantity'] = $get_products_from_order;
 
@@ -52,90 +55,157 @@ if (!file_exists($filePath)) {
     $products[] = get_product_order_info($get_products_from_order[$count]['product_id']);
     $products[$count]['quantity'] = $get_products_from_order[$count]['quantity'];
   }
-
-  // echo '<pre>';
-  // var_dump($products);
-  // echo '</pre>';
-  // exit();
   
-  // $_SESSION['products-from-order'] = $productInfo;
   $_SESSION['base-order'] = $get_base_order;
-
+  (int)$priceWithoutDeliveryCosts = (int)$_SESSION["base-order"]["order_price"] - (int)DELIVERY_COSTS;
 
   // instantiate and use the dompdf class
-  $dompdf = new Dompdf();
+  // $dompdf = new Dompdf();
+  $dompdf = new Dompdf(["chroot" => ["/var/www/html/img/comp"]]);
   $endprice = 0;
 
+  $position = 1;
   // produkte für tabelle generieren + gesamtpreis
   foreach ($products as $product) {
     $renderTableProducts .= 
     '<tr>
-      <td class="text-left">' . $product['title'] . '</td>
-      <td class="text-left">' . $product['quantity'] . '</td>
-      <td class="text-left">' . $product['price'] / 100 . '€</td> 
+      <td class="product-table text-left">' . $position . '</td>
+      <td class="product-table text-left">' . $product['title'] . '</td>
+      <td class="product-table text-center">' . $product['quantity'] . '</td>
+      <td class="product-table text-center">(' . COMPANY_VAT . ' %)</td>
+      <td class="product-table text-left">' . $product['price'] / 100 . ' EUR</td>
+      <td class="product-table text-right">' . ($product['price'] * $product['quantity']) / 100 . ' EUR</td>
     </tr>';
     $price = $product['price'] * $product['quantity'];
     $endprice = $endprice + $price;
-  } // FEHLER BEIM PREIS
+    $position++;
+  }
 
+  $withoutVat = round($endprice / 1.20);
+  $vat = $endprice - $withoutVat;
 
   // HTML für die Erstellung des PDF-Dokuments
   $renderToHTML ='
   <html>
+  
   <head>
   <style>
-  html, body {margin: 0;padding:0}
-  body {height: 100%;}
-  table {}
-  h1 {font-size: 32px}
-      h2 {font-size: 24px}
-      p {font-size: 16px}
-      th, td {padding: 6px 10px}
-      .content {margin: 2cm 1.5cm 1.5cm 2cm;}
-      .text-left {text-align: left;}
-      .text-center {text-align: center}
-      .text-right {text-align: right}
-      .float-left {float:left;}
-      .footer {position:absolute; width:100%; bottom: 190px;}
-    </style>
+    html, body {margin: 0;padding:0}
+    body {height: 100%;}
+    table, td, th {border-collapse:collapse}
+    th {border-top:1px solid black;border-bottom:1px solid black}
+    .product-table {border-bottom:1px solid black}
+    h1 {font-size: 20px}
+    h2 {font-size: 18px}
+    p {font-size: 16px}
+    .company {float:left;width:32%}
+    .company:last-child {margin-right:0}
+    .logo {max-width:160px}
+    th, td {padding: 6px 10px}
+    .content {margin: 2cm 1.5cm 1.5cm 2cm;}
+    .text-left {text-align: left;}
+    .text-center {text-align: center}
+    .text-right {text-align: right}
+    .float-left {float:left;}
+    .clearing {clear:both}
+    .no-mar-pad {margin:0;padding:0}
+  </style>
   </head>
+  
   <body>
     <div class="content">
-      <h1>Rechnung:</h1>
-      <hr />
-      <p>Bestell Nummer: <b>' . $_SESSION["base-order"]["orders_id"] . '</b></p>
-      <p>Bestell Datum: <b>' . $_SESSION['base-order']['order_date'] . '</b></p>
-      <p>Bestell Status: <b>' .  $_SESSION['base-order']['status'] . '</b></p>
-      <hr />
-      <h2>Produkte:</h2>
+    <div class="company">
+      <img class="logo" src="/var/www/html/img/comp/logo.png" />
+    </div>
+    <div class="company">
+      <p class="no-mar-pad">' . COMPANY_NAME . '</p>
+      <p class="no-mar-pad">' . COMPANY_STREET . '</p>
+      <p class="no-mar-pad">' . COMPANY_ZIP . ' ' . COMPANY_CITY . '</p>
+    </div>
+    <div class="company">
+      <p class="no-mar-pad">Tel: ' . COMPANY_PHONE . '</p>    
+      <p class="no-mar-pad">E-Mail: ' . COMPANY_MAIL . '</p>    
+      <p class="no-mar-pad">Web: ' . COMPANY_WEB . '</p>    
+    </div>
+    <div class="clearing"></div>
+      <p class="no-mar-pad"><b>Rechnungsanschrift:</b></p><br />
+      <p class="no-mar-pad">' . $userData['first_name'] .' ' . $userData['last_name'] . '</p>
+      <p class="no-mar-pad">' . $deliveryAddress['street'] .' / ' . $deliveryAddress['street_number'] . '</p>
+      <p class="no-mar-pad">' . $deliveryAddress['zip_code'] . ' '. $deliveryAddress['city'] . '</p>
+      <p class="text-right"><b>' . date("d.m.Y") . '</b></p>
+      <p><b>Rechnungs Nummer: ' . $_SESSION["base-order"]["orders_id"] . '</b></p>
+      <br />
+      <p class="no-mar-pad"><b>Guten Tag,</b></p>
+      <p class="no-mar-pad">gemäß Ihrer Bestellung berechnen wir folgenden Auftrag:</p>
+      <h2>Bestellung:</h2>
       <table>
-      <thead>
-      <tr>
-      <th class="text-left">Produkt</th>
-      <th class="text-left">Stück</th>
-            <th class="text-left">Preis</th>
-          </tr>
+        <thead>
+          <tr>
+            <th class="text-left">Pos.</th>
+            <th class="text-left">Artikel</th>
+            <th class="text-left">Anzahl</th>
+            <th class="text-center">MwSt-Satz</th>
+            <th class="text-left">Einzelpreis</th>
+            <th class="text-right">Preis</th>
+            </tr>
         </thead>
         <tbody>
         ' . $renderTableProducts . '
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class=" text-right">Gesamt: ' . $endprice / 100 . ' EUR</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-right">Versandkosten: ' . DELIVERY_COSTS . ' EUR</td>
+          </tr>
+          <tr>
+          <td></td>
+          <td><small>Zahlart:</small></td>
+            <td><small>Vorkasse</small></td>
+            <td></td>
+            <td></td>
+            <td class="text-right"><b>Gesamt-Brutto: ' . $_SESSION["base-order"]["order_price"] / 100 . ' EUR</b></td>
+          </tr>
+          <tr>
+          <td></td>
+          <td><small>Versandart:</small></td>
+          <td><small>Standard Post</small></td>
+          <td></td>
+          <td></td>
+          <td class="text-right">Gesamt ohne MwSt: ' . $withoutVat / 100 . ' EUR</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="text-right">MwSt: ' . $vat / 100 . ' EUR</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="text-right">MwSt Betrag: 20% ' . $vat / 100 . ' EUR</td>
+        </tr>
         </tbody>
-        </table>
-        <div class="text-right">
-          <p>Gesamtpreis:(inkl. MwSt)</p>
-          <p>' . $_SESSION["base-order"]["order_price"] / 100 . '€</p>
-        <div>
-        <p class="text-left">Bitte berücksichtigen sie, dass die Versendung der Waren erst nach eingelangter Zahlung auf unser Konto erfolgt.</p>
-        <p class="text-left">Benutzen sie für die Überweisung als Verwendungszweck: ' .$_SESSION["base-order"]["orders_id"] . '</p>
-      <div class="footer">
-        <hr />
-        <div class="text-center">
-          <p>Firma Stiftl GmbH</p>
-          <p>Stiftlstraße 1</p>
-          <p>1299 Stiftlingen</p>
-        <div>
-        </div>
-        </div>
-        </body>
+      </table>
+      <p class="text-left">Bitte berücksichtigen sie, dass die Versendung der Waren erst nach eingelangter Zahlung auf unser Konto erfolgt.</p>
+      <p class="text-left">Benutzen sie für die Überweisung als Verwendungszweck: ' .$_SESSION["base-order"]["orders_id"] . '</p>
+    </div>
+  </body>
+  
   </html>
   ';
 

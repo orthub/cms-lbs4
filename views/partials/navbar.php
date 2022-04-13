@@ -9,7 +9,7 @@ if (isset($_SESSION['user_id'])) {
 
 <navbar>
   <div class="comp-logo">
-    <a href="/index.php"><img src="/img/comp/comp-logo.jpg" alt="Company Logo"></a>
+    <a href="/index.php"><img src="/img/comp/logo.png" alt="Company Logo"></a>
   </div>
 
   <input type="checkbox" id="toggle-btn">

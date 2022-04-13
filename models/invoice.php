@@ -42,14 +42,30 @@ function get_product_order_info(int $product_id)
   return $res_get_product_price;
 }
 
-function get_user_email_by_id(string $userId)
+function get_user_data_by_id(string $userId)
 {
-  $sql_get_user_email_by_id = 'SELECT `id`, `email`
+  $sql_get_user_data_by_id = 'SELECT `id`, `email`, `first_name`, `last_name`
                                 FROM `users`
                                 WHERE `id` = :userId';
-  $statement_get_user_email_by_id = get_db()->prepare($sql_get_user_email_by_id);
-  $statement_get_user_email_by_id->execute([':userId' => $userId]);
-  $result_get_user_email_by_id = $statement_get_user_email_by_id->fetch(PDO::FETCH_ASSOC);
+  $statement_get_user_data_by_id = get_db()->prepare($sql_get_user_data_by_id);
+  $statement_get_user_data_by_id->execute([':userId' => $userId]);
+  $result_get_user_data_by_id = $statement_get_user_data_by_id->fetch(PDO::FETCH_ASSOC);
 
-  return $result_get_user_email_by_id;
+  return $result_get_user_data_by_id;
+}
+
+function get_delivery_address_for_order(string $userId, string $deliveryId)
+{
+  $sql_get_delivery_address_for_order = 'SELECT `id`, `city`, `street`, `street_number`, `zip_code`
+                                          FROM `delivery_address`
+                                          WHERE `id` = :deliveryId
+                                          AND `user_id` = :userId';
+  $statement_get_delivery_address_for_order = get_db()->prepare($sql_get_delivery_address_for_order);
+  $statement_get_delivery_address_for_order->execute([
+    ':deliveryId' => $deliveryId,
+    ':userId' => $userId
+  ]);
+  $result_get_delivery_address_for_order = $statement_get_delivery_address_for_order->fetch(PDO::FETCH_ASSOC);
+
+  return $result_get_delivery_address_for_order;
 }
