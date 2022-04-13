@@ -14,15 +14,16 @@ $userId = $_SESSION['user_id'];
 $orderId = $_SESSION['base-order']['orders_id'];
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
-$file = '/storage/' . $userId . '/' . $orderId . '.pdf';
+$file = '/storage/' . $userId . '/Rechnung_' . $orderId . '.pdf';
 $filePath = $rootPath . $file;
+
 
 if (file_exists($filePath)) {
   //Define header information
   header('Content-Description: File Transfer');
   header('Content-Type: application/octet-stream');
 
-  header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+  header('Content-Disposition: attachment; filename="' . basename("Rechnung_" . $file) . '"');
   header('Content-Length: ' . filesize($filePath));
   header('Pragma: public');
 
@@ -148,7 +149,7 @@ if (!file_exists($filePath)) {
 
   $output = $dompdf->output();
 
-  file_put_contents('../storage/' . $userId . '/' . $orderId . '.pdf', $output);
+  file_put_contents('../storage/' . $userId . '/Rechnung_' . $orderId . '.pdf', $output);
 
   //Define header information
   // header('Content-Description: File Transfer');

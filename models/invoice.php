@@ -32,7 +32,7 @@ function get_products_for_order(string $order_id)
 
 function get_product_order_info(int $product_id)
 {
-  $sql_get_product_price = 'SELECT `price`, `title`, `quantity`
+  $sql_get_product_price = 'SELECT `price`, `title`
                             FROM `products` 
                             WHERE `id` = :productId';
   $stmt_get_product_price = get_db()->prepare($sql_get_product_price);

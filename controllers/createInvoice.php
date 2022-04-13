@@ -12,15 +12,16 @@ $userId = $_SESSION['user_id'];
 $orderId = $_SESSION['order_id'];
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
-$file = '/storage/' . $userId . '/' . $orderId . '.pdf';
+$file = '/storage/' . $userId . '/Rechnung_' . $orderId . '.pdf';
 $filePath = $rootPath . $file;
 
 if (file_exists($filePath)) {
+  $date = date('d.m.Y H.i');
   //Define header information
   header('Content-Description: File Transfer');
   header('Content-Type: application/octet-stream');
 
-  header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+  header('Content-Disposition: attachment; filename="' . basename("Rechnung_" . $file) . '"');
   header('Content-Length: ' . filesize($filePath));
   header('Pragma: public');
 
@@ -48,11 +49,16 @@ if (!file_exists($filePath)) {
 
   $products = [];
   for ($count = 0; $count <= $counting; $count++) {
-    $productInfo[] = get_product_order_info($get_products_from_order[$count]['product_id']);
+    $products[] = get_product_order_info($get_products_from_order[$count]['product_id']);
     $products[$count]['quantity'] = $get_products_from_order[$count]['quantity'];
   }
 
-  $_SESSION['products-from-order'] = $productInfo;
+  // echo '<pre>';
+  // var_dump($products);
+  // echo '</pre>';
+  // exit();
+  
+  // $_SESSION['products-from-order'] = $productInfo;
   $_SESSION['base-order'] = $get_base_order;
 
 
@@ -61,7 +67,7 @@ if (!file_exists($filePath)) {
   $endprice = 0;
 
   // produkte für tabelle generieren + gesamtpreis
-  foreach ($_SESSION['products-from-order'] as $product) {
+  foreach ($products as $product) {
     $renderTableProducts .= 
     '<tr>
       <td class="text-left">' . $product['title'] . '</td>
@@ -116,7 +122,7 @@ if (!file_exists($filePath)) {
         </table>
         <div class="text-right">
           <p>Gesamtpreis:(inkl. MwSt)</p>
-          <p>' . $_SESSION["base-order"]["order_price"]. '€</p>
+          <p>' . $_SESSION["base-order"]["order_price"] / 100 . '€</p>
         <div>
         <p class="text-left">Bitte berücksichtigen sie, dass die Versendung der Waren erst nach eingelangter Zahlung auf unser Konto erfolgt.</p>
         <p class="text-left">Benutzen sie für die Überweisung als Verwendungszweck: ' .$_SESSION["base-order"]["orders_id"] . '</p>
@@ -146,7 +152,7 @@ if (!file_exists($filePath)) {
 
   $output = $dompdf->output();
 
-  file_put_contents('../storage/' . $userId . '/' . $orderId . '.pdf', $output);
+  file_put_contents('../storage/' . $userId . '/Rechnung_' . $orderId . '.pdf', $output);
 
   //Define header information
   // header('Content-Description: File Transfer');
