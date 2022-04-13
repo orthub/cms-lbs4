@@ -29,9 +29,9 @@ navbar {
   height: 100%;
   width: 100%;
   float: left;
-  background: #313131;
+  background: #f5901c;
   padding: 0 20px;
-  color: #e97c00;
+  color: #313131;
 }
 
 .comp-logo {
@@ -55,7 +55,7 @@ navbar {
 }
 
 .navigation li a {
-  color: #e97c00;
+  color: #313131;
   padding: 28px 15px;
   text-transform: uppercase;
   text-align: center;
@@ -89,7 +89,7 @@ navbar {
 .navigation a:hover,
 .show-menu-btn:hover,
 .hide-menu-btn:hover {
-  color: #f0fc88;
+  color: #ffffff;
 }
 
 #toggle-btn {
@@ -106,8 +106,8 @@ navbar {
 .dropdown-content {
   display: none;
   position: absolute;
-  color: #e97c00;
-  background-color: #313131;
+  color: #313131;
+  background-color: #f5901c;
   min-width: 140px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 12px 0px;
@@ -123,13 +123,13 @@ navbar {
   width: 100%;
   text-align: center;
   float: left;
-  background: #313131;
+  background: #f5901c;
   padding: 12px 20px;
-  color: #e97c00;
+  color: #313131;
 }
 
 .footer a {
-  color: #e97c00;
+  color: #313131;
   text-decoration: none;
   text-align: center;
 }
@@ -137,7 +137,7 @@ navbar {
 .footer a:hover {
   text-decoration: none;
   text-align: center;
-  color: #f0fc88;
+  color: #ffffff;
 }
 
 
@@ -153,7 +153,7 @@ navbar {
     position: fixed;
     width: 100%;
     height: 100vh;
-    background: #313131;
+    background: #f5901c;
     top: -100%;
     left: 0;
     padding: 50px 0px;
@@ -326,13 +326,13 @@ navbar {
 }
 
 .main-icons {
-  color: #e97c00;
+  color: #f5901c;
   font-size: 14vh;
 }
 
 .main-icon-text {
   margin: 12px 0px;
-  color: #e97c00;
+  color: #f5901c;
   font-size: 30px;
 }
 
@@ -426,16 +426,16 @@ select {
   width: auto;
   margin-top: 8px;
   padding: 4px;
-  color: #e97c00;
-  background-color: #313131;
+  color: #313131;
+  background-color: #f5901c;
   border-radius: 4px;
 }
 
 .button:hover {
   width: auto;
   padding: 4px;
-  color: #f0fc88;
-  background-color: #313131;
+  color: #ffffff;
+  background-color: #f5901c;
   border-radius: 4px;
   cursor: pointer;
 }
