@@ -20,7 +20,7 @@ unset($_SESSION['order-products-quantity']);
     <div class="row">
       <div class="col-4"></div>
       <div class="col-4 text-center">
-        <?php require_once __DIR__ . '/../helpers/flashMassage.php' ?>
+        <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
         <h2>Danke für Ihre Bestellung.</h2>
         <p>Ihre Rechnung erhalten sie in kürze per Email.</p>
         <p>Sie können die Rechnung jederzeit bei ihren Bestellungen einsehen und herunterladen.</p>
