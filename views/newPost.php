@@ -13,7 +13,7 @@
     <div class="row">
       <div class="col-4"></div>
       <div class="col-4">
-        <?php require_once __DIR__ . '/../lib/error_messages.php' ?>
+        <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
         <form action="/controllers/newPost.php" method="POST">
           <label for="input-title">Titel</label><br />
           <input id="input-title" type="text" name="new-title"

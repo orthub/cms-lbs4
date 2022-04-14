@@ -12,7 +12,7 @@ require_once __DIR__ . '/../controllers/dashboard.php';
 
   <div class="space-big"></div>
   <div class="content">
-
+    <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
     <table>
       <thead>
         <tr>

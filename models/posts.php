@@ -53,12 +53,16 @@ function new_post(string $title, string $body, string $userId)
 
 function delete_post_by_id(string $postId)
 {
-  $sql_delete_post_by_id = 'DELETE FROM `posts` 
-                                WHERE `id` = :postId';
-  $stmt_delete_post_by_id = get_db()->prepare($sql_delete_post_by_id);
-  $stmt_delete_post_by_id->execute([':postId' => $postId]);
+  try {
+    $sql_delete_post_by_id = 'DELETE FROM `posts` 
+                              WHERE `id` = :postId';
+    $stmt_delete_post_by_id = get_db()->prepare($sql_delete_post_by_id);
+    $stmt_delete_post_by_id->execute([':postId' => $postId]);
+  } catch (\Exception $e) {
+    return false;
+  }
 
-  return $stmt_delete_post_by_id;
+  return true;
 }
 
 function change_post_status_by_id(string $postId, string $status)
