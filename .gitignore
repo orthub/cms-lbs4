@@ -6,3 +6,4 @@ config/mail_data.php
 lib/
 storage/
 /img/comp/logo.png
+/img/products
