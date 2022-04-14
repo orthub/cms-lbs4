@@ -14,6 +14,7 @@ require_once __DIR__ . '/../controllers/editProduct.php';
   <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
+      <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
       <div class="text-center">
         <a
           href="/controllers/productStatus.php?prodid=<?php echo $_SESSION['edit-product']['id'] . '&current=' . $_SESSION['edit-product']['status'] . '&slug=' . $_SESSION['edit-product']['slug'] ?>">
