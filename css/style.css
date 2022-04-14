@@ -540,9 +540,8 @@ tr:nth-child(even) {
 
 /*-- Product Image --*/
 .product-img {
-  width: 250px;
-  max-width: 255px;
-  height: auto;
+  max-width: 220px;
+  max-height: 170px;
 }
 
 .dash-img {
