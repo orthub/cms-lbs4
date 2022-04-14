@@ -11,7 +11,7 @@
     <div class="row">
       <div class="col-4"></div>
       <div class="col-4">
-        <?php require_once __DIR__ . '/../lib/error_messages.php' ?>
+        <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
 
         <form action="/controllers/newProduct.php" method="POST">
           <label for="product">Produktname</label><br />
