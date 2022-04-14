@@ -6,9 +6,11 @@
 <body>
   <?php require_once __DIR__ . '/partials/navbar.php' ?>
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
-  <div class="container">
+  <div class="content">
+
     <div class="row">
-      <div class="col-2"></div>
+      <div class="col-2">
+      </div>
       <div class="col-8">
         <?php echo (isset($_SESSION['new-post'])) ? '<p class="success-msg">' . $_SESSION['new-post'] . '</p>' : '' ?>
         <?php unset($_SESSION['new-post']) ?>
@@ -37,8 +39,9 @@
       </div>
       <div class="col-2"></div>
     </div>
-    <?php require_once __DIR__ . '/partials/footer.php' ?>
   </div>
+  <?php require_once __DIR__ . '/partials/footer.php' ?>
+
 </body>
 
 </html>

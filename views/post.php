@@ -9,15 +9,20 @@
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
   <?php require_once __DIR__ . '/../controllers/posts.php' ?>
   <?php $single_post = get_post_by_id($post_id) ?>
-  <div class="col-2"></div>
-  <div class="col-8">
-    <h2><?php echo $single_post['title'] ?></h2>
-    <p><?php echo $single_post['body'] ?></p>
-    <small><?php echo $single_post['first_name'] . ' | ' . $single_post['created'] ?></small>
-    <br />
-    <a href="/views/posts.php"><button class="button">Zurück</button></a>
+  <div class="content">
+    <div class="row">
+
+      <div class="col-2"></div>
+      <div class="col-8">
+        <h2><?php echo $single_post['title'] ?></h2>
+        <p><?php echo $single_post['body'] ?></p>
+        <small><?php echo $single_post['first_name'] . ' | ' . $single_post['created'] ?></small>
+        <br />
+        <a href="/views/posts.php"><button class="button">Zurück</button></a>
+      </div>
+      <div class="col-2"></div>
+    </div>
   </div>
-  <div class="col-2"></div>
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

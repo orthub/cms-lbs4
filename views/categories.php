@@ -12,8 +12,8 @@ require_once __DIR__ . '/../controllers/products.php';
   <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
 
   <div class="space-big"></div>
-  <div class="products">
-    <h2><?php echo $get_category ?></h2>
+  <div class="content">
+    <h2 class="category"><?php echo $get_category ?></h2>
     <?php if(!$category_available) : ?>
     <p>Kategorie nicht gefunden.</p>
     <?php endif ?>
@@ -21,11 +21,9 @@ require_once __DIR__ . '/../controllers/products.php';
       <?php if($category_available) : ?>
       <?php foreach ($category_products as $product) : ?>
       <div class="col-3">
+        <p class="text-bold"><?php echo $product['title'] ?></p>
         <img class="product-img" src="<?php echo $product['img_url'] ?>" alt="<?php echo $product['slug']?>">
-        <p><?php echo $product['title'] ?></p>
-        <p><?php echo $product['description'] ?></p>
         <p><?php echo $product['price'] / 100 . '€' ?></p>
-        <p><?php echo $product['category'] ?></p>
         <p>Lagernd: <?php echo $product['quantity'] ?></p>
         <?php if ($product['quantity'] >= 1) : ?>
         <form action="/../controllers/addToCart.php" method="POST">

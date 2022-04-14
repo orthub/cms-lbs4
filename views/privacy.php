@@ -5,10 +5,10 @@
 
 <body>
   <?php require_once __DIR__ . '/partials/navbar.php' ?>
-  <div class="container">
-    <h1>Datenschutzbestimmungen</h1>
-    <?php require_once __DIR__ . '/partials/footer.php' ?>
-  </div>
+
+  <h1>Datenschutzbestimmungen</h1>
+  <?php require_once __DIR__ . '/partials/footer.php' ?>
+
 </body>
 
 </html>

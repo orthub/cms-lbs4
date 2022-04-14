@@ -8,9 +8,9 @@ require_once __DIR__ . '/../controllers/orders.php';
 <?php require_once __DIR__ . '/partials/head.php' ?>
 
 <body>
-  <div class="container">
-    <?php require_once __DIR__ . '/partials/navbar.php' ?>
-    <?php require_once __DIR__ . '/partials/userbar.php' ?>
+  <?php require_once __DIR__ . '/partials/navbar.php' ?>
+  <?php require_once __DIR__ . '/partials/userbar.php' ?>
+  <div class="content">
     <div class="row">
       <div class="col-2">
         <h2>Bestellübersicht:</h2>
@@ -34,6 +34,8 @@ require_once __DIR__ . '/../controllers/orders.php';
     <hr />
     <?php endforeach ?>
   </div>
+  <div class="space-big"></div>
+  <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 
 </html>
