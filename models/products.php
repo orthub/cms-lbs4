@@ -130,3 +130,17 @@ function change_product_status_by_id(string $productId,string $status)
   
   return $stmt_change_product_status_by_id;
 }
+
+function update_product_image_by_slug(string $path, string $slug)
+{
+  $sql_update_product_image_by_slug = 'UPDATE `products`
+                                        SET `img_url` = :newPath
+                                        WHERE `slug` = :slug';
+  $statement_update_product_image_by_slug = get_db()->prepare($sql_update_product_image_by_slug);
+  $statement_update_product_image_by_slug->execute([
+    ':newPath' => $path,
+    ':slug' => $slug
+  ]);
+  
+  return $statement_update_product_image_by_slug;
+}

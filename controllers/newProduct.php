@@ -14,8 +14,6 @@ if (isset($_SESSION['user_id'])) {
     exit();
   }
 
-
-  
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
     require_once __DIR__ . '/../helpers/session.php';
@@ -83,7 +81,18 @@ if (isset($_SESSION['user_id'])) {
       }
     }
 
+    $product_image_path = '/var/www/html/img/products/' . $slug . '/';
+
+    if (mkdir($product_image_path, 0700) === false) {
+      $_SESSION['error']['no-path'] = 'Pfad nicht erstellt';
+      header('Location: ' . '/views/newProduct.php');
+      exit();
+    }
+    
     $create_new_product = new_product($product_title, $slug, $description, $price, $category, $quantity);
+
+    
+
 
     if ($create_new_product){
       $_SESSION['new-product'] = 'Neues Produkt erfolgreich angelegt';
