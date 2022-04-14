@@ -30,7 +30,7 @@ if (isset($_SESSION['user_id'])) {
           </div>
       </div>
       </li>
-      <li><a href="/index.php"><i class="fas fa-pen-to-square"></i> Kontakt</a></li>
+      <li><a href="/views/contact.php"><i class="fas fa-pen-to-square"></i> Kontakt</a></li>
       <?php if (isset($_SESSION['user_id'])) : ?>
       <?php echo '<li><a href="/views/logout.php"><i class="fas fa-right-from-bracket"></i> Ausloggen</a></li>' ?>
       <?php endif ?>
