@@ -14,6 +14,7 @@ require_once __DIR__ . '/../controllers/editPost.php';
   <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
+      <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
       <a
         href="/controllers/postStatus.php?postid=<?php echo $_SESSION['edit-post']['id'] . '&status=' . $_SESSION['edit-post']['published'] ?>">
         <button
