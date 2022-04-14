@@ -58,6 +58,8 @@ if (isset($_SESSION['user_id'])) {
   if ($update_image) {
     $_SESSION['edit-product']['img_url'] = $image_url_for_database;
     unset($_SESSION['error']);
+    header('Location: ' . '/views/editProduct.php');
+    exit();
   }
 
 }
