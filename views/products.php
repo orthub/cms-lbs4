@@ -15,6 +15,7 @@ $products = get_all_live_products();
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
   <?php echo (isset($_SESSION['new-product']) ? '<p class="text-center success-msg">' . $_SESSION['new-product'] . '</p>' : '' ) ?>
   <?php unset($_SESSION['new-product']) ?>
+  <div class="space-big"></div>
   <div class="content">
 
     <div class="row">
