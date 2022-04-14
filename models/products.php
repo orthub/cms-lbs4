@@ -95,14 +95,18 @@ function save_edited_product(string $productId, string $title, string $descripti
   return $stmt_save_edited_product;
 }
 
-function delete_product_by_id(string $productId)
+function delete_product_by_id(string $productId): bool
 {
-  $sql_delete_product_by_id = 'DELETE FROM `products` 
-                                WHERE `id` = :productId';
-  $stmt_delete_product_by_id = get_db()->prepare($sql_delete_product_by_id);
-  $stmt_delete_product_by_id->execute([':productId' => $productId]);
+  try {
+    $sql_delete_product_by_id = 'DELETE FROM `products` 
+                                  WHERE `id` = :productId';
+    $stmt_delete_product_by_id = get_db()->prepare($sql_delete_product_by_id);
+    $stmt_delete_product_by_id->execute([':productId' => $productId]);
+  } catch (\Exception $e) {
+    return false;
+  }
 
-  return $stmt_delete_product_by_id;
+  return true;
 }
 
 function check_slugs(string $slug)
@@ -143,4 +147,16 @@ function update_product_image_by_slug(string $path, string $slug)
   ]);
   
   return $statement_update_product_image_by_slug;
+}
+
+function get_slug_path_by_id(string $productId)
+{
+  $sql_get_slug_path_by_id = 'SELECT `id`, `img_url`, `slug`
+                              FROM `products`
+                              WHERE `id` = :productId';
+  $statement_get_slug_path_by_id = get_db()->prepare($sql_get_slug_path_by_id);
+  $statement_get_slug_path_by_id->execute([':productId' => $productId]);
+  $result_get_slug_path_by_id = $statement_get_slug_path_by_id->fetch();
+
+  return $result_get_slug_path_by_id;
 }
