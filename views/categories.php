@@ -9,14 +9,17 @@ require_once __DIR__ . '/../controllers/products.php';
 <body>
   <?php require_once __DIR__ . '/partials/navbar.php' ?>
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
-  <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
-
-  <div class="space-big"></div>
   <div class="content">
-    <h2 class="category"><?php echo $get_category ?></h2>
+    <div class="space-mid"></div>
+    <div class="text-center">
+      <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
+    </div>
+    <div class="space-small"></div>
+    <h2 class="text-center" class="category"><?php echo $get_category ?></h2>
     <?php if(!$category_available) : ?>
     <p>Kategorie nicht gefunden.</p>
     <?php endif ?>
+    <div class="space-small"></div>
     <div class="row">
       <?php if($category_available) : ?>
       <?php foreach ($category_products as $product) : ?>
@@ -38,9 +41,8 @@ require_once __DIR__ . '/../controllers/products.php';
       <?php endforeach ?>
     </div>
     <?php endif ?>
-
   </div>
-
+  <div class="space-big"></div>
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

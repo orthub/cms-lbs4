@@ -10,9 +10,14 @@ require_once __DIR__ . '/../controllers/productList.php';
   <?php require_once __DIR__ . '/partials/navbar.php' ?>
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
 
-  <div class="space-big"></div>
+  <div class="space-mid"></div>
   <div class="content">
-    <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
+    <div class="text-center">
+      <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
+    </div>
+    <div class="space-small"></div>
+
+
     <table>
       <thead>
         <tr>
@@ -29,7 +34,8 @@ require_once __DIR__ . '/../controllers/productList.php';
       <tbody>
         <?php foreach ($all_products as $product) : ?>
         <tr>
-          <td><img class="dash-img" src="<?php echo $product['img_url'] ?>" alt="<?php echo $product['slug'] ?>"></td>
+          <td><img class="dash-img" src="<?php echo $product['img_url'] ?>" alt="<?php echo $product['slug'] ?>">
+          </td>
           <td><?php echo $product['title'] ?></td>
           <td><?php echo $product['description'] ?></td>
           <td><?php echo $product['category'] ?></td>
@@ -57,7 +63,6 @@ require_once __DIR__ . '/../controllers/productList.php';
         <?php endforeach ?>
       </tbody>
     </table>
-
   </div>
   <div class="space-big"></div>
   <?php require_once __DIR__ . '/partials/footer.php' ?>

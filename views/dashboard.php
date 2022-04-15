@@ -9,11 +9,12 @@ require_once __DIR__ . '/../controllers/dashboard.php';
 <body>
   <?php require_once __DIR__ . '/partials/navbar.php' ?>
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
-
-  <div class="space-small"></div>
   <div class="content">
-    <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
-
+    <div class="space-small"></div>
+    <div class="text-center">
+      <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
+    </div>
+    <div class="space-mid"></div>
     <div class="row">
       <div class="col-6">
         <p class="text-bold">Benutzer</p>
@@ -44,12 +45,10 @@ require_once __DIR__ . '/../controllers/dashboard.php';
         <br />
         <p>Lagerbestand weniger als 10:</p>
         <?php if (!empty($products_less_ten)) : ?>
-
         <?php foreach ($products_less_ten as $value) : ?>
         <br />
         <?php echo $value['title'] . ' | <b class="red">' . $value['quantity'] . '</b> Lagernd, Produkt ist ' . $value['status'] ?>
         <?php endforeach ?>
-
         <?php endif ?>
         <br /><br />
         <a href="/views/product-list.php">Alle Produkte anzeigen</a>
@@ -63,11 +62,8 @@ require_once __DIR__ . '/../controllers/dashboard.php';
         <a href="/views/post-list.php">Alle Posts anzeigen</a>
       </div>
     </div>
-
-
-
-    <div class="space-big"></div>
   </div>
+  <div class="space-big"></div>
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

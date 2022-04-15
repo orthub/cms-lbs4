@@ -10,9 +10,12 @@ require_once __DIR__ . '/../controllers/editMessage.php';
   <?php require_once __DIR__ . '/partials/navbar.php' ?>
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
 
-  <div class="space-big"></div>
+  <div class="space-mid"></div>
   <div class="content">
-    <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
+    <div class="text-center">
+      <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
+    </div>
+    <div class="space-small"></div>
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8">
@@ -50,22 +53,13 @@ require_once __DIR__ . '/../controllers/editMessage.php';
             </td>
           </tr>
         </table>
-
         <hr />
         <br />
         <p><?php echo 'Vom: ' . $_SESSION['edit-message']['created'] ?></p>
         <p><?php echo 'Email: ' .  $_SESSION['edit-message']['email'] ?></p>
-
       </div>
       <div class="col-2"></div>
     </div>
-
-
-
-
-
-
-
   </div>
   <div class="space-big"></div>
   <?php require_once __DIR__ . '/partials/footer.php' ?>

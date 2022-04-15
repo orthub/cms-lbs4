@@ -5,12 +5,15 @@
 
 <body>
   <?php require_once __DIR__ . '/partials/navbar.php' ?>
-  <div class="container">
+  <div class="content">
+    <div class="space-mid"></div>
     <div class="row">
-      <div class="col-4"></div>
-      <div class="col-4">
-        <h1>Login</h1>
+      <div class="col-3"></div>
+      <div class="col-6">
         <?php require_once __DIR__ . '/../helpers/flashLogin.php' ?>
+        <div class="space-small"></div>
+        <h1>Login</h1>
+        <div class="space-small"></div>
         <div class="login-form">
           <form action="/controllers/login.php" method="POST">
             <label for="email-login">Email:</label><br />
@@ -25,10 +28,11 @@
         <br />
         <a href="/views/register.php">Keinen Account? Hier gehts zur Registrierung</a>
       </div>
-      <div class="col-4"></div>
+      <div class="col-3"></div>
     </div>
-    <?php require_once __DIR__ . '/partials/footer.php' ?>
   </div>
+  <div class="space-big"></div>
+  <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 
 </html>

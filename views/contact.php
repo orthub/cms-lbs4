@@ -11,11 +11,16 @@ require_once __DIR__ . '/../controllers/contactForUsers.php';
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
   <div class="content">
     <div class="space-mid"></div>
+    <div class="text-center">
+      <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
+    </div>
+    <div class="space-small"></div>
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6">
-        <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
+        <div class="space-small"></div>
         <h1>Kontaktformular</h1>
+        <div class="space-small"></div>
         <p>Wenn Sie irgendwelche Anliegen haben, zögern Sie nicht und Kontaktieren Sie uns.</p>
         <div class="space-small"></div>
         <form action="/controllers/contact.php" method="POST">

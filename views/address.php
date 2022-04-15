@@ -15,28 +15,28 @@ require_once __DIR__ . '/../controllers/orders.php';
     <div class="space-mid"></div>
     <div class="row">
       <div class="col-2">
-
-        <p class="text-bold">Vorhandene Adressen:</p>
       </div>
       <div class="col-8">
-      </div>
-      <div class="col-2"></div>
-    </div>
-    <div class="row">
-      <?php foreach ($deliveryAddress as $key => $value) : ?>
-      <div class="col-2">
-        <div class="delivery-address">
-          <form action="/controllers/checkout.php" method="POST">
-            <?php echo $value['city'] . '<br />';
-            echo $value['zip_code'] . '<br />';
-            echo $value['street'] . ' / ' . $value['street_number'] . '<br />';
-            ?>
-            <input type="hidden" value="<?php echo $value['id'] ?>" name="deliveryId" />
-            <input class="button" type='submit' value='Auswählen und weiter' />
-          </form>
+        <p class="text-bold">Vorhandene Adressen:</p>
+
+        <div class="row">
+          <?php foreach ($deliveryAddress as $key => $value) : ?>
+          <div class="col-2">
+            <div class="delivery-address">
+              <form action="/controllers/checkout.php" method="POST">
+                <?php echo $value['city'] . '<br />';
+                echo $value['zip_code'] . '<br />';
+                echo $value['street'] . ' / ' . $value['street_number'] . '<br />';
+                ?>
+                <input type="hidden" value="<?php echo $value['id'] ?>" name="deliveryId" />
+                <input class="button" type='submit' value='Auswählen und weiter' />
+              </form>
+            </div>
+          </div>
+          <?php endforeach ?>
         </div>
       </div>
-      <?php endforeach ?>
+      <div class="col-2"></div>
     </div>
     <div class="clear-float"></div>
     <div class="row">
