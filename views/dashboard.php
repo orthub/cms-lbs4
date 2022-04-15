@@ -9,99 +9,65 @@ require_once __DIR__ . '/../controllers/dashboard.php';
 <body>
   <?php require_once __DIR__ . '/partials/navbar.php' ?>
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
-  <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
 
   <div class="space-small"></div>
   <div class="content">
-    <table>
-      <thead>
-        <tr>
-          <th>Vorname</th>
-          <th>Email</th>
-          <th>Rechte</th>
-          <th>Neue Rechte</th>
-          <th>Löschen</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($all_users as $user) : ?>
-        <tr>
-          <td><?php echo $user['first_name'] ?></td>
-          <td><?php echo $user['email'] ?></td>
-          <td><?php echo $user['role'] ?></td>
-          <td>
-            <?php if ($user['role'] != 'ADMIN') : ?>
-            <form action="/controllers/new-role.php" method="POST">
-              <select name="user-rights" id="userRights">
-                <?php foreach ($roles as $role) : ?>
-                <option value="<?php echo $role['role'] ?>"><?php echo $role['role'] ?></option>
-                <?php endforeach ?>
-                <input type="hidden" name="userId" value="<?php echo $user['id'] ?>">
-                <input class="button" type="submit" value="Aktualisieren">
-            </form>
-            <?php endif ?>
-          </td>
-          <td>
-            <form action="/controllers/delete-user.php" method="POST">
-              <input type="hidden" name="removeUser" value="<?php echo $user['id'] ?>">
-              <input class="button" type="submit" value="Löschen">
-            </form>
-          </td>
-        </tr>
-        <?php endforeach ?>
-      </tbody>
-    </table>
+    <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
 
-    <div class="space-small"></div>
-    <div class="all-product-link">
-      <a href="/views/product-list.php">Alle Produkte anzeigen</a>
+    <div class="row">
+      <div class="col-6">
+        <p class="text-bold">Benutzer</p>
+        <p>Insgesamt: <?php echo $all_users ?></p>
+        <p>Administratoren: <?php echo $admins ?></p>
+        <p>Angestellte: <?php echo $employees ?></p>
+        <p>Kunden: <?php echo $customers ?></p>
+        <br />
+        <a href="/views/user-list.php">Alle Benutzer anzeigen</a>
+      </div>
+      <div class="col-6">
+        <p class="text-bold">Nachrichten</p>
+        <p>Insgesamt: <?php echo $messages ?></p>
+        <p>Neu: <?php echo $new_messages ?></p>
+        <p>Gelesen: <?php echo $read_messages ?></p>
+        <p>Beantwortet: <?php echo $answered_messages ?></p>
+        <br />
+        <a href="/views/message-list.php">Alle Nachrichten anzeigen</a>
+      </div>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Titel</th>
-          <th>Kategorie</th>
-          <th>Lagernd</th>
-          <th>Preis</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($last_products as $product) : ?>
-        <tr>
-          <td><img class="dash-img" src="<?php echo $product['img_url'] ?>" alt="<?php echo $product['slug'] ?>">
-          </td>
-          <td><?php echo $product['title'] ?></td>
-          <td><?php echo $product['category'] ?></td>
-          <td class="text-right"><?php echo $product['quantity'] ?></td>
-          <td><?php echo $product['price'] / 100 . '€' ?></td>
-          <td>
-            <form action="/controllers/editProduct.php" method="POST">
-              <input type="hidden" name="edit-product" value="<?php echo $product['slug'] ?>">
-              <input class="button" type="submit" value="Bearbeiten">
-            </form>
-          </td>
-          <td>
-            <form action="" method="POST">
-              <input type="hidden" name="delete-product" value="<?php echo $product['id'] ?>">
-              <input class="button" type="submit" value="Löschen">
-            </form>
-          </td>
-        </tr>
+    <div class="space-mid"></div>
+    <div class="row">
+      <div class="col-6">
+        <p class="text-bold">Produkte</p>
+        <p>Insgesamt: <?php echo $all_products ?></p>
+        <p>Sichtbar: <?php echo $products_live ?></p>
+        <p>Nicht sichtbar: <?php echo $products_draft ?></p>
+        <br />
+        <p>Lagerbestand weniger als 10:</p>
+        <?php if (!empty($products_less_ten)) : ?>
+
+        <?php foreach ($products_less_ten as $value) : ?>
+        <br />
+        <?php echo $value['title'] . ' | <b class="red">' . $value['quantity'] . '</b> Lagernd, Produkt ist ' . $value['status'] ?>
         <?php endforeach ?>
-      </tbody>
-    </table>
 
+        <?php endif ?>
+        <br /><br />
+        <a href="/views/product-list.php">Alle Produkte anzeigen</a>
+      </div>
+      <div class="col-6">
+        <p class="text-bold">Posts</p>
+        <p>Insgesamt: <?php echo $posts ?></p>
+        <p>Sichtbar: <?php echo $posts_live ?></p>
+        <p>Nicht sichtbar: <?php echo $posts_draft ?></p>
+        <br />
+        <a href="/views/post-list.php">Alle Posts anzeigen</a>
+      </div>
+    </div>
+
+
+
+    <div class="space-big"></div>
   </div>
-
-  <div class="space-mid"></div>
-  <div class="space-mid"></div>
-
-  <div class="content">
-
-  </div>
-  <div class="space-small"></div>
-
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

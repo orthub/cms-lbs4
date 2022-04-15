@@ -5,23 +5,29 @@ require_once __DIR__ . '/../models/dashboard.php';
 require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 
 // bei eingeloggtem benutzer werden die rechte abgefragt, wenn der benutzer kein
-// administrator oder angestellter ist, wird wieder auf die startseite umgeleitet
+// administrator ist, wird wieder auf die startseite umgeleitet
 if (isset($_SESSION['user_id'])) {
   $userId = $_SESSION['user_id'];
   $user_role = check_user_role($userId);
   $role = $user_role['role'];
   
-  if($role === 'CUSTOMER') {
+  if($role !== 'ADMIN') {
     header('Location: ' . '/');
-    die();
+    exit();
   }
-
-  // informationen über benutzer, posts und produkte holen
-  $all_users = get_all_users_and_roles();
-  $roles = get_all_roles();
-
-  $last_products = get_last_ten_products();
-  $all_products = get_all_products_for_admin();
-
-  $all_posts = get_all_posts();
+  $all_users = count_all_users();
+  $admins = count_admins();
+  $employees = count_employees();
+  $customers = count_customers();
+  $messages = count_all_messages();
+  $new_messages = count_new_messages();
+  $read_messages = count_read_messages();
+  $answered_messages = count_answered_messages();
+  $all_products = count_all_products();
+  $products_live = count_live_products();
+  $products_draft = count_draft_products();
+  $posts = count_all_posts();
+  $posts_live = count_live_posts();
+  $posts_draft = count_draft_posts();
+  $products_less_ten = get_products_less_ten_quantity();
 }

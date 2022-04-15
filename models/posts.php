@@ -94,3 +94,15 @@ function save_edited_post(string $postId, string $title, string $body)
 
   return $statement_save_edited_post;
 }
+
+function get_all_posts()
+{
+  $sql_five_posts = 'SELECT `posts`.`id`, `title`, SUBSTRING(`body`, 1, 50) 
+                      AS `body`, `author`, `created`, `first_name`, `published`
+                      FROM `posts`
+                      JOIN `users` ON(`author` = `users`.`id`)
+                      ORDER BY `created` DESC';
+  $result_five_posts = get_db()->query($sql_five_posts);
+  
+  return $result_five_posts->fetchAll();
+}

@@ -160,3 +160,13 @@ function get_slug_path_by_id(string $productId)
 
   return $result_get_slug_path_by_id;
 }
+
+function get_all_products()
+{
+  $sql_get_all_products = 'SELECT `id`, `title`, `description`, `price`, 
+  `category`, `img_url`, `slug`, `quantity`, `status`
+  FROM `products`';
+$stmt_get_all_products = get_db()->query($sql_get_all_products, PDO::FETCH_ASSOC);
+
+return $stmt_get_all_products;
+}
