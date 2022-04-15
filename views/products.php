@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../helpers/session.php';
 require_once __DIR__ . '/../models/products.php';
+require_once __DIR__ . '/../helpers/roles.php';
 $products = get_all_live_products();
 
 ?>
@@ -30,7 +31,7 @@ $products = get_all_live_products();
           <input type="hidden" name="id" value="<?php echo $product['id'] ?>" />
           <input class="button" type="submit" value="In den Warenkorb" />
         </form>
-        <?php if ($role !== 'CUSTOMER') : ?>
+        <?php if (isset($role) && $role !== 'CUSTOMER') : ?>
         <form action="editProduct.php" method="POST">
           <input type="hidden" name="edit-product" value="<?php echo $product['slug'] ?>" />
           <input class="button-draft" type="submit" value="Bearbeiten">
