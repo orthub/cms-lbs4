@@ -33,7 +33,7 @@ $products = get_all_live_products();
         <?php if (isset($role) && $role !== 'CUSTOMER') : ?>
         <form action="editProduct.php" method="POST">
           <input type="hidden" name="edit-product" value="<?php echo $product['slug'] ?>" />
-          <input class="button-draft" type="submit" value="Bearbeiten">
+          <input class="button-edit" type="submit" value="Bearbeiten">
         </form>
         <?php endif ?>
         <?php endif ?>

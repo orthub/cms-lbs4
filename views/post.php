@@ -20,6 +20,7 @@
         <hr />
         <small><?php echo $single_post['first_name'] . ' | ' . $single_post['created'] ?></small>
         <br />
+        <br />
         <a href="/views/posts.php"><button class="button">Zurück</button></a>
       </div>
       <div class="col-2"></div>

@@ -406,7 +406,7 @@ navbar {
 }
 
 .pos-right {
-  right: 0;
+  float: right;
 }
 
 .green {
@@ -437,9 +437,12 @@ select {
   width: auto;
 }
 
+button {
+  border-style: none;
+}
+
 .button {
   width: auto;
-  margin-top: 8px;
   padding: 4px 12px;
   color: #313131;
   border-style: none;
@@ -451,74 +454,116 @@ select {
   width: auto;
   padding: 4px 12px;
   color: #ffffff;
-  background-color: #f5901c;
+  background-color: rgba(245, 144, 28, 0.719);
   border-radius: 12px;
   cursor: pointer;
 }
 
-.button-cancel {
+.button-edit {
   width: auto;
-  margin-top: 8px;
-  padding: 4px;
-  color: #d6cece;
-  background-color: #c21313;
-  border-radius: 4px;
+  padding: 4px 12px;
+  color: #313131;
+  border-style: none;
+  background-color: #49b800;
+  border-radius: 12px;
+}
+
+.button-edit:hover {
+  width: auto;
+  padding: 4px 12px;
+  color: #ffffff;
+  background-color: rgba(74, 184, 0, 0.719);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.button-delete {
+  width: auto;
+  padding: 4px 12px;
+  color: #313131;
+  border-style: none;
+  background-color: #f5351c;
+  border-radius: 12px;
+}
+
+.button-delete:hover {
+  width: auto;
+  padding: 4px 12px;
+  color: #ffffff;
+  border-style: none;
+  background-color: rgba(245, 53, 28, 0.719);
+  border-radius: 12px;
+  cursor: pointer;
 }
 
 .button-cancel a {
   text-decoration: none;
   width: auto;
-  margin-top: 8px;
-  padding: 4px;
-  color: #d6cece;
-  background-color: #c21313;
-  border-radius: 4px;
+  padding: 4px 12px;
+  color: #313131;
+  border-style: none;
+  background-color: #f5c21c;
+  border-radius: 12px;
 }
 
 .button-cancel a:hover {
+  text-decoration: none;
   width: auto;
-  padding: 4px;
-  color: #313131;
-  background-color: #b84e4e;
-  border-radius: 4px;
+  padding: 4px 12px;
+  color: #ffffff;
+  border-style: none;
+  background-color: rgba(245, 194, 28, 0.719);
+  border-radius: 12px;
   cursor: pointer;
 }
 
 .button-live {
   width: auto;
-  margin-top: 8px;
-  padding: 4px;
-  color: #1b1b1b;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: #ffffff;
+  border-style: none;
   background-color: #00be00;
-  border-radius: 4px;
+  border-radius: 20px;
 }
 
 .button-live:hover {
   width: auto;
-  padding: 4px;
-  color: #1b1b1b;
-  background-color: #70b670;
-  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: #ffffff;
+  border-style: none;
+  background-color: rgba(0, 190, 0, 0.719);
+  border-radius: 20px;
   cursor: pointer;
 }
 
 .button-draft {
   width: auto;
-  margin-top: 8px;
-  padding: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
   color: #ffffff;
-  background-color: #c70e0e;
-  border-radius: 4px;
+  border-style: none;
+  background-color: #be0000;
+  border-radius: 20px;
 }
 
 .button-draft:hover {
   width: auto;
-  padding: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
   color: #ffffff;
-  background-color: #9c5555;
-  border-radius: 4px;
+  border-style: none;
+  background-color: rgba(190, 0, 0, 0.719);
+  border-radius: 20px;
   cursor: pointer;
 }
+
+
 
 /*--Delivery Address--*/
 .available-addresses {
@@ -555,6 +600,10 @@ tr:nth-child(even) {
   margin: 0px 18px 0px 0px;
   padding: 0;
   border: none;
+}
+
+.mt-10 {
+  margin-top: 10px;
 }
 
 .content {

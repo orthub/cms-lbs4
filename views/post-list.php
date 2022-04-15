@@ -48,7 +48,7 @@ require_once __DIR__ . '/../controllers/postList.php';
             <?php if ($role === 'ADMIN') : ?>
             <form action="/controllers/deletePost.php" method="POST">
               <input type="hidden" name="delete-post" value="<?php echo $post['id'] ?>">
-              <input class="button" type="submit" value="Löschen">
+              <input class="button-delete" type="submit" value="Löschen">
             </form>
             <?php endif ?>
           </td>

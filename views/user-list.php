@@ -35,7 +35,7 @@ require_once __DIR__ . '/../controllers/userList.php';
           <td>
             <?php if ($user['role'] != 'ADMIN') : ?>
             <form action="/controllers/new-role.php" method="POST">
-              <select name="user-rights" id="userRights">
+              <select class="mt-10" name="user-rights" id="userRights">
                 <?php foreach ($roles as $role) : ?>
                 <option value="<?php echo $role['role'] ?>"><?php echo $role['role'] ?></option>
                 <?php endforeach ?>
@@ -47,7 +47,7 @@ require_once __DIR__ . '/../controllers/userList.php';
           <td>
             <form action="/controllers/delete-user.php" method="POST">
               <input type="hidden" name="removeUser" value="<?php echo $user['id'] ?>">
-              <input class="button" type="submit" value="Löschen">
+              <input class="button-delete" type="submit" value="Löschen">
             </form>
           </td>
         </tr>

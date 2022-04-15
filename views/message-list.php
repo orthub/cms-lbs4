@@ -45,7 +45,7 @@ require_once __DIR__ . '/../controllers/messageList.php';
                 <?php if ($role === 'ADMIN') : ?>
                 <form action="/controllers/deleteMessage.php" method="POST">
                   <input type="hidden" name="delete-message" value="<?php echo $message['message_id'] ?>">
-                  <input class="button-cancel" type="submit" value="Löschen">
+                  <input class="button-delete" type="submit" value="Löschen">
                 </form>
                 <?php endif ?>
               </td>

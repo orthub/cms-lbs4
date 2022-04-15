@@ -21,6 +21,7 @@ require_once __DIR__ . '/../controllers/orders.php';
         <p>Bestell Nummer: <b><?php echo $order['orders_id'] ?></b></p>
         <p>Bestell Datum: <b><?php echo date('d.m.Y', strtotime($order['order_date'])) ?></b></p>
         <p>Bestell Status: <b><?php echo ($order['status'] === 'new') ? 'Zahlung noch nicht eingegangen' : ''?></b></p>
+        <br />
         <form action="/controllers/invoice.php" method="POST">
           <input type="hidden" name="order_id" value="<?php echo $order['orders_id'] ?>">
           <input class="button" type="submit" name="invoice" value="Rechnung ansehen">

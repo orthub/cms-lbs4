@@ -16,8 +16,8 @@ require_once __DIR__ . '/../controllers/editProduct.php';
     </div>
     <div class="space-small"></div>
     <div class="row">
-      <div class="col-4"></div>
-      <div class="col-4">
+      <div class="col-3"></div>
+      <div class="col-6">
         <div class="text-center">
           <a
             href="/controllers/productStatus.php?prodid=<?php echo $_SESSION['edit-product']['id'] . '&current=' . $_SESSION['edit-product']['status'] . '&slug=' . $_SESSION['edit-product']['slug'] ?>">
@@ -40,12 +40,11 @@ require_once __DIR__ . '/../controllers/editProduct.php';
             <img class="product-img" src="<?php echo $_SESSION['edit-product']['img_url'] ?>" />
           </div>
         </div>
-        <div class="space-small"></div>
         <form action="/controllers/editProductSave.php" method="POST">
           <label for="">Titel</label>
-          <input type="text" name="title" value="<?php echo $_SESSION['edit-product']['title'] ?>">
+          <input type="text" name="title" value="<?php echo $_SESSION['edit-product']['title'] ?>"><br /><br />
           <label for="des">Beschreibung</label>
-          <textarea id="des" name="description"><?php echo $_SESSION['edit-product']['description'] ?>"</textarea>
+          <textarea id="des" name="description"><?php echo $_SESSION['edit-product']['description'] ?>"</textarea><br />
           <label for="">Kategorie (Aktuell: <?php echo $_SESSION['edit-product']['category'] ?>)</label><br />
           <select id="category" name="category">
             <?php foreach ($categories as $category) : ?>
@@ -53,15 +52,20 @@ require_once __DIR__ . '/../controllers/editProduct.php';
             </option>
             <?php endforeach ?>
           </select>
-          <input type="number" name="quantity" value="<?php echo $_SESSION['edit-product']['quantity'] ?>">
-          <label for="">Preis</label>
+          <br />
+          <label for="quantity">Stück</label>
+          <input id="quantity" type="number" name="quantity"
+            value="<?php echo $_SESSION['edit-product']['quantity'] ?>"><br /><br />
+          <label for="">Preis (in cent)</label>
           <input type="number" name="price" value="<?php echo $_SESSION['edit-product']['price'] ?>">
           <input type="hidden" name="productId" value="<?php echo $_SESSION['edit-product']['id'] ?>">
           <input type="hidden" name="productStatus" value="<?php echo $_SESSION['edit-product']['status'] ?>">
+          <div class="space-small"></div>
           <input class="button" type="submit" value="Speichern">
+          <button class="button-cancel pos-right"><a href="/views/products.php">Abbrechen</a></button>
         </form>
       </div>
-      <div class="col-4"></div>
+      <div class="col-3"></div>
     </div>
     <div class="space-big"></div>
   </div>

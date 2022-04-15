@@ -26,6 +26,8 @@
               <p><?php echo $post['body'] ?></p>
               <hr />
               <small><?php echo $post['first_name'] . ' | ' . $post['created'] ?></small>
+              <br />
+              <br />
               <form action="/views/post.php" method="GET">
                 <input type="hidden" name="post_id" value="<?php echo $post['id'] ?>">
                 <input class="button" type="submit" value="Weiter lesen...">

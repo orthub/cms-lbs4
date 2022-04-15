@@ -32,7 +32,7 @@ require_once __DIR__ . '/../controllers/editMessage.php';
             <td></td>
             <td class="no-table-style">
               <form action="/controllers/newMessageStatus.php" method="POST">
-                <select name="message-status" id="messageStatus">
+                <select class="mt-10" name="message-status" id="messageStatus">
                   <?php foreach ($_SESSION['edit-message']['edit-status'] as $newStatus) : ?>
                   <option value="<?php echo $newStatus['id'] ?>"><?php echo $newStatus['status'] ?></option>
                   <?php endforeach ?>
@@ -47,7 +47,7 @@ require_once __DIR__ . '/../controllers/editMessage.php';
               <form action="/controllers/deleteMessage.php" method="POST">
                 <input type="hidden" name="delete-message"
                   value="<?php echo $_SESSION['edit-message']['message_id'] ?>">
-                <input class="button-cancel" type="submit" value="Löschen">
+                <input class="button-delete" type="submit" value="Löschen">
               </form>
               <?php endif ?>
             </td>

@@ -13,10 +13,12 @@ require_once __DIR__ . '/../config/company_data.php';
   <?php require_once __DIR__ . '/partials/navbar.php' ?>
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
   <div class="content">
-    <div class="space-mid"></div>
+    <div class="space-small"></div>
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8">
+        <a href="/views/orders.php">Zurück zur Übersicht</a>
+        <div class="space-small"></div>
         <h2>Rechnung:</h2>
         <hr />
       </div>
@@ -38,8 +40,8 @@ require_once __DIR__ . '/../config/company_data.php';
       <div class="col-2">
       </div>
       <div class="col-8">
-        <hr />
         <h2>Produkte:</h2>
+        <br />
         <table class="no-table-style">
           <thead>
             <tr>
@@ -82,6 +84,7 @@ require_once __DIR__ . '/../config/company_data.php';
         <h2>Gesamtpreis (inkl. MwSt) und Versand: <?php echo ($_SESSION['base-order']['order_price']) / 100 . '€' ?>
         </h2>
         <hr />
+        <br />
         <form action="/controllers/downloadInvoice.php" method="POST">
           <input type="hidden" name="order_id" value="<?php echo $_SESSION['base-order']['orders_id'] ?>">
           <input type="hidden" name="endprice" value="<?php echo $_SESSION['base-order']['order_price'] ?>">

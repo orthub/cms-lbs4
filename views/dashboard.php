@@ -17,7 +17,8 @@ require_once __DIR__ . '/../controllers/dashboard.php';
     <div class="space-mid"></div>
     <div class="row">
       <div class="col-6">
-        <p class="text-bold">Benutzer</p>
+        <h2>Benutzer</h2>
+        <br />
         <p>Insgesamt: <?php echo $all_users ?></p>
         <p>Administratoren: <?php echo $admins ?></p>
         <p>Angestellte: <?php echo $employees ?></p>
@@ -26,7 +27,8 @@ require_once __DIR__ . '/../controllers/dashboard.php';
         <a href="/views/user-list.php">Alle Benutzer anzeigen</a>
       </div>
       <div class="col-6">
-        <p class="text-bold">Nachrichten</p>
+        <h2>Nachrichten</h2>
+        <br />
         <p>Insgesamt: <?php echo $messages ?></p>
         <p>Neu: <?php echo $new_messages ?></p>
         <p>Gelesen: <?php echo $read_messages ?></p>
@@ -38,7 +40,8 @@ require_once __DIR__ . '/../controllers/dashboard.php';
     <div class="space-mid"></div>
     <div class="row">
       <div class="col-6">
-        <p class="text-bold">Produkte</p>
+        <h2>Produkte</h2>
+        <br />
         <p>Insgesamt: <?php echo $all_products ?></p>
         <p>Sichtbar: <?php echo $products_live ?></p>
         <p>Nicht sichtbar: <?php echo $products_draft ?></p>
@@ -54,7 +57,8 @@ require_once __DIR__ . '/../controllers/dashboard.php';
         <a href="/views/product-list.php">Alle Produkte anzeigen</a>
       </div>
       <div class="col-6">
-        <p class="text-bold">Posts</p>
+        <h2>Posts</h2>
+        <br />
         <p>Insgesamt: <?php echo $posts ?></p>
         <p>Sichtbar: <?php echo $posts_live ?></p>
         <p>Nicht sichtbar: <?php echo $posts_draft ?></p>
