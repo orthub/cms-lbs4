@@ -46,7 +46,7 @@ require_once __DIR__ . '/../controllers/userList.php';
           </td>
           <td>
             <form action="/controllers/delete-user.php" method="POST">
-              <input type="hidden" name="removeUser" value="<?php echo $user['id'] ?>">
+              <input type="hidden" name="remove-user" value="<?php echo $user['id'] ?>">
               <input class="button-delete" type="submit" value="Löschen">
             </form>
           </td>

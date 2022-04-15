@@ -5,7 +5,7 @@ require_once __DIR__ . '/database.php';
 function get_delivery_address(string $userId)
 {
   $sql_get_delivery_address = 'SELECT `id`, `user_id`, `city`, `street`, `street_number`, `zip_code`
-                                FROM delivery_address
+                                FROM `delivery_address`
                                 WHERE `user_id` = :userId';
   $stmt_get_delivery_address = get_db()->prepare($sql_get_delivery_address);
   $stmt_get_delivery_address->execute([':userId' => $userId]);

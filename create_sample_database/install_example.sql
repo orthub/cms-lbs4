@@ -10,7 +10,6 @@ DROP TABLE IF EXISTS `delivery_address`;
 DROP TABLE IF EXISTS `cart`;
 DROP TABLE IF EXISTS `products`;
 DROP TABLE IF EXISTS `posts`;
-DROP TABLE IF EXISTS `addresses`;
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `contact`;
 DROP TABLE IF EXISTS `contact_status`;
@@ -27,22 +26,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `email` (`email`),
   PRIMARY KEY (`id`)
 );
-CREATE TABLE IF NOT EXISTS `addresses` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` VARCHAR(28) NOT NULL,
-  `country` VARCHAR(64) NOT NULL,
-  `city` VARCHAR(64) NOT NULL,
-  `zip_code` INT NOT NULL,
-  `street` VARCHAR(64) NOT NULL,
-  `street_number` VARCHAR(8) NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `FK_address_users` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`)
-);
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(128) NOT NULL,
   `body` TEXT NOT NULL,
-  -- `image` VARCHAR(128) NOT NULL DEFAULT '/img/posts/default.jpg',
   `author` VARCHAR(28) NOT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `published` ENUM('LIVE', 'DRAFT') NOT NULL DEFAULT 'DRAFT',
@@ -69,23 +56,6 @@ VALUES(
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
     "ADMIN",
     "/storage/1116546574897163/"
-  );
-INSERT INTO
-  `addresses` (
-    `user_id`,
-    `country`,
-    `city`,
-    `zip_code`,
-    `street`,
-    `street_number`
-  )
-VALUES(
-    "1116546574897163",
-    "Austria",
-    "Vienna",
-    "1100",
-    "Kurzweg",
-    "1a"
   );
 -- EMPLOYEES
 INSERT INTO
@@ -203,41 +173,6 @@ VALUES(
     "CUSTOMER",
     "/storage/84986546532165/"
   );
--- SOME SAMPLE ADDRESSES
-INSERT INTO
-  `addresses` (
-    `user_id`,
-    `country`,
-    `city`,
-    `zip_code`,
-    `street`,
-    `street_number`
-  )
-VALUES(
-    "77986546432165",
-    "Austria",
-    "Vienna",
-    "1100",
-    "Kurzisweg",
-    "1b"
-  );
-INSERT INTO
-  `addresses` (
-    `user_id`,
-    `country`,
-    `city`,
-    `zip_code`,
-    `street`,
-    `street_number`
-  )
-VALUES(
-    "125546832165",
-    "Austria",
-    "Vienna",
-    "1100",
-    "Kurzerweg",
-    "1c"
-  );
 -- CREATE SAMPLE POSTS
 INSERT INTO
   `posts` (`title`, `body`, `author`, `created`)
@@ -328,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `delivery_address` (
     `zip_code` VARCHAR(64) NOT NULL,
     PRIMARY KEY (`id`),
     KEY `FK_user_delivery_address` (`user_id`),
-    CONSTRAINT `FK_user_delivery_address` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+    CONSTRAINT `FK_user_delivery_address` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
   );
 CREATE TABLE `orders` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -340,26 +275,17 @@ CREATE TABLE `orders` (
     `delivery_address_id` INT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY (`orders_id`),
-    CONSTRAINT `FK_order_to_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT `FK_order_delivery_address` FOREIGN KEY (`delivery_address_id`) REFERENCES `delivery_address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+    CONSTRAINT `FK_order_to_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+    CONSTRAINT `FK_order_delivery_address` FOREIGN KEY (`delivery_address_id`) REFERENCES `delivery_address` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
   );
--- CREATE TABLE IF NOT EXISTS `order_products` (
-  --   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  --   `order_id` INT UNSIGNED NOT NULL,
-  --   `product_id` INT UNSIGNED NOT NULL,
-  --   `quantity` INT UNSIGNED NOT NULL,
-  --   PRIMARY KEY (`id`),
-  --   CONSTRAINT `FK_order_products_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  --   CONSTRAINT `FK_order_products_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
-  --   );
-  CREATE TABLE `order_products` (
+CREATE TABLE `order_products` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `order_id` VARCHAR(128) NOT NULL,
     `product_id` INT UNSIGNED NOT NULL,
     `quantity` INT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `FK_order_products_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-    CONSTRAINT `FK_order_products_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`orders_id`) ON DELETE NO ACTION ON UPDATE CASCADE
+    CONSTRAINT `FK_order_products_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`orders_id`) ON DELETE CASCADE ON UPDATE CASCADE
   );
 -- ARCHIVE FOR DELETED USERS
   CREATE TABLE `users_archive` (
@@ -367,6 +293,7 @@ CREATE TABLE `orders` (
     `first_name` VARCHAR(24) NOT NULL,
     `last_name` VARCHAR(36) NOT NULL,
     `email` VARCHAR(64) NOT NULL,
+    `role` VARCHAR(16) NOT NULL,
     `invoice_path` VARCHAR(255),
     UNIQUE KEY `email` (`email`),
     PRIMARY KEY (`id`)
