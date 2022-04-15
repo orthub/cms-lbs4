@@ -1,4 +1,7 @@
-<?php require_once __DIR__ . '/../helpers/session.php'; ?>
+<?php 
+require_once __DIR__ . '/../helpers/session.php';
+require_once __DIR__ . '/../controllers/contactForUsers.php';
+?>
 <!DOCTYPE html>
 <html>
 <?php require_once __DIR__ . '/partials/head.php' ?>
@@ -17,9 +20,16 @@
         <div class="space-small"></div>
         <form action="/controllers/contact.php" method="POST">
           <label for="email">Email:</label><br />
+          <?php if (!isset($_SESSION['user_id'])) : ?>
           <input id="email" type="email" name="contact-email"
             value="<?php echo (isset($_SESSION['contact']['email'])) ? $_SESSION['contact']['email'] : '' ?>" /><br /><br />
           <label for="title">Titel:</label><br />
+          <?php endif ?>
+          <?php if (isset($_SESSION['user_id'])) : ?>
+          <input id="email" type="email" name="contact-email"
+            value="<?php echo (isset($_SESSION['contact']['user-email'])) ? $_SESSION['contact']['user-email'] : '' ?>" /><br /><br />
+          <label for="title">Titel:</label><br />
+          <?php endif ?>
           <input id="title" type="text" name="contact-title"
             value="<?php echo (isset($_SESSION['contact']['title'])) ? $_SESSION['contact']['title'] : '' ?>" /><br /><br />
           <label for="message">Nachricht:</label><br />
@@ -32,6 +42,7 @@
     </div>
   </div>
   <div class="space-big"></div>
+  <?php unset($_SESSION['contact']) ?>
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

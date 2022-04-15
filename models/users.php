@@ -21,3 +21,13 @@ function get_all_roles()
   
   return $result_get_all_roles;
 }
+
+function get_user_email_by_id(string $userId)
+{
+  $sql_get_user_email_by_id = 'SELECT `email` FROM `users` WHERE `id` = :userId';
+  $statement_get_user_email_by_id = get_db()->prepare($sql_get_user_email_by_id);
+  $statement_get_user_email_by_id->execute([':userId' => $userId]);
+  $result_get_user_email_by_id = $statement_get_user_email_by_id->fetchColumn();
+
+  return $result_get_user_email_by_id;
+}

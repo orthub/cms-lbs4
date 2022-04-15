@@ -9,8 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   require_once __DIR__ . '/../helpers/session.php';
   $errors = [];
   $contact_email = trim(htmlspecialchars(filter_input(INPUT_POST, 'contact-email', FILTER_SANITIZE_EMAIL)));
-  $contact_title = trim(htmlspecialchars(filter_input(INPUT_POST, 'contact-title', FILTER_SANITIZE_SPECIAL_CHARS)));
-  $contact_message = trim(htmlspecialchars(filter_input(INPUT_POST, 'contact-message', FILTER_SANITIZE_SPECIAL_CHARS)));
+  $contact_title = trim(filter_input(INPUT_POST, 'contact-title', FILTER_SANITIZE_SPECIAL_CHARS));
+  $contact_message = trim(filter_input(INPUT_POST, 'contact-message', FILTER_SANITIZE_SPECIAL_CHARS));
 
   if ((bool)$contact_email === false) {
     $_SESSION['error']['contact-email'] = 'Bitte eine Email-Adresse angeben';
