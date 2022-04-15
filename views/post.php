@@ -17,6 +17,7 @@
       <div class="col-8">
         <h2><?php echo $single_post['title'] ?></h2>
         <p><?php echo $single_post['body'] ?></p>
+        <hr />
         <small><?php echo $single_post['first_name'] . ' | ' . $single_post['created'] ?></small>
         <br />
         <a href="/views/posts.php"><button class="button">Zurück</button></a>
