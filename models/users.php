@@ -97,3 +97,11 @@ function change_author(string $oldAuthor, string $newAuthor)
 
   return $statement_change_author;
 }
+
+function get_archived_users()
+{
+  $sql_get_archived_users = 'SELECT `id`, `first_name`, `last_name`, `email`, `role`, `invoice_path`
+  FROM `users_archive`';
+$stmt_get_archived_users = get_db()->query($sql_get_archived_users, PDO::FETCH_ASSOC);
+return $stmt_get_archived_users;
+}

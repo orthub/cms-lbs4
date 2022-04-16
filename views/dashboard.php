@@ -66,6 +66,17 @@ require_once __DIR__ . '/../controllers/dashboard.php';
         <a href="/views/post-list.php">Alle Posts anzeigen</a>
       </div>
     </div>
+    <div class="space-mid"></div>
+    <div class="row">
+      <div class="col-6">
+        <h2>Gelöschte/Archivierte Benutzer</h2>
+        <br />
+        <p>Insgesamt: <?php echo $archived_users ?></p>
+        <br />
+        <a href="/views/archived-list.php">Anzeigen</a>
+      </div>
+      <div class="col-6"></div>
+    </div>
   </div>
   <div class="space-big"></div>
   <?php require_once __DIR__ . '/partials/footer.php' ?>

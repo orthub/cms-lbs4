@@ -107,3 +107,10 @@ function get_products_less_ten_quantity()
   $stmt = get_db()->query($sql);
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function count_archived_users()
+{
+  $sql = 'SELECT COUNT(`id`) FROM `users_archive`';
+  $stmt = get_db()->query($sql);
+  return $stmt->fetchColumn();
+}

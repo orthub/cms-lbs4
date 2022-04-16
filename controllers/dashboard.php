@@ -30,4 +30,5 @@ if (isset($_SESSION['user_id'])) {
   $posts_live = count_live_posts();
   $posts_draft = count_draft_posts();
   $products_less_ten = get_products_less_ten_quantity();
+  $archived_users = count_archived_users();
 }
