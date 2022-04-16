@@ -4,7 +4,6 @@ config/company_data.php
 config/db_conf.php
 config/mail_data.php
 lib/
-storage/
 /img/comp/logo.png
 /img/products
 /create_sample_database/install.sql
