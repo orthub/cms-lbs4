@@ -33,7 +33,6 @@ require_once __DIR__ . '/../controllers/userList.php';
           <td><?php echo $user['email'] ?></td>
           <td><?php echo $user['role'] ?></td>
           <td>
-            <?php if ($user['role'] != 'ADMIN') : ?>
             <form action="/controllers/new-role.php" method="POST">
               <select class="mt-10" name="user-rights" id="userRights">
                 <?php foreach ($roles as $role) : ?>
@@ -42,7 +41,6 @@ require_once __DIR__ . '/../controllers/userList.php';
                 <input type="hidden" name="userId" value="<?php echo $user['id'] ?>">
                 <input class="button" type="submit" value="Aktualisieren">
             </form>
-            <?php endif ?>
           </td>
           <td>
             <form action="/controllers/delete-user.php" method="POST">
