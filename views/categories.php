@@ -15,7 +15,7 @@ require_once __DIR__ . '/../controllers/products.php';
       <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
     </div>
     <div class="space-small"></div>
-    <h2 class="text-center" class="category"><?php echo $get_category ?></h2>
+    <h2 class="text-center"><?php echo $category_from_url ?></h2>
     <?php if(!$category_available) : ?>
     <p>Kategorie nicht gefunden.</p>
     <?php endif ?>

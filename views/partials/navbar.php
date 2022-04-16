@@ -24,8 +24,7 @@ if (isset($_SESSION['user_id'])) {
         <li><a href="/views/products.php"><i class="fas fa-list"></i> Kategorien</a>
           <div class="dropdown-content">
             <?php foreach($categories as $category) : ?>
-            <a
-              href="/views/categories.php?cat=<?php echo $category['category'] ?>"><?php echo $category['category'] ?></a>
+            <a href="/views/categories.php?cat=<?php echo $category['id'] ?>"><?php echo $category['category'] ?></a>
             <?php endforeach ?>
           </div>
       </div>

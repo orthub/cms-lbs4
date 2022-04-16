@@ -32,7 +32,7 @@
           <label for="category">Kategorie</label><br />
           <select id="category" name="category">
             <?php foreach ($categories as $category) : ?>
-            <option value="<?php echo $category['category'] ?>"><?php echo $category['category'] ?></option>
+            <option value="<?php echo $category['id'] ?>"><?php echo $category['category'] ?></option>
             <?php endforeach ?>
           </select>
           <br />

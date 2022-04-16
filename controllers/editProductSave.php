@@ -17,11 +17,11 @@ if (isset($_SESSION['user_id'])) {
     $title = htmlspecialchars($_POST['title']);
     $description = htmlspecialchars($_POST['description']);
     $price = htmlspecialchars($_POST['price']);
-    $category = htmlspecialchars($_POST['category']);
+    $categoryId = htmlspecialchars($_POST['category']);
     $quantity = htmlspecialchars($_POST['quantity']);
     $status = filter_input(INPUT_POST, 'productStatus', FILTER_SANITIZE_SPECIAL_CHARS);
 
-    $save_product = save_edited_product($productId, $title, $description, $price, $category, $quantity, $status);
+    $save_product = save_edited_product($productId, $title, $description, $price, $categoryId, $quantity, $status);
 
     if ($save_product) {
       unset($_SESSION['edit-product']);

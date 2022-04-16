@@ -45,10 +45,10 @@ require_once __DIR__ . '/../controllers/editProduct.php';
           <input type="text" name="title" value="<?php echo $_SESSION['edit-product']['title'] ?>"><br /><br />
           <label for="des">Beschreibung</label>
           <textarea id="des" name="description"><?php echo $_SESSION['edit-product']['description'] ?>"</textarea><br />
-          <label for="">Kategorie (Aktuell: <?php echo $_SESSION['edit-product']['category'] ?>)</label><br />
+          <label for="">Kategorie (Aktuell: <?php echo $_SESSION['edit-product']['cat'] ?>)</label><br />
           <select id="category" name="category">
             <?php foreach ($categories as $category) : ?>
-            <option value="<?php echo $category['category'] ?>"><?php echo $category['category'] ?>
+            <option value="<?php echo $category['id'] ?>"><?php echo $category['category'] ?>
             </option>
             <?php endforeach ?>
           </select>

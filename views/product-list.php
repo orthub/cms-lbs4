@@ -38,7 +38,7 @@ require_once __DIR__ . '/../controllers/productList.php';
           </td>
           <td><?php echo $product['title'] ?></td>
           <td><?php echo $product['description'] ?></td>
-          <td><?php echo $product['category'] ?></td>
+          <td><?php echo $product['cat'] ?></td>
           <td class="text-center"><?php echo $product['quantity'] ?></td>
           <td><?php echo $product['price'] / 100 . '€' ?></td>
           <td><?php echo $product['status'] ?></td>

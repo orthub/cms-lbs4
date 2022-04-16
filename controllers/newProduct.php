@@ -21,7 +21,7 @@ if (isset($_SESSION['user_id'])) {
     $slug = filter_input(INPUT_POST, 'slug', FILTER_SANITIZE_SPECIAL_CHARS);
     $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS);
     $price = filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_INT);
-    $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_SPECIAL_CHARS);
+    $category_id = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_SPECIAL_CHARS);
     $quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_NUMBER_INT);
 
     if ((bool)$product_title === false) {
@@ -62,7 +62,7 @@ if (isset($_SESSION['user_id'])) {
       $_SESSION['newProduct']['price'] = $price;
     }
     if ((bool)$category) {
-      $_SESSION['newProduct']['category'] = $category;
+      $_SESSION['newProduct']['category'] = $category_id;
     }
     if ((bool)$quantity) {
       $_SESSION['newProduct']['quantity'] = $quantity;
@@ -89,7 +89,7 @@ if (isset($_SESSION['user_id'])) {
       exit();
     }
     
-    $create_new_product = new_product($product_title, $slug, $description, $price, $category, $quantity);
+    $create_new_product = new_product($product_title, $slug, $description, $price, $category_id, $quantity);
 
     
 
