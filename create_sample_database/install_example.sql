@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS `orders`;
 DROP TABLE IF EXISTS `delivery_address`;
 DROP TABLE IF EXISTS `cart`;
 DROP TABLE IF EXISTS `products`;
+DROP TABLE IF EXISTS `product_category`;
 DROP TABLE IF EXISTS `posts`;
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `contact`;
@@ -49,13 +50,13 @@ INSERT INTO
     `home`
   )
 VALUES(
-    "1116546574897163",
+    "110011001100",
     "Roland",
     "Ortner",
     "admin@stiftl.at",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
     "ADMIN",
-    "/storage/1116546574897163/"
+    "/storage/110011001100/"
   );
 -- EMPLOYEES
 INSERT INTO
@@ -69,13 +70,13 @@ INSERT INTO
     `home`
   )
 VALUES(
-    "125546832165",
+    "220011001100",
     "John",
     "Doe",
     "employee@stiftl.at",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
     "EMPLOYEE",
-    "/storage/125546832165/"
+    "/storage/220011001100/"
   );
 INSERT INTO
   `users` (
@@ -88,13 +89,13 @@ INSERT INTO
     `home`
   )
 VALUES(
-    "22552833165",
+    "220011002200",
     "Martin",
     "Doe",
     "employee.martin@stiftl.at",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
     "EMPLOYEE",
-    "/storage/22552833165/"
+    "/storage/220011002200/"
   );
 INSERT INTO
   `users` (
@@ -107,13 +108,13 @@ INSERT INTO
     `home`
   )
 VALUES(
-    "225524462235",
+    "220011003300",
     "Martina",
     "Hofreiter",
     "employee.martina@stiftl.at",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
     "EMPLOYEE",
-    "/storage/225524462235/"
+    "/storage/220011003300/"
   );
 INSERT INTO
   `users` (
@@ -126,13 +127,13 @@ INSERT INTO
     `home`
   )
 VALUES(
-    "223344699235",
+    "220011004400",
     "Hubert",
     "Kleber",
     "employee.hubert@stiftl.at",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
     "EMPLOYEE",
-    "/storage/223344699235/"
+    "/storage/220011004400/"
   );
 -- CUSTOMERS
 INSERT INTO
@@ -146,13 +147,13 @@ INSERT INTO
     `home`
   )
 VALUES(
-    "77986546432165",
+    "770011001100",
     "Johannes",
     "Maulbeer",
     "j.maulbeer@keinemail.com",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
     "CUSTOMER",
-    "/storage/77986546432165/"
+    "/storage/770011001100/"
   );
 INSERT INTO
   `users` (
@@ -165,13 +166,13 @@ INSERT INTO
     `home`
   )
 VALUES(
-    "84986546532165",
-    "Bill",
-    "Hates",
-    "customer.bill@stiftl.at",
+    "770011002200",
+    "Renate",
+    "Still",
+    "customer.still@stiftl.at",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
     "CUSTOMER",
-    "/storage/84986546532165/"
+    "/storage/770011002200/"
   );
 -- CREATE SAMPLE POSTS
 INSERT INTO
@@ -187,7 +188,7 @@ VALUES(
         remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
         sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
         Aldus PageMaker including versions of Lorem Ipsum.',
-    '1116546574897163',
+    '110011001100',
     '2021-01-23 02:05:19'
   );
 -- WAITFOR DELAY '00:00:02';
@@ -196,7 +197,7 @@ INSERT INTO
 VALUES(
     'Post 2',
     'Post number two testing. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    '1116546574897163',
+    '110011001100',
     '2021-05-11 02:16:37'
   );
 -- WAITFOR DELAY '00:00:02'
@@ -205,7 +206,7 @@ INSERT INTO
 VALUES(
     'Post 3',
     'Post number three testing. This is a short post.',
-    '125546832165',
+    '220011001100',
     '2021-011-10 15:32:01'
   );
 -- WAITFOR DELAY '00:00:02';
@@ -214,7 +215,7 @@ INSERT INTO
 VALUES(
     'Post 4',
     'Post number four testing. Hell yeah, i think this will finally work.',
-    '125546832165',
+    '220011001100',
     '2022-01-16 09:12:53'
   );
 -- WAITFOR DELAY '00:00:02';
@@ -223,26 +224,27 @@ INSERT INTO
 VALUES(
     'Post 5',
     'Post number five testing. So, this script is working, hope the delay works also, for sorting the posts. Meh, not working!',
-    '125546832165',
+    '220011002200',
     '2022-02-21 09:35:42'
   );
 -- CREATE SHOP TABLES
-  CREATE TABLE IF NOT EXISTS `products` (
+  CREATE TABLE `product_category` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `category` VARCHAR(36) NOT NULL,
+    PRIMARY KEY (`id`)
+  );
+CREATE TABLE IF NOT EXISTS `products` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(128) NOT NULL,
     `slug` VARCHAR(128) NOT NULL,
     `description` text NOT NULL,
     `price` INT NOT NULL,
-    `category` ENUM(
-      "Buntstift",
-      "Kugelschreiber",
-      "Gel-Schreiber",
-      "Spezial"
-    ),
+    `category_id` INT UNSIGNED NOT NULL,
     `img_url` VARCHAR(128) DEFAULT "/img/products/default.jpg",
     `quantity` INT UNSIGNED DEFAULT "0",
     `status` ENUM("LIVE", "DRAFT") DEFAULT "DRAFT",
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    CONSTRAINT `FK_products_product_category` FOREIGN KEY (`category_id`) REFERENCES `product_category`(`id`)
   );
 CREATE TABLE IF NOT EXISTS `cart` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -314,6 +316,22 @@ CREATE TABLE `contact_status` (
     PRIMARY KEY (`id`),
     CONSTRAINT `FK_contact_status_contact` FOREIGN KEY (`status_id`) REFERENCES `contact_status` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
   );
+-- ADD CATEGORIES
+INSERT INTO
+  `product_category` (`category`)
+VALUES("Kugelschreiber");
+INSERT INTO
+  `product_category` (`category`)
+VALUES("Gelschreiber");
+INSERT INTO
+  `product_category` (`category`)
+VALUES("Buntstifte");
+INSERT INTO
+  `product_category` (`category`)
+VALUES("Filzstifte");
+INSERT INTO
+  `product_category` (`category`)
+VALUES("Spezialschreiber");
 -- ADD SOME PRODUCTS
 INSERT INTO
   `products` (
@@ -321,7 +339,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -331,7 +349,7 @@ VALUES(
     "testproduct one",
     1499,
     "product-1",
-    "Kugelschreiber",
+    1,
     10,
     "/img/products/default.jpg",
     "LIVE"
@@ -342,7 +360,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -352,7 +370,7 @@ VALUES(
     "testproduct two",
     1499,
     "product-2",
-    "Kugelschreiber",
+    2,
     10,
     "/img/products/default.jpg",
     "LIVE"
@@ -363,7 +381,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -373,7 +391,7 @@ VALUES(
     "testproduct three",
     1499,
     "product-3",
-    "Gel-Schreiber",
+    3,
     10,
     "/img/products/default.jpg",
     "LIVE"
@@ -384,7 +402,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -394,7 +412,7 @@ VALUES(
     "testproduct four",
     1999,
     "product-4",
-    "Buntstift",
+    4,
     10,
     "/img/products/default.jpg",
     "LIVE"
@@ -405,7 +423,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -415,7 +433,7 @@ VALUES(
     "testproduct five",
     1199,
     "product-5",
-    "Buntstift",
+    5,
     10,
     "/img/products/default.jpg",
     "DRAFT"
@@ -426,7 +444,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -436,7 +454,7 @@ VALUES(
     "testproduct six",
     1999,
     "product-6",
-    "Kugelschreiber",
+    2,
     10,
     "/img/products/default.jpg",
     "DRAFT"
@@ -447,7 +465,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -457,7 +475,7 @@ VALUES(
     "testproduct seven",
     2199,
     "product-7",
-    "Gel-Schreiber",
+    3,
     10,
     "/img/products/default.jpg",
     "LIVE"
@@ -468,7 +486,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -478,7 +496,7 @@ VALUES(
     "testproduct eight",
     2199,
     "product-8",
-    "Gel-Schreiber",
+    4,
     10,
     "/img/products/default.jpg",
     "LIVE"
@@ -489,7 +507,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -499,7 +517,7 @@ VALUES(
     "testproduct nine",
     1499,
     "product-9",
-    "Buntstift",
+    2,
     10,
     "/img/products/default.jpg",
     "LIVE"
@@ -510,7 +528,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -520,7 +538,7 @@ VALUES(
     "testproduct ten",
     1199,
     "product-10",
-    "Kugelschreiber",
+    1,
     10,
     "/img/products/default.jpg",
     "LIVE"
@@ -531,7 +549,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -541,7 +559,7 @@ VALUES(
     "testproduct eleven",
     1799,
     "product-11",
-    "Gel-Schreiber",
+    5,
     10,
     "/img/products/default.jpg",
     "DRAFT"
@@ -552,7 +570,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -562,7 +580,7 @@ VALUES(
     "testproduct twelve",
     2199,
     "product-12",
-    "Buntstift",
+    2,
     10,
     "/img/products/default.jpg",
     "LIVE"
@@ -573,7 +591,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -583,7 +601,7 @@ VALUES(
     "testproduct thirteen",
     1499,
     "product-13",
-    "Buntstift",
+    3,
     10,
     "/img/products/default.jpg",
     "LIVE"
@@ -594,7 +612,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -604,7 +622,7 @@ VALUES(
     "testproduct fourteen",
     1199,
     "product-14",
-    "Buntstift",
+    1,
     10,
     "/img/products/default.jpg",
     "LIVE"
@@ -615,7 +633,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -625,7 +643,7 @@ VALUES(
     "testproduct fivteen",
     1999,
     "product-15",
-    "Kugelschreiber",
+    3,
     10,
     "/img/products/default.jpg",
     "DRAFT"
@@ -636,7 +654,7 @@ INSERT INTO
     `description`,
     `price`,
     `slug`,
-    `category`,
+    `category_id`,
     `quantity`,
     `img_url`,
     `status`
@@ -646,7 +664,7 @@ VALUES(
     "testproduct sixteen",
     2199,
     "product-16",
-    "Gel-Schreiber",
+    4,
     10,
     "/img/products/default.jpg",
     "LIVE"
@@ -661,3 +679,76 @@ VALUES('GELESEN');
 INSERT INTO
   `contact_status` (`status`)
 VALUES('BEANTWORTET');
+-- ADD ARCHIVED USERS
+INSERT INTO
+  `users_archive` (
+    `id`,
+    `first_name`,
+    `last_name`,
+    `email`,
+    `role`,
+    `invoice_path`
+  )
+VALUES
+  (
+    "110022003300",
+    "Max",
+    "Muster",
+    "max@mustermann.nomail",
+    "CUSTOMER",
+    ""
+  );
+INSERT INTO
+  `users_archive` (
+    `id`,
+    `first_name`,
+    `last_name`,
+    `email`,
+    `role`,
+    `invoice_path`
+  )
+VALUES
+  (
+    "110033004400",
+    "Stefan",
+    "Klein",
+    "stefan@klein.nomail",
+    "EMPLOYEE",
+    "/storage/110033004400/"
+  );
+INSERT INTO
+  `users_archive` (
+    `id`,
+    `first_name`,
+    `last_name`,
+    `email`,
+    `role`,
+    `invoice_path`
+  )
+VALUES
+  (
+    "220011003300",
+    "Sabine",
+    "Lauf",
+    "sabine@lauf.nomail",
+    "ADMIN",
+    ""
+  );
+INSERT INTO
+  `users_archive` (
+    `id`,
+    `first_name`,
+    `last_name`,
+    `email`,
+    `role`,
+    `invoice_path`
+  )
+VALUES
+  (
+    "440033001100",
+    "Roswitha",
+    "Stangl",
+    "roswitha@stangl.nomail",
+    "CUSTOMER",
+    "/storage/440033001100/"
+  );
