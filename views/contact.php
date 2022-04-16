@@ -1,6 +1,7 @@
 <?php 
 require_once __DIR__ . '/../helpers/session.php';
 require_once __DIR__ . '/../controllers/contactForUsers.php';
+require_once __DIR__ . '/../controllers/contactSpam.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,14 +41,18 @@ require_once __DIR__ . '/../controllers/contactForUsers.php';
           <label for="message">Nachricht:</label><br />
           <textarea id="message"
             name="contact-message"><?php echo (isset($_SESSION['contact']['message'])) ? $_SESSION['contact']['message'] : '' ?></textarea><br /><br />
+          <label for="contact-spam">Lösen Sie bitte folgende Rechnung:
+          </label><?php echo $spam_protect ?>
+          <input id="contact-spam" type="text" name="contact-spam"><br /><br />
           <input class="button" type="submit" value="Abschicken" />
         </form>
+        <?php echo 'spam: ' . $spam_protect ?>
+        <?php echo 'calc: ' . $_SESSION['contact']['result'] ?>
       </div>
       <div class="col-3"></div>
     </div>
   </div>
   <div class="space-big"></div>
-  <?php unset($_SESSION['contact']) ?>
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 
