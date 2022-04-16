@@ -3,11 +3,11 @@
 require_once __DIR__ . '/database.php';
 /**
  * Get the last 5 posts from database
- * Post preview (body) limited to 120 chars
+ * Post preview (body) limited to 360 chars
  */
 function get_last_ten_posts()
 {
-  $sql_five_posts = 'SELECT `posts`.`id`, `title`, SUBSTRING(`body`, 1, 120) 
+  $sql_five_posts = 'SELECT `posts`.`id`, `title`, SUBSTRING(`body`, 1, 360) 
                       AS `body`, `author`, `created`, `first_name`, `published`
                       FROM `posts`
                       JOIN `users` ON(`author` = `users`.`id`)

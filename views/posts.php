@@ -23,7 +23,9 @@
           <div class="post">
             <div class="content">
               <h2><?php echo $post['title'] ?></h2>
+              <br />
               <p><?php echo $post['body'] ?></p>
+              <br />
               <hr />
               <small><?php echo $post['first_name'] . ' | ' . $post['created'] ?></small>
               <br />

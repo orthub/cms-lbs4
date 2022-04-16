@@ -12,11 +12,12 @@
   <div class="content">
     <div class="space-mid"></div>
     <div class="row">
-
       <div class="col-2"></div>
       <div class="col-8">
         <h2><?php echo $single_post['title'] ?></h2>
+        <br />
         <p><?php echo $single_post['body'] ?></p>
+        <br />
         <hr />
         <small><?php echo $single_post['first_name'] . ' | ' . $single_post['created'] ?></small>
         <br />
