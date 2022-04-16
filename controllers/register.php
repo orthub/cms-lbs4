@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  require_once __DIR__ . '/../helpers/session.php';
   $errors = [];
   $email_exists_in_database = true;
   $registerFirstname = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -88,17 +89,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if (count($errors) > 0) {
         header('Location: ' . '/views/register.php');
       }
+
       if (count($errors) === 0) {
         $time = microtime(true);
         $register_id = str_replace('.', '', $time);
         $registerHome = '/storage/' . $register_id . '/';
-        $create_new_user = create_new_user($register_id, $registerFirstname, $registerLastname, $registerEmail, $registerPassword, $registerHome);
-        if ((bool)$create_new_user) {
-          $path = '/var/www/html/storage/' . $register_id;
-          mkdir($path, 0700, true);
-          $_SESSION['new-user'] = 'Account erfolgreich erstellt. Sie können sich nun einloggen';
-          header('Location: ' . '/views/login.php');
-        }
+        $_SESSION['register']['id'] = $register_id;
+        $_SESSION['register']['first-name'] = $registerFirstname;
+        $_SESSION['register']['last-name'] = $registerLastname;
+        $_SESSION['register']['email'] = $registerEmail;
+        $_SESSION['register']['password'] = $registerPassword;
+        $_SESSION['register']['home'] = $registerHome;
+
+        require_once __DIR__ . '/../controllers/confirmRegister.php';
+
       }  
     }
   }
