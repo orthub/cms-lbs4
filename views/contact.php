@@ -46,8 +46,6 @@ require_once __DIR__ . '/../controllers/contactSpam.php';
           <input id="contact-spam" type="text" name="contact-spam"><br /><br />
           <input class="button" type="submit" value="Abschicken" />
         </form>
-        <?php echo 'spam: ' . $spam_protect ?>
-        <?php echo 'calc: ' . $_SESSION['contact']['result'] ?>
       </div>
       <div class="col-3"></div>
     </div>
