@@ -5,16 +5,17 @@ require_once __DIR__ . '/database.php';
 
 function get_all_users()
 {
-  $sql_get_all_users = 'SELECT `id`, `first_name`, `last_name`, `email`, `role` 
-                        FROM `users`';
+  $sql_get_all_users = 'SELECT `users`.`id`, `first_name`, `last_name`, `email`, `role_id`, `user_role`.`role`
+                        FROM `users`
+                        JOIN `user_role` ON(`role_id` = `user_role`.`id`)';
   $stmt_get_all_users = get_db()->query($sql_get_all_users, PDO::FETCH_ASSOC);
   return $stmt_get_all_users;
 }
 
 function get_all_roles()
 {
-  $sql_get_all_roles = 'SELECT DISTINCT `role` 
-                        FROM `users` 
+  $sql_get_all_roles = 'SELECT `id`, `role` 
+                        FROM `user_role` 
                         ORDER BY `role` DESC';
   $stmt_get_all_roles = get_db()->query($sql_get_all_roles);
   $result_get_all_roles = $stmt_get_all_roles->fetchAll();
@@ -34,9 +35,10 @@ function get_user_email_by_id(string $userId)
 
 function get_user_data_by_id(string $userId)
 {
-  $sql_get_user_data_by_id = 'SELECT `id`, `first_name`, `last_name`, `email`, `role`, `home`
+  $sql_get_user_data_by_id = 'SELECT `users`.`id`, `first_name`, `last_name`, `email`, `role_id`, `home`, `user_role`.`role`
                               FROM `users`
-                              WHERE `id` = :userId';
+                              JOIN `user_role` ON(`role_id` = `user_role`.`id`)
+                              WHERE `users`.`id` = :userId';
   $statement_get_user_data_by_id = get_db()->prepare($sql_get_user_data_by_id);
   $statement_get_user_data_by_id->execute([':userId' => $userId]);
   $result_get_user_data_by_id = $statement_get_user_data_by_id->fetch();
@@ -44,18 +46,18 @@ function get_user_data_by_id(string $userId)
   return $result_get_user_data_by_id;
 }
 
-function move_user_to_archive(string $userId, string $firstName, string $lastName, string $email, string $role, string $invoicePath)
+function move_user_to_archive(string $userId, string $firstName, string $lastName, string $email, string $roleId, string $invoicePath)
 {
   $sql_move_user_to_archive = 'INSERT INTO `users_archive`
                                 SET `id` = :userId, `first_name` = :firstName, `last_name` = :lastName,
-                                     `email` = :email, `role` = :userRole, `invoice_path` = :invoicePath';
+                                     `email` = :email, `role_id` = :roleId, `invoice_path` = :invoicePath';
   $statement_move_user_to_archive = get_db()->prepare($sql_move_user_to_archive);
   $statement_move_user_to_archive->execute([
     ':userId' => $userId,
     ':firstName' => $firstName,
     ':lastName' => $lastName,
     ':email' => $email,
-    ':userRole' => $role,
+    ':roleId' => $roleId,
     ':invoicePath' => $invoicePath
   ]);
 }
@@ -100,8 +102,11 @@ function change_author(string $oldAuthor, string $newAuthor)
 
 function get_archived_users()
 {
-  $sql_get_archived_users = 'SELECT `id`, `first_name`, `last_name`, `email`, `role`, `invoice_path`
-  FROM `users_archive`';
-$stmt_get_archived_users = get_db()->query($sql_get_archived_users, PDO::FETCH_ASSOC);
-return $stmt_get_archived_users;
+  $sql_get_archived_users = 'SELECT `users_archive`.`id`, `first_name`, `last_name`, `email`, 
+                                    `role_id`, `invoice_path`, `user_role`.`role`
+                              FROM `users_archive`
+                              JOIN `user_role` ON(`role_id` = `user_role`.`id`)';
+  $stmt_get_archived_users = get_db()->query($sql_get_archived_users, PDO::FETCH_ASSOC);
+
+  return $stmt_get_archived_users;
 }

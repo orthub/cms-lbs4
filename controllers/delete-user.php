@@ -22,7 +22,7 @@ if (isset($_SESSION['user_id'])) {
   $first_name = $get_user['first_name'];
   $last_name = $get_user['last_name'];
   $email = $get_user['email'];
-  $user_role = $get_user['role'];
+  $user_role = $get_user['role_id'];
   $invoice_path = $get_user['home']; // bis hier OK
 
   // falls jemand mit der rolle 'customer' gelöscht werden soll, werden alle daten geholt

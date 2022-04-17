@@ -20,5 +20,5 @@ if (isset($_SESSION['user_id'])) {
   $role = $_POST['user-rights'];
   $userId = $_POST['userId'];
   set_new_role($role, $userId);
-  header('Location: ' . '/views/dashboard.php');
+  header('Location: ' . '/views/user-list.php');
 }

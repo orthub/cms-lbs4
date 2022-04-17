@@ -12,21 +12,29 @@ function count_all_users()
 
 function count_admins()
 {
-  $sql = 'SELECT COUNT(`role`) FROM `users` WHERE `role` = "ADMIN"';
+  $sql = 'SELECT COUNT(`role`) FROM `users`
+          JOIN `user_role` ON(`role_id` = `user_role`.`id`)
+          WHERE `role` = "ADMIN"';
   $stmt = get_db()->query($sql);
   return $stmt->fetchColumn();
 }
 
 function count_employees()
 {
-  $sql = 'SELECT COUNT(`role`) FROM `users` WHERE `role` = "EMPLOYEE"';
+  $sql = 'SELECT COUNT(`role`) 
+          FROM `users`
+          JOIN `user_role` ON(`role_id` = `user_role`.`id`) 
+          WHERE `role` = "EMPLOYEE"';
   $stmt = get_db()->query($sql);
   return $stmt->fetchColumn();
 }
 
 function count_customers()
 {
-  $sql = 'SELECT COUNT(`role`) FROM `users` WHERE `role` = "CUSTOMER"';
+  $sql = 'SELECT COUNT(`role`) 
+          FROM `users` 
+          JOIN `user_role` ON(`role_id` = `user_role`.`id`)
+          WHERE `role` = "CUSTOMER"';
   $stmt = get_db()->query($sql);
   return $stmt->fetchColumn();
 }
@@ -113,4 +121,18 @@ function count_archived_users()
   $sql = 'SELECT COUNT(`id`) FROM `users_archive`';
   $stmt = get_db()->query($sql);
   return $stmt->fetchColumn();
+}
+
+function set_new_role(string $roleId, string $userId)
+{
+  $sql = 'UPDATE `users`
+          SET `role_id` = :roleId
+          WHERE `id` = :userId';
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([
+    ':roleId' => $roleId,
+    ':userId' => $userId
+  ]);
+
+  return $stmt;
 }

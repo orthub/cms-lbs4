@@ -36,7 +36,7 @@ require_once __DIR__ . '/../controllers/userList.php';
             <form action="/controllers/new-role.php" method="POST">
               <select class="mt-10" name="user-rights" id="userRights">
                 <?php foreach ($roles as $role) : ?>
-                <option value="<?php echo $role['role'] ?>"><?php echo $role['role'] ?></option>
+                <option value="<?php echo $role['id'] ?>"><?php echo $role['role'] ?></option>
                 <?php endforeach ?>
                 <input type="hidden" name="userId" value="<?php echo $user['id'] ?>">
                 <input class="button" type="submit" value="Aktualisieren">

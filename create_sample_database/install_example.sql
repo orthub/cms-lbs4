@@ -11,21 +11,28 @@ DROP TABLE IF EXISTS `cart`;
 DROP TABLE IF EXISTS `products`;
 DROP TABLE IF EXISTS `product_category`;
 DROP TABLE IF EXISTS `posts`;
+DROP TABLE IF EXISTS `user_role`;
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `contact`;
 DROP TABLE IF EXISTS `contact_status`;
 DROP TABLE IF EXISTS `users_archive`;
 -- CREATE CMS TABLES
+CREATE TABLE IF NOT EXISTS `user_role` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `role` VARCHAR(12) NOT NULL,
+  PRIMARY KEY (`id`)
+);
 CREATE TABLE IF NOT EXISTS `users` (
   `id` VARCHAR(28) NOT NULL,
   `first_name` VARCHAR(24) NOT NULL,
   `last_name` VARCHAR(36) NOT NULL,
   `email` VARCHAR(64) NOT NULL,
   `password` VARCHAR(128) NOT NULL,
-  `role` ENUM('ADMIN', 'EMPLOYEE', 'CUSTOMER') NOT NULL DEFAULT 'CUSTOMER',
+  `role_id` INT UNSIGNED NOT NULL DEFAULT 3,
   `home` VARCHAR(64),
   UNIQUE KEY `email` (`email`),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK_users_user_role` FOREIGN KEY (`role_id`) REFERENCES `user_role`(`id`)
 );
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -38,6 +45,16 @@ CREATE TABLE IF NOT EXISTS `posts` (
   CONSTRAINT `FK_posts_users` FOREIGN KEY (`author`) REFERENCES `users`(`id`)
 );
 -- CREATE TEST ACCOUNTS
+-- ROLES
+INSERT INTO
+  `user_role`(`role`)
+VALUES('ADMIN');
+INSERT INTO
+  `user_role`(`role`)
+VALUES('EMPLOYEE');
+INSERT INTO
+  `user_role`(`role`)
+VALUES('CUSTOMER');
 -- ADMIN USER
 INSERT INTO
   `users` (
@@ -46,7 +63,7 @@ INSERT INTO
     `last_name`,
     `email`,
     `password`,
-    `role`,
+    `role_id`,
     `home`
   )
 VALUES(
@@ -55,7 +72,7 @@ VALUES(
     "Ortner",
     "admin@stiftl.at",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
-    "ADMIN",
+    1,
     "/storage/110011001100/"
   );
 -- EMPLOYEES
@@ -66,7 +83,7 @@ INSERT INTO
     `last_name`,
     `email`,
     `password`,
-    `role`,
+    `role_id`,
     `home`
   )
 VALUES(
@@ -75,7 +92,7 @@ VALUES(
     "Doe",
     "employee@stiftl.at",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
-    "EMPLOYEE",
+    2,
     "/storage/220011001100/"
   );
 INSERT INTO
@@ -85,7 +102,7 @@ INSERT INTO
     `last_name`,
     `email`,
     `password`,
-    `role`,
+    `role_id`,
     `home`
   )
 VALUES(
@@ -94,7 +111,7 @@ VALUES(
     "Doe",
     "employee.martin@stiftl.at",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
-    "EMPLOYEE",
+    2,
     "/storage/220011002200/"
   );
 INSERT INTO
@@ -104,7 +121,7 @@ INSERT INTO
     `last_name`,
     `email`,
     `password`,
-    `role`,
+    `role_id`,
     `home`
   )
 VALUES(
@@ -113,7 +130,7 @@ VALUES(
     "Hofreiter",
     "employee.martina@stiftl.at",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
-    "EMPLOYEE",
+    2,
     "/storage/220011003300/"
   );
 INSERT INTO
@@ -123,7 +140,7 @@ INSERT INTO
     `last_name`,
     `email`,
     `password`,
-    `role`,
+    `role_id`,
     `home`
   )
 VALUES(
@@ -132,7 +149,7 @@ VALUES(
     "Kleber",
     "employee.hubert@stiftl.at",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
-    "EMPLOYEE",
+    2,
     "/storage/220011004400/"
   );
 -- CUSTOMERS
@@ -143,7 +160,7 @@ INSERT INTO
     `last_name`,
     `email`,
     `password`,
-    `role`,
+    `role_id`,
     `home`
   )
 VALUES(
@@ -152,7 +169,7 @@ VALUES(
     "Maulbeer",
     "j.maulbeer@keinemail.com",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
-    "CUSTOMER",
+    3,
     "/storage/770011001100/"
   );
 INSERT INTO
@@ -162,7 +179,7 @@ INSERT INTO
     `last_name`,
     `email`,
     `password`,
-    `role`,
+    `role_id`,
     `home`
   )
 VALUES(
@@ -171,11 +188,11 @@ VALUES(
     "Still",
     "customer.still@stiftl.at",
     "$2y$10$CbyJ749EvzB1scPFSiuVNepXvcvBK5C5SXirMbhQBY3YjYVP3.jPS",
-    "CUSTOMER",
+    3,
     "/storage/770011002200/"
   );
 -- CREATE SHOP TABLES
-  CREATE TABLE `product_category` (
+  CREATE TABLE IF NOT EXISTS `product_category` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `category` VARCHAR(36) NOT NULL,
     PRIMARY KEY (`id`)
@@ -214,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `delivery_address` (
     KEY `FK_user_delivery_address` (`user_id`),
     CONSTRAINT `FK_user_delivery_address` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
   );
-CREATE TABLE `orders` (
+CREATE TABLE IF NOT EXISTS `orders` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `order_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `status` enum("new", "payed") NOT NULL DEFAULT "new",
@@ -227,7 +244,7 @@ CREATE TABLE `orders` (
     CONSTRAINT `FK_order_to_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
     CONSTRAINT `FK_order_delivery_address` FOREIGN KEY (`delivery_address_id`) REFERENCES `delivery_address` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
   );
-CREATE TABLE `order_products` (
+CREATE TABLE IF NOT EXISTS `order_products` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `order_id` VARCHAR(128) NOT NULL,
     `product_id` INT UNSIGNED NOT NULL,
@@ -237,23 +254,24 @@ CREATE TABLE `order_products` (
     CONSTRAINT `FK_order_products_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`orders_id`) ON DELETE CASCADE ON UPDATE CASCADE
   );
 -- ARCHIVE FOR DELETED USERS
-  CREATE TABLE `users_archive` (
+  CREATE TABLE IF NOT EXISTS `users_archive` (
     `id` VARCHAR(28) NOT NULL,
     `first_name` VARCHAR(24) NOT NULL,
     `last_name` VARCHAR(36) NOT NULL,
     `email` VARCHAR(64) NOT NULL,
-    `role` VARCHAR(16) NOT NULL,
+    `role_id` INT UNSIGNED NOT NULL,
     `invoice_path` VARCHAR(255),
     UNIQUE KEY `email` (`email`),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    CONSTRAINT `FK_users_archive_user_role` FOREIGN KEY (`role_id`) REFERENCES `user_role`(`id`)
   );
-CREATE TABLE `contact_status` (
+CREATE TABLE IF NOT EXISTS `contact_status` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `status` VARCHAR(24) NOT NULL,
     PRIMARY KEY (`id`)
   );
 -- CONTACT TABLE
-  CREATE TABLE `contact` (
+  CREATE TABLE IF NOT EXISTS `contact` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `email` VARCHAR(128) NOT NULL,
     `title` VARCHAR(64) NOT NULL,
@@ -633,7 +651,7 @@ INSERT INTO
     `first_name`,
     `last_name`,
     `email`,
-    `role`,
+    `role_id`,
     `invoice_path`
   )
 VALUES
@@ -642,7 +660,7 @@ VALUES
     "Max",
     "Muster",
     "max@mustermann.nomail",
-    "CUSTOMER",
+    3,
     ""
   );
 INSERT INTO
@@ -651,7 +669,7 @@ INSERT INTO
     `first_name`,
     `last_name`,
     `email`,
-    `role`,
+    `role_id`,
     `invoice_path`
   )
 VALUES
@@ -660,7 +678,7 @@ VALUES
     "Stefan",
     "Klein",
     "stefan@klein.nomail",
-    "EMPLOYEE",
+    2,
     "/storage/110033004400/"
   );
 INSERT INTO
@@ -669,7 +687,7 @@ INSERT INTO
     `first_name`,
     `last_name`,
     `email`,
-    `role`,
+    `role_id`,
     `invoice_path`
   )
 VALUES
@@ -678,7 +696,7 @@ VALUES
     "Sabine",
     "Lauf",
     "sabine@lauf.nomail",
-    "ADMIN",
+    1,
     ""
   );
 INSERT INTO
@@ -687,7 +705,7 @@ INSERT INTO
     `first_name`,
     `last_name`,
     `email`,
-    `role`,
+    `role_id`,
     `invoice_path`
   )
 VALUES
@@ -696,7 +714,7 @@ VALUES
     "Roswitha",
     "Stangl",
     "roswitha@stangl.nomail",
-    "CUSTOMER",
+    3,
     "/storage/440033001100/"
   );
 -- CREATE SAMPLE POSTS
@@ -920,4 +938,109 @@ VALUES(
     '220011002200',
     '2022-02-27 11:23:02',
     'DRAFT'
+  );
+INSERT INTO
+  `contact` (
+    `email`,
+    `title`,
+    `message`,
+    `status_id`,
+    `created`
+  )
+VALUES(
+    "j.kuli@keinemail.com",
+    "Spezialstifte",
+    "Guten Tag,<br><br>fertigen sie auch stifte nach Kundenwunsch an?<br>Wenn ja, wieviel würde das kosten?",
+    1,
+    "2022-02-28 09:06:16"
+  );
+INSERT INTO
+  `contact` (
+    `email`,
+    `title`,
+    `message`,
+    `status_id`,
+    `created`
+  )
+VALUES(
+    "s.kugelstift@keinemail.com",
+    "Grünes Monster",
+    "bekommen sie wieder den Kugelschreiber Grünes Monster, ich hätte den so gerne.",
+    2,
+    "2022-03-08 10:15:03"
+  );
+INSERT INTO
+  `contact` (
+    `email`,
+    `title`,
+    `message`,
+    `status_id`,
+    `created`
+  )
+VALUES(
+    "a.verfilzt@keinemail.com",
+    "Nich nur Stifte",
+    "ich würde mich freuen wenn sie zu den Stiften auch Notizbücher anbieten würden",
+    2,
+    "2022-03-15 08:31:48"
+  );
+INSERT INTO
+  `contact` (
+    `email`,
+    `title`,
+    `message`,
+    `status_id`,
+    `created`
+  )
+VALUES(
+    "k.gutemiene@keinemail.com",
+    "Mehr Farben",
+    "guten Tag,<br><br>wäre es möglich ihr sortiment an Stiften bezüglich der Schreibfarben zu erweitern?",
+    3,
+    "2022-03-19 15:47:42"
+  );
+INSERT INTO
+  `contact` (
+    `email`,
+    `title`,
+    `message`,
+    `status_id`,
+    `created`
+  )
+VALUES(
+    "f.stanglwirt@keinemail.com",
+    "Personalisierung",
+    "können sie auch Gravuren oder Aufdrucke an den Stiften vornehmen?",
+    1,
+    "2022-03-25 08:57:21"
+  );
+INSERT INTO
+  `contact` (
+    `email`,
+    `title`,
+    `message`,
+    `status_id`,
+    `created`
+  )
+VALUES(
+    "o.senfmaier@keinemail.com",
+    "Kugelschreiber",
+    "hallo,<br><br>ich würde gerne erfahren ob sie in zukunft auch Kugelschreiber mit roter und grüner Farbe verkaufen",
+    2,
+    "2022-04-06 09:22:45"
+  );
+INSERT INTO
+  `contact` (
+    `email`,
+    `title`,
+    `message`,
+    `status_id`,
+    `created`
+  )
+VALUES(
+    "b.hasuleitner@hauslmail.at",
+    "Notizbücher",
+    "bitte nehmen sie notizbücher in ihr sortiment auf",
+    3,
+    "2022-04-12 15:37:44"
   );
