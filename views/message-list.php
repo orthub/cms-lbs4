@@ -17,8 +17,8 @@ require_once __DIR__ . '/../controllers/messageList.php';
     </div>
     <div class="space-small"></div>
     <div class="row">
-      <div class="col-2"></div>
-      <div class="col-8">
+      <div class="col-1"></div>
+      <div class="col-9">
         <?php if (count($all_messages) === 0) : ?>
         <h2 class="text-center">Keine Nachrichten vorhanden</h2>
         <?php endif ?>
@@ -59,7 +59,7 @@ require_once __DIR__ . '/../controllers/messageList.php';
         </table>
         <?php endif ?>
       </div>
-      <div class="col-2"></div>
+      <div class="col-1"></div>
     </div>
   </div>
   <div class="space-big"></div>
