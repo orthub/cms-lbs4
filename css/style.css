@@ -25,6 +25,10 @@ a {
   font-family: 'Montserrat';
 }
 
+a {
+  text-decoration: none;
+}
+
 .landing {
   width: auto;
   height: 100vh;

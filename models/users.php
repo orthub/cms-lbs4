@@ -110,3 +110,33 @@ function get_archived_users()
 
   return $stmt_get_archived_users;
 }
+
+function get_current_password_by_id(string $userId)
+{
+  $sql_get_current_password_by_id = 'SELECT `password`
+                                FROM `users`
+                                WHERE `id` = :userId';
+  $statement_get_current_password_by_id = get_db()->prepare($sql_get_current_password_by_id);
+  $statement_get_current_password_by_id->execute([':userId' => $userId]);
+  $result_get_current_password_by_id = $statement_get_current_password_by_id->fetchColumn();
+
+  return $result_get_current_password_by_id;
+}
+
+function set_new_password_by_id(string $userId, string $newPassword)
+{
+  $hashPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+  try {
+    $sql = 'UPDATE `users`
+            SET `password` = :newPassword
+            WHERE `id` = :userId';
+    $stmt = get_db()->prepare($sql);
+    $stmt->execute([
+      ':newPassword' => $hashPassword,
+      ':userId' => $userId
+    ]);
+  } catch (\Exception $e) {
+    return false;
+  }
+  return true;
+}

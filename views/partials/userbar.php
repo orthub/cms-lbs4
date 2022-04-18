@@ -22,7 +22,8 @@ if (isset($_SESSION['user_id'])) {
     <li><a class="userbar"><i class="fa-solid fa-user-clock"></i> Hallo <?php echo $userName ?></a></li>
     <?php endif ?>
     <?php if ($role === 'CUSTOMER') : ?>
-    <li><a class="userbar"><i class="fa-solid fa-user"></i> Hallo <?php echo $userName ?></a></li>
+    <li><a class="userbar" href="/views/account.php"><i class="fa-solid fa-user"></i> Hallo
+        <?php echo $userName ?></a></li>
     <?php endif ?>
     <?php if ($role === 'ADMIN') : ?>
     <li><a class="userbar" href="/views/dashboard.php"><i class="fa-solid fa-table-cells"></i> Dashboard</a></li>

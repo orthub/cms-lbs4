@@ -34,3 +34,20 @@ function save_delivery_address(string $userId, string $city, string $street, str
 
   return $res_save_delivery_address;
 }
+
+function delete_address_by_id(string $userId, string $addressId)
+{
+  try {
+    $sql = 'DELETE FROM `delivery_address`
+            WHERE `id` = :addressId
+            AND `user_id` = :userId';
+    $stmt = get_db()->prepare($sql);
+    $stmt->execute([
+      ':addressId' => $addressId,
+      ':userId' => $userId
+    ]);
+  } catch (\Exception $e) {
+    return false;
+  }
+  return true;
+}
