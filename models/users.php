@@ -68,7 +68,7 @@ function delete_user_by_id(string $userId)
     $sql_delete_user_by_id = 'DELETE FROM `users` WHERE `id` = :userId';
     $statement_delete_user_by_id = get_db()->prepare($sql_delete_user_by_id);
     $statement_delete_user_by_id->execute([':userId' => $userId]);
-  } catch (\Exception) {
+  } catch (\Exception $e) {
     return false;
   }
   return true;
