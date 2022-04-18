@@ -16,10 +16,12 @@ if (isset($_SESSION['user_id'])) {
   <?php $newMessages = count_new_messages_for_userbar() ?>
   <ul>
     <?php if ($role === 'ADMIN') : ?>
-    <li><a class="userbar"><i class="fa-solid fa-user-secret"></i> Hallo <?php echo $userName ?></a></li>
+    <li><a class="userbar" href="/views/account.php"><i class="fa-solid fa-user-secret"></i> Hallo
+        <?php echo $userName ?></a></li>
     <?php endif ?>
     <?php if ($role === 'EMPLOYEE') : ?>
-    <li><a class="userbar"><i class="fa-solid fa-user-clock"></i> Hallo <?php echo $userName ?></a></li>
+    <li><a class="userbar" href="/views/account.php"><i class="fa-solid fa-user-clock"></i> Hallo
+        <?php echo $userName ?></a></li>
     <?php endif ?>
     <?php if ($role === 'CUSTOMER') : ?>
     <li><a class="userbar" href="/views/account.php"><i class="fa-solid fa-user"></i> Hallo
