@@ -29,15 +29,15 @@ a {
   text-decoration: none;
 }
 
-.landing {
-  width: auto;
-  height: 100vh;
+.main-mid {
+  position: relative;
+  top: 50%;
 }
 
-.landing-img {
-  width: 100vw;
-  height: 100vh;
-  background: url('/img/comp/landing.jpg') no-repeat center;
+.main-img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
 }
 
 navbar {
@@ -361,7 +361,7 @@ navbar {
 
 .main-icons {
   color: #f5901c;
-  font-size: 14vh;
+  font-size: 90px;
 }
 
 .main-icon-text {
@@ -414,6 +414,12 @@ navbar {
   width: 100%;
   float: left;
   height: 80px;
+}
+
+.space-big-main {
+  width: 100%;
+  float: left;
+  height: 140px;
 }
 
 .userbar-orders {
