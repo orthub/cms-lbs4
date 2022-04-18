@@ -17,7 +17,13 @@ require_once __DIR__ . '/../controllers/products.php';
     <div class="space-small"></div>
     <h2 class="text-center"><?php echo $category_from_url ?></h2>
     <?php if(!$category_available) : ?>
-    <p>Kategorie nicht gefunden.</p>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <p class="text-center">Keine Produkte in der Kategorie gefunden</p>
+      </div>
+      <div class="col-2"></div>
+    </div>
     <?php endif ?>
     <div class="space-small"></div>
     <div class="row">
@@ -41,6 +47,7 @@ require_once __DIR__ . '/../controllers/products.php';
       <?php endforeach ?>
     </div>
     <?php endif ?>
+  </div>
   </div>
   <div class="space-big"></div>
   <?php require_once __DIR__ . '/partials/footer.php' ?>

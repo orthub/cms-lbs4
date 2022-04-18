@@ -25,6 +25,17 @@ a {
   font-family: 'Montserrat';
 }
 
+.landing {
+  width: auto;
+  height: 100vh;
+}
+
+.landing-img {
+  width: 100vw;
+  height: 100vh;
+  background: url('/img/comp/landing.jpg') no-repeat center;
+}
+
 navbar {
   height: 100%;
   width: 100%;
@@ -71,6 +82,7 @@ navbar {
 
 .show-menu-btn,
 .hide-menu-btn {
+  right: -180px;
   transition: 0.4s;
   font-size: 30px;
   cursor: pointer;
@@ -152,6 +164,7 @@ navbar {
 
   .navigation {
     position: fixed;
+    width: auto;
     width: 100%;
     height: 100vh;
     background: #f5901c;
@@ -184,6 +197,10 @@ navbar {
   #toggle-btn:checked~nav .navigation {
     top: 0px;
   }
+}
+
+.check-btn-nav {
+  right: 0px;
 }
 
 /*-- Userbar --*/
@@ -373,8 +390,8 @@ navbar {
 .spacer-main {
   width: 100%;
   float: left;
-  height: 30vh;
-  background-color: #e9d5c0;
+  height: 31vh;
+  background-color: #cecdcd;
 }
 
 .space-small {
@@ -617,4 +634,10 @@ tr:nth-child(even) {
 
 .dash-img {
   height: 48px;
+}
+
+/*-- ABOUT IMAGE --*/
+.about-img {
+  display: block;
+  max-width: 250px;
 }

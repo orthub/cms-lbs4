@@ -12,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
     <a href="/index.php"><img src="/img/comp/logo.png" alt="Company Logo"></a>
   </div>
 
-  <input type="checkbox" id="toggle-btn">
+  <input class="check-btn-nav" type="checkbox" id="toggle-btn">
   <label for="toggle-btn" class="show-menu-btn"><i class="fas fa-bars"></i></label>
 
   <nav>
