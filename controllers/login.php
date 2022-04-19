@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $errors = [];
   $email_exist = false;
-  $match_passwd = false;
+  $match_password = false;
   $login_email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
   $login_password = trim(filter_input(INPUT_POST, 'passwd'));
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ((bool)$login_email) {
     $_SESSION['login']['email'] = $login_email;
   }
-  if ((bool)$loginPasswd) {
+  if ((bool)$login_password) {
     $_SESSION['login']['passwd'] = $login_password;
   }
 
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $email_exist = search_mail($login_email, $login_password);
 
-    if ((bool)$emailExist === false) {
+    if ((bool)$email_exist === false) {
       $_SESSION['error']['login-fail'] = 'Email oder Passwort stimmt nicht';
       $errors[] = 1;
     }
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       header('Location: ' . '/views/login.php');
     }
 
-    if ((bool)$emailExist) {
+    if ((bool)$email_exist) {
       $match = get_password_from_email($login_email);
       $is_valid_login = password_verify($login_password, $match);
       

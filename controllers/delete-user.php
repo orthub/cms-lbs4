@@ -1,16 +1,17 @@
 <?php
 require_once __DIR__ . '/../helpers/session.php';
 require_once __DIR__ . '/userRights.php';
-require_once __DIR__ . '/../models/users.php';
+require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 
 if($_SERVER['REQUEST_METHOD'] === 'GET') {
   header('Location: ' . '/');
 }
 
 if (isset($_SESSION['user_id'])) {
+  require_once __DIR__ . '/../models/users.php';
   $user_id = $_SESSION['user_id'];
   $new_user_id = $user_id;
-  $user_role = check_user_role($userId);
+  $user_role = check_user_role($user_id);
   $role = $user_role['role'];
   
   if($role !== 'ADMIN') {

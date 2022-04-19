@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../helpers/session.php';
+require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 require_once __DIR__ . '/../config/company_data.php';
 ?>
 <!DOCTYPE html>

@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $errors = [];
   require_once __DIR__ . '/../models/addresses.php';
 
-  $userId = $_SESSION['user_id'];
+  $user_id = $_SESSION['user_id'];
   
   $city = trim(filter_input(INPUT_POST, 'city', FILTER_SANITIZE_SPECIAL_CHARS));
   $street = trim(filter_input(INPUT_POST, 'street', FILTER_SANITIZE_SPECIAL_CHARS));
@@ -30,12 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors[] = 1;
   }
 
-  if ((bool)$streetNumber === false) {
+  if ((bool)$street_number === false) {
     $_SESSION['error']['new-streetNumber'] = 'Bitte Straßennummer angeben';
     $errors[] = 1;
   }
 
-  if ((bool)$zipCode === false) {
+  if ((bool)$zip_code === false) {
     $_SESSION['error']['new-zip'] = 'Bitte Postleitzahl angeben';
     $errors[] = 1;
   }
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
   
   if (count($errors) === 0) {
-    $new_delivery_address = save_delivery_address($userId, $city, $street, $street_number, $zip_code);
+    $new_delivery_address = save_delivery_address($user_id, $city, $street, $street_number, $zip_code);
     unset($_SESSION['addresss']);
     $_SESSION['success']['account-new-address'] = 'Neue Adresse hinzugefügt';
     header('Location: ' . '/views/account.php');

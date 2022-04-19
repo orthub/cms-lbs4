@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../helpers/session.php';
 require_once __DIR__ . '/../controllers/products.php';
 require_once __DIR__ . '/../controllers/getDeliveryAddress.php';
+require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,18 +25,14 @@ require_once __DIR__ . '/../controllers/getDeliveryAddress.php';
         <p class="text-bold">Neue Lieferadresse hinzufügen</p><br />
         <form action="/controllers/accountNewAddress.php" method="POST">
           <label for="street">Straße:</label><br />
-          <input type="text" name="street" id="street"
-            value="<?php echo (isset($_SESSION['address']['street'])) ? $_SESSION['address']['street'] : '' ?>" />
+          <input type="text" name="street" id="street" value="<?php echo (isset($_SESSION['address']['street'])) ? $_SESSION['address']['street'] : '' ?>" />
           <br /><br />
           <label for="streetNumber">Straßennummer:</label><br />
-          <input type="text" name="streetNumber" id="streetNumber"
-            value="<?php echo (isset($_SESSION['address']['streetNumber'])) ? $_SESSION['address']['streetNumber'] : '' ?>" /><br /><br />
+          <input type="text" name="streetNumber" id="streetNumber" value="<?php echo (isset($_SESSION['address']['streetNumber'])) ? $_SESSION['address']['streetNumber'] : '' ?>" /><br /><br />
           <label for="city">Stadt:</label><br />
-          <input type="text" name="city" id="city"
-            value="<?php echo (isset($_SESSION['address']['city'])) ? $_SESSION['address']['city'] : '' ?>" /><br /><br />
+          <input type="text" name="city" id="city" value="<?php echo (isset($_SESSION['address']['city'])) ? $_SESSION['address']['city'] : '' ?>" /><br /><br />
           <label for="zip">Postleitzahl:</label><br />
-          <input type="text" name="zip" id="text"
-            value="<?php echo (isset($_SESSION['address']['zip'])) ? $_SESSION['address']['zip'] : '' ?>" /><br /><br />
+          <input type="text" name="zip" id="text" value="<?php echo (isset($_SESSION['address']['zip'])) ? $_SESSION['address']['zip'] : '' ?>" /><br /><br />
           <input class="button" type="submit" value="Lieferadresse hinzufügen" />
         </form>
       </div>
@@ -43,14 +40,11 @@ require_once __DIR__ . '/../controllers/getDeliveryAddress.php';
         <p class="text-bold">Passwort ändern</p><br />
         <form action="/controllers/accountPWchange.php" method="POST">
           <label for="accountPWcurrent">Aktuelles Passwort</label><br />
-          <input id="accountPWcurrent" name="current-pw" type="password"
-            value="<?php echo (isset($_SESSION['account']['cur-pw'])) ? $_SESSION['account']['cur-pw'] : '' ?>"><br /><br />
+          <input id="accountPWcurrent" name="current-pw" type="password" value="<?php echo (isset($_SESSION['account']['cur-pw'])) ? $_SESSION['account']['cur-pw'] : '' ?>"><br /><br />
           <label for="accountPWnew">Neues Passwort</label><br />
-          <input id="accountPWnew" name="new-pw" type="password"
-            value="<?php echo (isset($_SESSION['account']['new-pw'])) ? $_SESSION['account']['new-pw'] : '' ?>"><br /><br />
+          <input id="accountPWnew" name="new-pw" type="password" value="<?php echo (isset($_SESSION['account']['new-pw'])) ? $_SESSION['account']['new-pw'] : '' ?>"><br /><br />
           <label for="accountPWconfirm">Passwort bestätigen</label><br />
-          <input id="accountPWconfirm" name="confirm-pw" type="password"
-            value="<?php echo (isset($_SESSION['account']['conf-pw'])) ? $_SESSION['account']['conf-pw'] : '' ?>"><br /><br />
+          <input id="accountPWconfirm" name="confirm-pw" type="password" value="<?php echo (isset($_SESSION['account']['conf-pw'])) ? $_SESSION['account']['conf-pw'] : '' ?>"><br /><br />
           <input class="button" type="submit" value="Passwort ändern">
         </form>
       </div>

@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../helpers/session.php';
+require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 require_once __DIR__ . '/../controllers/editProduct.php';
 ?>
 <!DOCTYPE html>
@@ -42,7 +43,7 @@ require_once __DIR__ . '/../controllers/editProduct.php';
           <label for="">Titel</label>
           <input type="text" name="title" value="<?php echo $_SESSION['edit-product']['title'] ?>"><br /><br />
           <label for="des">Beschreibung</label>
-          <textarea id="des" name="description"><?php echo $_SESSION['edit-product']['description'] ?>"</textarea><br />
+          <textarea id="des" name="description"><?php echo $_SESSION['edit-product']['description'] ?></textarea><br />
           <label for="">Kategorie (Aktuell: <?php echo $_SESSION['edit-product']['cat'] ?>)</label><br />
           <select id="category" name="category">
             <?php foreach ($categories as $category) : ?>
