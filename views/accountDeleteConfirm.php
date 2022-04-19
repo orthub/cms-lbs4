@@ -17,8 +17,8 @@ require_once __DIR__ . '/../controllers/products.php';
     <div class="space-small"></div>
     <h2 class="text-center">Bestätigen sie die Löschanfrage</h2>
     <div class="space-mid"></div>
-    <p class="text-center">Wenn sie ihr Konto löschen, werden sie vom System ausgeloggt und auf unsere Startseite
-      umgeleitet</p>
+    <p class="text-center">Wenn sie ihr Konto löschen, werden sie vom System ausgeloggt und auf unsere Startseite umgeleitet</p>
+
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6 text-center">
@@ -30,6 +30,7 @@ require_once __DIR__ . '/../controllers/products.php';
       </div>
       <div class="col-3"></div>
     </div>
+
   </div>
   <div class="space-big"></div>
   <?php require_once __DIR__ . '/partials/footer.php' ?>

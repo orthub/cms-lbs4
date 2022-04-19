@@ -3,20 +3,20 @@ require_once __DIR__ . '/../helpers/session.php';
 
 if (isset($_GET['actoken']) && !empty($_GET['actoken'])) {
   require_once __DIR__ . '/../helpers/session.php';
-  $token = trim(htmlspecialchars(filter_input(INPUT_GET, 'actoken')));
+  $token = trim(filter_input(INPUT_GET, 'actoken', FILTER_SANITIZE_SPECIAL_CHARS));
 
   if ($_SESSION['register']['token'] === $token) {
 
     $register_id = $_SESSION['register']['id'];
-    $registerFirstname = $_SESSION['register']['first-name'];
-    $registerLastname = $_SESSION['register']['last-name'];
-    $registerEmail = $_SESSION['register']['email'];
-    $registerPassword = $_SESSION['register']['password'];
-    $registerHome = $_SESSION['register']['home'];
+    $register_firstname = $_SESSION['register']['first-name'];
+    $register_lastname = $_SESSION['register']['last-name'];
+    $register_email = $_SESSION['register']['email'];
+    $register_password = $_SESSION['register']['password'];
+    $register_home = $_SESSION['register']['home'];
 
     require_once __DIR__ . '/../models/register.php';
 
-    $create_new_user = create_new_user($register_id, $registerFirstname, $registerLastname, $registerEmail, $registerPassword, $registerHome);
+    $create_new_user = create_new_user($register_id, $register_firstname, $register_lastname, $register_email, $register_password, $register_home);
 
     if ((bool)$create_new_user) {
       $path = '/var/www/html/storage/' . $register_id;
@@ -32,3 +32,5 @@ if (isset($_GET['actoken']) && !empty($_GET['actoken'])) {
 
   header('Location: ' . '/views/register.php');
 }
+
+header('Location: ' . '/');

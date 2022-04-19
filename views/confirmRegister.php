@@ -15,6 +15,7 @@ require_once __DIR__ . '/../helpers/session.php';
       <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
     </div>
     <div class="space-small"></div>
+
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8">
@@ -26,8 +27,10 @@ require_once __DIR__ . '/../helpers/session.php';
       </div>
       <div class="col-2"></div>
     </div>
+
   </div>
   <div class="space-big"></div>
+
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

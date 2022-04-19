@@ -1,49 +1,44 @@
 <?php
 namespace Dompdf;
 require_once __DIR__ . '/../helpers/session.php';
-// namespace Dompdf;
 
 require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 
 use Dompdf\Dompdf;
-// use Dompdf\Adapter\CPDF;
-// use Dompdf\Exception;
+
+$user_id = $_SESSION['user_id'];
+$order_id = $_SESSION['base-order']['orders_id'];
+
+$root_path = $_SERVER['DOCUMENT_ROOT'];
+$file = '/storage/' . $user_id . '/Rechnung_' . $order_id . '.pdf';
+$file_path = $root_path . $file;
 
 
-$userId = $_SESSION['user_id'];
-$orderId = $_SESSION['base-order']['orders_id'];
-
-$rootPath = $_SERVER['DOCUMENT_ROOT'];
-$file = '/storage/' . $userId . '/Rechnung_' . $orderId . '.pdf';
-$filePath = $rootPath . $file;
-
-
-if (file_exists($filePath)) {
+if (file_exists($file_path)) {
   //Define header information
   header('Content-Description: File Transfer');
   header('Content-Type: application/octet-stream');
-
   header('Content-Disposition: attachment; filename="' . basename("Rechnung_" . $file) . '"');
-  header('Content-Length: ' . filesize($filePath));
+  header('Content-Length: ' . filesize($file_path));
   header('Pragma: public');
 
   //Clear system output buffer
   flush();
 
   //Read the size of the file
-  readfile($filePath);
+  readfile($file_path);
 
   exit();
 }
 
-if (!file_exists($filePath)) {
+if (!file_exists($file_path)) {
   require_once __DIR__ . '/../lib/vendor/autoload.php';
   require_once __DIR__ . '/../lib/vendor/dompdf/dompdf/src/Autoloader.php';
   require_once __DIR__ . '/../models/invoice.php';
-  $renderTableProducts = '';
+  $render_table_products = '';
   
-  $get_base_order = get_order_with_user_and_order_id($userId, $orderId);
-  $get_products_from_order = get_products_for_order($orderId);
+  $get_base_order = get_order_with_user_and_order_id($user_id, $order_id);
+  $get_products_from_order = get_products_for_order($order_id);
 
   $_SESSION['order-products-quantity'] = $get_products_from_order;
 
@@ -61,23 +56,23 @@ if (!file_exists($filePath)) {
 
   // instantiate and use the dompdf class
   $dompdf = new Dompdf();
-  $endprice = 0;
+  $end_price = 0;
 
   // produkte für tabelle generieren + gesamtpreis
   foreach ($_SESSION['products-from-order'] as $product) {
-    $renderTableProducts .= 
+    $render_table_products .= 
     '<tr>
       <td class="text-left">' . $product['title'] . '</td>
       <td class="text-left">' . $product['quantity'] . '</td>
       <td class="text-left">' . $product['price'] / 100 . '€</td> 
     </tr>';
     $price = $product['price'] * $product['quantity'];
-    $endprice = $endprice + $price;
+    $end_price = $end_price + $price;
   } // FEHLER BEIM PREIS
 
 
   // HTML für die Erstellung des PDF-Dokuments
-  $renderToHTML ='
+  $render_to_html ='
   <html>
   <head>
   <style>
@@ -114,7 +109,7 @@ if (!file_exists($filePath)) {
           </tr>
         </thead>
         <tbody>
-        ' . $renderTableProducts . '
+        ' . $render_table_products . '
         </tbody>
         </table>
         <div class="text-right">
@@ -136,7 +131,7 @@ if (!file_exists($filePath)) {
   </html>
   ';
 
-  $dompdf->loadHtml($renderToHTML);
+  $dompdf->loadHtml($render_to_html);
 
   // (Optional) Setup the paper size and orientation
   $dompdf->setPaper('A4', 'portrait');
@@ -144,27 +139,11 @@ if (!file_exists($filePath)) {
   // Render the HTML as PDF
   $dompdf->render();
 
-  // Output the generated PDF to Browser
-  // $dompdf->stream();
-
   $output = $dompdf->output();
 
-  file_put_contents('../storage/' . $userId . '/Rechnung_' . $orderId . '.pdf', $output);
-
-  //Define header information
-  // header('Content-Description: File Transfer');
-  // header('Content-Type: application/octet-stream');
-  
-  // header('Content-Disposition: attachment; filename="' . basename($file) . '"');
-  // header('Content-Length: ' . filesize($filePath));
-  // header('Pragma: public');
+  file_put_contents('../storage/' . $user_id . '/Rechnung_' . $order_id . '.pdf', $output);
   
   //Clear system output buffer
   flush();
   
-  //Read the size of the file
-  // readfile($filePath);
-  
-  
-
 }

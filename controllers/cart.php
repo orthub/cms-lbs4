@@ -4,12 +4,12 @@ require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 
 require_once __DIR__ . '/../models/cart.php';
 
-$userId = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id'];
 
 $totalPrice = 0;
-$cartItems = get_cart_products_for_user($userId);
-$noItems = false;
-$noItems = count($cartItems);
-if ($noItems === 0) {
-  $noItems = true;
+$cart_items = get_cart_products_for_user($user_id);
+$no_items = false;
+$no_items = count($cart_items);
+if ($no_items === 0) {
+  $no_items = true;
 }

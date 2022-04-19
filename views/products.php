@@ -18,6 +18,7 @@ $products = get_all_live_products();
   <?php unset($_SESSION['new-product']) ?>
   <div class="space-big"></div>
   <div class="content">
+
     <div class="row">
       <?php foreach($products as $product) : ?>
       <div class="col-3">
@@ -43,8 +44,10 @@ $products = get_all_live_products();
       </div>
       <?php endforeach ?>
     </div>
+
   </div>
   <div class="space-big"></div>
+
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

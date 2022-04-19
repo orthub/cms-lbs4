@@ -2,94 +2,95 @@
 
 require_once __DIR__ . '/database.php';
 
-function add_to_cart(string $userId, string $productId, string $quantity): bool
+function add_to_cart(string $user_id, string $product_id, string $quantity): bool
 {
-  $sql_add_to_cart = 'INSERT INTO `cart`
-                      SET quantity = 1, `user_id` = :userId , `product_id` = :productId
-                      ON DUPLICATE KEY UPDATE quantity = quantity + :quantity';
-  $stmt_add_to_cart = get_db()->prepare($sql_add_to_cart);
-  $stmt_add_to_cart->execute([
-    ':userId' => $userId,
-    ':productId' => $productId,
+  $sql = 'INSERT INTO `cart`
+          SET quantity = 1, `user_id` = :userId , `product_id` = :productId
+          ON DUPLICATE KEY UPDATE quantity = quantity + :quantity';
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([
+    ':userId' => $user_id,
+    ':productId' => $product_id,
     ':quantity' => $quantity
   ]);
-  remove_quantity_from_product($productId);
+  remove_quantity_from_product($product_id);
   
-  if ($stmt_add_to_cart === false) {
+  if ($stmt === false) {
     return false;
   }
 
   return true;
 }
 
-function remove_quantity_from_product(string $productId)
+function remove_quantity_from_product(string $product_id)
 {
-  $sql_remove_quantity_from_product = 'UPDATE `products` 
-                                        SET `quantity` = `quantity` -1 
-                                        WHERE `id` = :productId';
-  $stmt_remove_quantity_from_product = get_db()->prepare($sql_remove_quantity_from_product);
-  $stmt_remove_quantity_from_product->execute([':productId' => $productId]);
+  $sql = 'UPDATE `products` 
+          SET `quantity` = `quantity` -1 
+          WHERE `id` = :productId';
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([':productId' => $product_id]);
   
-  return $stmt_remove_quantity_from_product;
+  return $stmt;
 }
 
-function get_cart_products_for_user(string $userId)
+function get_cart_products_for_user(string $user_id)
 {
-  $sql_get_cart_products_for_user = 'SELECT `product_id`, `cart`.`quantity`, `title`, `price`
-                                      FROM `cart`
-                                      JOIN `products` ON(cart.product_id = products.id)
-                                      WHERE `user_id` = :userId';
-  $stmt_get_cart_products_for_user = get_db()->prepare($sql_get_cart_products_for_user);
-  $stmt_get_cart_products_for_user->execute([':userId' => $userId]);
-  $res_get_cart_products_for_user = $stmt_get_cart_products_for_user->fetchAll();
+  $sql = 'SELECT `product_id`, `cart`.`quantity`, `title`, `price`
+          FROM `cart`
+          JOIN `products` ON(cart.product_id = products.id)
+          WHERE `user_id` = :userId';
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([':userId' => $user_id]);
+  $res = $stmt->fetchAll();
 
-  return $res_get_cart_products_for_user;
+  return $res;
 }
 
-function remove_product_from_cart(string $userId, string $productId, string $quantity)
+function remove_product_from_cart(string $user_id, string $product_id, string $quantity)
 {
-  $sql_remove_product_from_cart = 'DELETE FROM `cart`
-                                    WHERE `product_id` = :productId
-                                    AND `user_id` = :userId';
-  $stmt_remove_product_from_cart = get_db()->prepare($sql_remove_product_from_cart);
-  $stmt_remove_product_from_cart->execute([
-    ':productId' => $productId,
-    ':userId' => $userId
+  $sql = 'DELETE FROM `cart`
+          WHERE `product_id` = :productId
+          AND `user_id` = :userId';
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([
+    ':productId' => $product_id,
+    ':userId' => $user_id
   ]);
-  restore_product_quantity_from_cart($quantity, $productId);
+  restore_product_quantity_from_cart($quantity, $product_id);
 }
 
-function get_quantity_from_cart(string $productId)
+function get_quantity_from_cart(string $product_id)
 {
-  $sql_get_quantity_from_cart = 'SELECT `quantity` 
-                                  FROM `cart` 
-                                  WHERE `product_id` = :productId';
-  $stmt_get_quantity_from_cart = get_db()->prepare($sql_get_quantity_from_cart);
-  $stmt_get_quantity_from_cart->execute([':productId' => $productId]);
-  $res_get_quantity_from_cart = $stmt_get_quantity_from_cart->fetchColumn();
+  $sql = 'SELECT `quantity` 
+          FROM `cart` 
+          WHERE `product_id` = :productId';
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([':productId' => $product_id]);
+  $res = $stmt->fetchColumn();
 
-  return $res_get_quantity_from_cart;
+  return $res;
 }
 
-function restore_product_quantity_from_cart(string $quantity, string $productId)
+function restore_product_quantity_from_cart(string $quantity, string $product_id)
 {
-  $sql_restore_product_quantity_from_cart = 'UPDATE `products` SET `quantity` = `quantity` + :quantity
-                                              WHERE `id` = :productId';
-  $stmt_restore_product_quantity_from_cart = get_db()->prepare($sql_restore_product_quantity_from_cart);
-  $stmt_restore_product_quantity_from_cart->execute([
+  $sql = 'UPDATE `products` 
+          SET `quantity` = `quantity` + :quantity
+          WHERE `id` = :productId';
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([
     ':quantity' => $quantity,
-    ':productId' => $productId
+    ':productId' => $product_id
   ]);
 }
 
-function count_products_for_user($userId)
+function count_products_for_user($user_id)
 {
-  $sql_count_products_for_user = 'SELECT SUM(quantity)
-                                  FROM cart
-                                  WHERE `user_id` = :userId';
-  $stmt_count_products_for_user = get_db()->prepare($sql_count_products_for_user);
-  $stmt_count_products_for_user->execute([':userId' => $userId]);
-  $res_count_products_for_user = $stmt_count_products_for_user->fetchColumn();
+  $sql = 'SELECT SUM(`quantity`)
+          FROM `cart`
+          WHERE `user_id` = :userId';
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([':userId' => $user_id]);
+  $res = $stmt->fetchColumn();
   
-  return $res_count_products_for_user;
+  return $res;
 }

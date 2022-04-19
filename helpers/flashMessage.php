@@ -15,6 +15,16 @@ if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
   }
 }
 
+if (isset($error)){
+  unset($error);
+}
+if (isset($warning)){
+  unset($warning);
+}
+if (isset($success)){
+  unset($success);
+}
+
 unset($_SESSION['error']);
 unset($_SESSION['warning']);
 unset($_SESSION['success']);

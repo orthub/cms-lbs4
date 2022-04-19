@@ -7,27 +7,27 @@ require_once __DIR__ . '/../config/mail_data.php';
 require_once __DIR__ . '/../helpers/sendMail.php';
 require_once __DIR__ . '/../models/invoice.php';
 
-$userId = $_SESSION['user_id'];
-$orderId = $_SESSION['order_id'];
-$userEmail = get_user_data_by_id($userId);
+$user_id = $_SESSION['user_id'];
+$order_id = $_SESSION['order_id'];
+$user_email = get_user_data_by_id($user_id);
 
-$rootPath = $_SERVER['DOCUMENT_ROOT'];
-$file = '/storage/' . $userId . '/' . $orderId . '.pdf';
-$filePath = $rootPath . $file;
+$root_path = $_SERVER['DOCUMENT_ROOT'];
+$file = '/storage/' . $user_id . '/' . $order_id . '.pdf';
+$file_path = $root_path . $file;
 
-$orderDate = date('d.m.Y');
+$order_date = date('d.m.Y');
 
-if (file_exists($filePath)) {
+if (file_exists($file_path)) {
 
-  $message = new Swift_Message('Bestellung vom ' . $orderDate);
+  $message = new Swift_Message('Bestellung vom ' . $order_date);
   $message->setBody('Danke für ihre Bestellung, die Rechnung finden sie im Anhang.');
-  $message->attach(Swift_Attachment::fromPath($filePath));
-  $message->setTo($userEmail['email']);
+  $message->attach(Swift_Attachment::fromPath($file_path));
+  $message->setTo($user_email['email']);
   $message->setFrom([MAIL_NOREPLY => 'Stiftl | Rechnung']);
   $send = send_mail($message);
 }
 
-if (!file_exists($filePath)) {
+if (!file_exists($file_path)) {
   $_SESSION['error']['send-invoice-email'] = 'Fehler beim versenden der Email, bitte wenden sie sich an unser personal';
   header('Location: ' . '/views/thankyou.php');
 }

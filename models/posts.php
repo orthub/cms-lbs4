@@ -7,15 +7,15 @@ require_once __DIR__ . '/database.php';
  */
 function get_last_ten_posts()
 {
-  $sql_five_posts = 'SELECT `posts`.`id`, `title`, SUBSTRING(`body`, 1, 360) 
-                      AS `body`, `author`, `created`, `first_name`, `published`
-                      FROM `posts`
-                      JOIN `users` ON(`author` = `users`.`id`)
-                      ORDER BY `created` DESC
-                      LIMIT 10';
-  $result_five_posts = get_db()->query($sql_five_posts);
+  $sql = 'SELECT `posts`.`id`, `title`, SUBSTRING(`body`, 1, 360) 
+          AS `body`, `author`, `created`, `first_name`, `published`
+          FROM `posts`
+          JOIN `users` ON(`author` = `users`.`id`)
+          ORDER BY `created` DESC
+          LIMIT 10';
+  $res = get_db()->query($sql);
   
-  return $result_five_posts->fetchAll();
+  return $res->fetchAll();
 }
 
 /**
@@ -23,41 +23,40 @@ function get_last_ten_posts()
  */
 function get_post_by_id(string $post_id)
 {
-  $sql_post_from_id = 'SELECT `posts`.`id`, `title`, `body`, `author`, `created`, `first_name`, `published`
-                        FROM `posts`
-                        JOIN `users` ON(`author` = `users`.`id`)
-                        WHERE `posts`.`id` = :postId';
-
-  $statement_post_from_id = get_db()->prepare($sql_post_from_id);
-  $statement_post_from_id->execute([':postId' => $post_id]);
-  $result_post_from_id = $statement_post_from_id->fetch();
+  $sql = 'SELECT `posts`.`id`, `title`, `body`, `author`, `created`, `first_name`, `published`
+          FROM `posts`
+          JOIN `users` ON(`author` = `users`.`id`)
+          WHERE `posts`.`id` = :postId';
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([':postId' => $post_id]);
+  $res = $stmt->fetch();
   
-  return $result_post_from_id;
+  return $res;
 }
 
-function new_post(string $title, string $body, string $userId)
+function new_post(string $title, string $body, string $user_id)
 {
-  $sql_new_post = 'INSERT INTO `posts`
-                    SET `title` = :title, 
-                        `body` = :body, 
-                        `author` = :userId';
-  $stmt_new_post = get_db()->prepare($sql_new_post);
-  $stmt_new_post->execute([
+  $sql = 'INSERT INTO `posts`
+          SET `title` = :title, 
+              `body` = :body, 
+              `author` = :userId';
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([
     ':title' => $title,
     ':body' => $body,
-    ':userId' => $userId
+    ':userId' => $user_id
   ]);
 
-  return $stmt_new_post;
+  return $stmt;
 }
 
-function delete_post_by_id(string $postId)
+function delete_post_by_id(string $post_id)
 {
   try {
-    $sql_delete_post_by_id = 'DELETE FROM `posts` 
-                              WHERE `id` = :postId';
-    $stmt_delete_post_by_id = get_db()->prepare($sql_delete_post_by_id);
-    $stmt_delete_post_by_id->execute([':postId' => $postId]);
+    $sql = 'DELETE FROM `posts` 
+            WHERE `id` = :postId';
+    $stmt = get_db()->prepare($sql);
+    $stmt->execute([':postId' => $post_id]);
   } catch (\Exception $e) {
     return false;
   }
@@ -65,44 +64,44 @@ function delete_post_by_id(string $postId)
   return true;
 }
 
-function change_post_status_by_id(string $postId, string $status)
+function change_post_status_by_id(string $post_id, string $status)
 {
-  $sql_change_post_status_by_id = 'UPDATE `posts`
-                                    SET `published` = :postStatus
-                                    WHERE `id` = :postId';
-$stmt_change_post_status_by_id = get_db()->prepare($sql_change_post_status_by_id);
-$stmt_change_post_status_by_id->execute([
-':postId' => $postId,
+  $sql = 'UPDATE `posts`
+          SET `published` = :postStatus
+          WHERE `id` = :postId';
+$stmt = get_db()->prepare($sql);
+$stmt->execute([
+':postId' => $post_id,
 ':postStatus' => $status
 ]);
 
-return $stmt_change_post_status_by_id;
+return $stmt;
 }
 
-function save_edited_post(string $postId, string $title, string $body)
+function save_edited_post(string $post_id, string $title, string $body)
 {
-  $sql_save_edited_post = 'UPDATE `posts`
-                            SET `title` = :postTitle,
-                                `body` = :postBody
-                            WHERE `id` = :postId';
-  $statement_save_edited_post = get_db()->prepare($sql_save_edited_post);
-  $statement_save_edited_post->execute([
+  $sql = 'UPDATE `posts`
+          SET `title` = :postTitle,
+              `body` = :postBody
+          WHERE `id` = :postId';
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([
     ':postTitle' => $title,
     ':postBody' => $body,
-    ':postId' => $postId
+    ':postId' => $post_id
   ]);
 
-  return $statement_save_edited_post;
+  return $stmt;
 }
 
 function get_all_posts()
 {
-  $sql_five_posts = 'SELECT `posts`.`id`, `title`, SUBSTRING(`body`, 1, 50) 
-                      AS `body`, `author`, `created`, `first_name`, `published`
-                      FROM `posts`
-                      JOIN `users` ON(`author` = `users`.`id`)
-                      ORDER BY `created` DESC';
-  $result_five_posts = get_db()->query($sql_five_posts);
+  $sql = 'SELECT `posts`.`id`, `title`, SUBSTRING(`body`, 1, 50) 
+          AS `body`, `author`, `created`, `first_name`, `published`
+          FROM `posts`
+          JOIN `users` ON(`author` = `users`.`id`)
+          ORDER BY `created` DESC';
+  $res = get_db()->query($sql);
   
-  return $result_five_posts->fetchAll();
+  return $res->fetchAll();
 }

@@ -6,5 +6,4 @@ config/mail_data.php
 lib/
 /img/comp/logo.png
 /img/products
-/create_sample_database/install.sql
 create_sample_database/lokal.sql

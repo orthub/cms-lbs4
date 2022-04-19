@@ -16,6 +16,7 @@ require_once __DIR__ . '/../controllers/userList.php';
       <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
     </div>
     <div class="space-small"></div>
+
     <table>
       <thead>
         <tr>
@@ -52,8 +53,10 @@ require_once __DIR__ . '/../controllers/userList.php';
         <?php endforeach ?>
       </tbody>
     </table>
+
   </div>
   <div class="space-big"></div>
+
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

@@ -13,6 +13,7 @@ require_once __DIR__ . '/../controllers/orders.php';
     <?php require_once __DIR__ . '/partials/navbar.php' ?>
     <?php require_once __DIR__ . '/partials/userbar.php' ?>
     <div class="space-mid"></div>
+
     <div class="row">
       <div class="col-2">
       </div>
@@ -36,14 +37,15 @@ require_once __DIR__ . '/../controllers/orders.php';
       </div>
       <div class="col-2"></div>
     </div>
+
     <div class="clear-float"></div>
+
     <div class="row">
       <div class="col-4"></div>
       <div class="col-4">
         <?php echo (!empty($_SESSION['error']['no-new-address'])) ? $_SESSION['error']['no-new-address'] : '' ?>
         <h2>Neue Lieferadresse:</h2>
         <div class="space-small"></div>
-
         <form action="/controllers/newDeliveryAddress.php" method="POST">
           <label for='street'>Straße:</label><br />
           <input type='text' name='street' id='street' />
@@ -63,10 +65,10 @@ require_once __DIR__ . '/../controllers/orders.php';
           <br /><br />
           <input class="button" type='submit' value='Lieferadresse hinzufügen' />
         </form>
-
       </div>
       <div class="col-4"></div>
     </div>
+
   </div>
   <div class="space-big"></div>
   <?php unset($_SESSION['error']) ?>

@@ -16,6 +16,7 @@ require_once __DIR__ . '/../controllers/editMessage.php';
       <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
     </div>
     <div class="space-small"></div>
+
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8">
@@ -45,8 +46,7 @@ require_once __DIR__ . '/../controllers/editMessage.php';
             <td>
               <?php if ($role === 'ADMIN') : ?>
               <form action="/controllers/deleteMessage.php" method="POST">
-                <input type="hidden" name="delete-message"
-                  value="<?php echo $_SESSION['edit-message']['message_id'] ?>">
+                <input type="hidden" name="delete-message" value="<?php echo $_SESSION['edit-message']['message_id'] ?>">
                 <input class="button-delete" type="submit" value="Löschen">
               </form>
               <?php endif ?>
@@ -60,8 +60,10 @@ require_once __DIR__ . '/../controllers/editMessage.php';
       </div>
       <div class="col-2"></div>
     </div>
+
   </div>
   <div class="space-big"></div>
+
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

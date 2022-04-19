@@ -5,15 +5,15 @@ require_once __DIR__ . '/../models/contact.php';
 require_once __DIR__ . '/../models/userRights.php';
 
 if (isset($_SESSION['user_id'])) {
-  $userId = $_SESSION['user_id'];
-  $user_role = check_user_role($userId);
+  $user_id = $_SESSION['user_id'];
+  $user_role = check_user_role($user_id);
   $role = $user_role['role'];
   
   if ($role === 'ADMIN') {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       require_once __DIR__ . '/../helpers/session.php';
       
-      $get_message_id = trim(htmlspecialchars(filter_input(INPUT_POST, 'delete-message', FILTER_SANITIZE_SPECIAL_CHARS)));
+      $get_message_id = trim(filter_input(INPUT_POST, 'delete-message', FILTER_SANITIZE_SPECIAL_CHARS));
       if (empty($get_message_id)){
         header('Location: ' . '/views/message-list.php');
         exit();

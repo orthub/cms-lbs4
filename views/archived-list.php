@@ -18,6 +18,7 @@ require_once __DIR__ . '/../controllers/archivedList.php';
     <div class="space-small"></div>
     <a href="/views/dashboard.php">Zurück</a>
     <div class="space-small"></div>
+
     <table>
       <thead>
         <tr>
@@ -41,14 +42,13 @@ require_once __DIR__ . '/../controllers/archivedList.php';
               <input type="hidden" name="archived-invoices" value="<?php echo $user['id'] ?>">
               <input class="button" type="submit" value="Rechnungen ansehen">
             </form>
-
-
             <?php endif ?>
           </td>
         </tr>
         <?php endforeach ?>
       </tbody>
     </table>
+
   </div>
   <div class="space-big"></div>
   <?php require_once __DIR__ . '/partials/footer.php' ?>

@@ -8,26 +8,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
   
     $errors = [];
-    $currentPassword = filter_input(INPUT_POST, 'current-pw', FILTER_SANITIZE_SPECIAL_CHARS);
-    $newPassword = filter_input(INPUT_POST, 'new-pw', FILTER_SANITIZE_SPECIAL_CHARS);
-    $confirmPassword = filter_input(INPUT_POST, 'confirm-pw', FILTER_SANITIZE_SPECIAL_CHARS);
+    $current_password = trim(filter_input(INPUT_POST, 'current-pw', FILTER_SANITIZE_SPECIAL_CHARS));
+    $new_password = trim(filter_input(INPUT_POST, 'new-pw', FILTER_SANITIZE_SPECIAL_CHARS));
+    $confirm_password = trim(filter_input(INPUT_POST, 'confirm-pw', FILTER_SANITIZE_SPECIAL_CHARS));
 
-    if ((bool)$currentPassword === false) {
+    if ((bool)$current_password === false) {
       $_SESSION['error']['account-current-passwd'] = 'Bitte ihr aktuelles Passwort eingeben';
       $errors[] = 1;
     }
-    if ((bool)$newPassword === false) {
+    if ((bool)$new_password === false) {
       $_SESSION['error']['account-new-passwd'] = 'Bitte ein neues Passwort eingeben';
       $errors[] = 1;
     }
-    if ((bool)$confirmPassword === false) {
+    if ((bool)$confirm_password === false) {
       $_SESSION['error']['account-confirm-passwd'] = 'Bitte das neue Passwort bestätigen';
       $errors[] = 1;
     }
 
-    $_SESSION['account']['cur-pw'] = $currentPassword;
-    $_SESSION['account']['new-pw'] = $newPassword;
-    $_SESSION['account']['conf-pw'] = $confirmPassword;
+    $_SESSION['account']['cur-pw'] = $current_password;
+    $_SESSION['account']['new-pw'] = $new_password;
+    $_SESSION['account']['conf-pw'] = $confirm_password;
   
     if (count($errors) > 0) {
       header('Location: ' . '/views/account.php');
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (count($errors) === 0) {
       require_once __DIR__ . '/../models/users.php';
       $get_current_password = get_current_password_by_id($user_id);
-      $check_password = password_hash($currentPassword, PASSWORD_DEFAULT);
+      $check_password = password_hash($current_password, PASSWORD_DEFAULT);
 
       if (password_verify($check_password, $get_current_password)) {
         $_SESSION['error']['check-failed'] = 'Falsches Passwort';
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       if (count($errors) === 0){
         
-        if (mb_strlen($newPassword) < 8) {
+        if (mb_strlen($new_password) < 8) {
           $_SESSION['error']['new-password-length'] = 'Passwort muss mindestens 8 Zeichen lang sein';
           $errors[] = 1;
         }
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (count($errors) === 0){
           
-          if ($newPassword !== $confirmPassword) {
+          if ($new_password !== $confirm_password) {
             $_SESSION['error']['confirm-failed'] = 'Passwörter stimmen nicht überein';
             $errors[] = 1;
           }
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           if (count($errors) > 0) {
             header('Location: ' . '/views/account.php');
           }
-          $set_new_password = set_new_password_by_id($user_id, $newPassword);
+          $set_new_password = set_new_password_by_id($user_id, $new_password);
 
           if ((bool)$set_new_password === false) {
             $_SESSION['error']['new-password'] = 'Passwort konnte nicht geändert werden';

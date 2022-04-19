@@ -7,7 +7,7 @@ require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 // bei eingeloggtem benutzer werden die rechte abgefragt, wenn der benutzer kein
 // administrator ist, wird wieder auf die startseite umgeleitet
 if (isset($_SESSION['user_id'])) {
-  $userId = $_SESSION['user_id'];
+  $user_id = $_SESSION['user_id'];
   $user_role = check_user_role($userId);
   $role = $user_role['role'];
   
@@ -19,7 +19,7 @@ if (isset($_SESSION['user_id'])) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     require_once __DIR__ . '/../helpers/session.php';
 
-    $archiveId = trim(htmlspecialchars(filter_input(INPUT_POST, 'archived-invoices')));
+    $archive_id = trim(filter_input(INPUT_POST, 'archived-invoices', FILTER_SANITIZE_SPECIAL_CHARS));
     $invoices_url = '/var/www/html/storage/' . $archiveId . '/';
     $archived_invoices = [];
     
@@ -32,7 +32,7 @@ if (isset($_SESSION['user_id'])) {
       }
     }
 
-    $_SESSION['archived']['invoice-url'] = '/storage/' . $archiveId . '/';
+    $_SESSION['archived']['invoice-url'] = '/storage/' . $archive_id . '/';
     $_SESSION['archived']['invoice'] = $archived_invoices;
 
     header('Location: ' . '/views/archived-invoices.php');

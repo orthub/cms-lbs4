@@ -4,17 +4,16 @@ require_once __DIR__ . '/../lib/vendor/autoload.php';
 require_once __DIR__ . '/../config/mail_data.php';
 require_once __DIR__ . '/../helpers/sendMail.php';
 
-$registerDate = date('Y.m.d');
-$token = hash('sha256', $registerDate);
+$register_date = date('Y.m.d');
+$token = hash('sha256', $register_date);
 $link = 'https://cms-lbs4.ddev.site/views/confirmedEmail.php?actoken=' . $token;
 $_SESSION['register']['token'] = $token;
 
-$newUserEmail = $_SESSION['registerEmail'];
+$new_user_email = $_SESSION['registerEmail'];
 
 $message = new Swift_Message('Stiftl - Account aktivierung');
-$message->setBody('Um die Registrierung abzuschließen, klicken Sie bitte auf den Aktivierungslink. ' . 
-$link);
-$message->setTo($newUserEmail);
+$message->setBody('Um die Registrierung abzuschließen, klicken Sie bitte auf den Aktivierungslink. ' . $link);
+$message->setTo($new_user_email);
 $message->setFrom([MAIL_NOREPLY => 'Stiftl | Account aktivierung']);
 $send = send_mail($message);
 

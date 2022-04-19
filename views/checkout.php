@@ -15,6 +15,7 @@ require_once __DIR__ . '/../config/company_data.php';
     <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
   </div>
   <div class="space-small"></div>
+
   <div class="row">
     <div class="col-3">
     </div>
@@ -32,8 +33,7 @@ require_once __DIR__ . '/../config/company_data.php';
       <p class="checkout-text">BLZ: <b><?php echo ACCOUNT_BLZ ?></b></p>
       <p class="checkout-text">Kontonummer: <b><?php echo ACCOUNT_NUMBER ?></b></p>
       <p class="checkout-text">Verwendungszweck: <b><?php echo $_SESSION['order_id'] ?></b></p>
-      <p class="checkout-text">Betrag:
-        <?php echo '<b>' . $_SESSION['totalPrice'] . '€</b> inkl 2,55€ Versandkosten' ?></p>
+      <p class="checkout-text">Betrag: <?php echo '<b>' . $_SESSION['totalPrice'] . '€</b> inkl 2,55€ Versandkosten' ?></p>
       <div class="space-small"></div>
       <form action="/controllers/thankyou.php" method="POST">
         <input type="hidden" name="deliveryId" value="<?php echo $_SESSION['checkout']['deliveryAddress']['id'] ?>">
@@ -42,7 +42,9 @@ require_once __DIR__ . '/../config/company_data.php';
     </div>
     <div class="col-3"></div>
   </div>
+
   <div class="space-big"></div>
+
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

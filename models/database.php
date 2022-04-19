@@ -12,9 +12,10 @@ function get_db()
     $user = DB_USER;
     $password = DB_PASSWD;
     $db = new PDO($dsn, $user, $password);
-    // $db = new PDO('mysql:host=db;port=3306;dbname=cms_shop', 'root', 'root');
   } catch (\Exception $e) {
-    
+    echo 'Überprüfen sie die einstellungen für die Datenbank';
+    echo '<br />' . $e;
+    exit();
   }
 
   return $db;

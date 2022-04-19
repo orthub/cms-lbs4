@@ -5,8 +5,8 @@ require_once __DIR__ . '/../models/userRights.php';
 
 
 if (isset($_SESSION['user_id'])) {
-  $userId = $_SESSION['user_id'];
-  $user_role = check_user_role($userId);
+  $user_id = $_SESSION['user_id'];
+  $user_role = check_user_role($user_id);
   $role = $user_role['role'];
 
   if ($role === 'CUSTOMER') {
@@ -17,12 +17,12 @@ if (isset($_SESSION['user_id'])) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
     require_once __DIR__ . '/../helpers/session.php';
-    $product_title = filter_input(INPUT_POST, 'product', FILTER_SANITIZE_SPECIAL_CHARS);
-    $slug = filter_input(INPUT_POST, 'slug', FILTER_SANITIZE_SPECIAL_CHARS);
-    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS);
-    $price = filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_INT);
-    $category_id = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_SPECIAL_CHARS);
-    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_NUMBER_INT);
+    $product_title = trim(filter_input(INPUT_POST, 'product', FILTER_SANITIZE_SPECIAL_CHARS));
+    $slug = trim(filter_input(INPUT_POST, 'slug', FILTER_SANITIZE_SPECIAL_CHARS));
+    $description = trim(filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS));
+    $price = trim(filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_INT));
+    $category_id = trim(filter_input(INPUT_POST, 'category', FILTER_SANITIZE_SPECIAL_CHARS));
+    $quantity = trim(filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_NUMBER_INT));
 
     if ((bool)$product_title === false) {
       $_SESSION['error']['title'] = 'Titel darf nicht leer sein';
@@ -72,9 +72,9 @@ if (isset($_SESSION['user_id'])) {
       require_once __DIR__ . '/../models/products.php';
       $categories = get_categories();
 
-      $slugExists = check_slugs($slug);
+      $slug_exists = check_slugs($slug);
     
-      if ($slugExists === $slug){
+      if ($slug_exists === $slug){
         $_SESSION['error']['slug-exists'] = 'Slug wird schon verwendet, bitte einen neuen wählen';
         header('Location: ' . '/views/newProduct.php');
         exit();
@@ -91,18 +91,11 @@ if (isset($_SESSION['user_id'])) {
     
     $create_new_product = new_product($product_title, $slug, $description, $price, $category_id, $quantity);
 
-    
-
-
     if ($create_new_product){
       $_SESSION['new-product'] = 'Neues Produkt erfolgreich angelegt';
       unset($_SESSION['newProduct']);
       unset($_SESSION['error']);
       header('Location: ' . '/views/products.php');
-    }
-    
+    } 
   }
-  
-  
-
 }

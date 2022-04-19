@@ -6,11 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   require_once __DIR__ . '/../helpers/session.php';
   require_once __DIR__ . '/../models/invoice.php';
  
-  $order_id = $_POST['order_id'];
+  $order_id = trim(filter_input(INPUT_POST, 'order_id', FILTER_SANITIZE_SPECIAL_CHARS));
+  $user_id = $_SESSION['user_id'];
   
-  $userId = $_SESSION['user_id'];
-  
-  $get_base_order = get_order_with_user_and_order_id($userId, $order_id);
+  $get_base_order = get_order_with_user_and_order_id($user_id, $order_id);
   $get_products_from_order = get_products_for_order($order_id);
 
   $_SESSION['order-products-quantity'] = $get_products_from_order;
@@ -26,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $_SESSION['products-from-order'] = $products;
   $_SESSION['base-order'] = $get_base_order;
 
-  $endprice = 0;
+  $end_price = 0;
   header('Location: ' . '/views/invoice.php');
   
 }

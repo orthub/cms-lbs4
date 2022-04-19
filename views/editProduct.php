@@ -15,16 +15,14 @@ require_once __DIR__ . '/../controllers/editProduct.php';
       <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
     </div>
     <div class="space-small"></div>
+
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6">
         <div class="text-center">
-          <a
-            href="/controllers/productStatus.php?prodid=<?php echo $_SESSION['edit-product']['id'] . '&current=' . $_SESSION['edit-product']['status'] . '&slug=' . $_SESSION['edit-product']['slug'] ?>">
-            <button
-              class="<?php echo ($_SESSION['edit-product']['status'] === 'LIVE') ? 'button-live' : 'button-draft' ?>">Status:
-              <?php echo $_SESSION['edit-product']['status'] ?>
-            </button></a>
+          <a href="/controllers/productStatus.php?prodid=<?php echo $_SESSION['edit-product']['id'] . '&current=' . $_SESSION['edit-product']['status'] . '&slug=' . $_SESSION['edit-product']['slug'] ?>">
+            <button class="<?php echo ($_SESSION['edit-product']['status'] === 'LIVE') ? 'button-live' : 'button-draft' ?>">Status: <?php echo $_SESSION['edit-product']['status'] ?></button>
+          </a>
         </div>
         <div class="space-small"></div>
         <div class="row">
@@ -54,8 +52,7 @@ require_once __DIR__ . '/../controllers/editProduct.php';
           </select>
           <br />
           <label for="quantity">Stück</label>
-          <input id="quantity" type="number" name="quantity"
-            value="<?php echo $_SESSION['edit-product']['quantity'] ?>"><br /><br />
+          <input id="quantity" type="number" name="quantity" value="<?php echo $_SESSION['edit-product']['quantity'] ?>"><br /><br />
           <label for="">Preis (in cent)</label>
           <input type="number" name="price" value="<?php echo $_SESSION['edit-product']['price'] ?>">
           <input type="hidden" name="productId" value="<?php echo $_SESSION['edit-product']['id'] ?>">
@@ -67,8 +64,10 @@ require_once __DIR__ . '/../controllers/editProduct.php';
       </div>
       <div class="col-3"></div>
     </div>
+
     <div class="space-big"></div>
   </div>
+
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

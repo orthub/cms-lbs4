@@ -4,75 +4,40 @@ require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $userId = $_SESSION['user_id'];
-  $deliveryId = filter_input(INPUT_POST, 'deliveryId', FILTER_SANITIZE_SPECIAL_CHARS);
-  $_SESSION['deliveryId'] = $deliveryId;
+  $user_id = $_SESSION['user_id'];
+  $delivery_id = trim(filter_input(INPUT_POST, 'deliveryId', FILTER_SANITIZE_SPECIAL_CHARS));
+  $_SESSION['deliveryId'] = $delivery_id;
   
   require_once __DIR__ . '/../models/checkout.php';
   require_once __DIR__ . '/../models/cart.php';
   
-  $deliveryName = username_for_order($userId);
-  $deliveryAddress = delivery_address_for_order($userId, $deliveryId);
+  $delivery_name = username_for_order($user_id);
+  $delivery_address = delivery_address_for_order($user_id, $delivery_id);
   
-  $_SESSION['checkout']['deliveryAddress'] = $deliveryAddress;
-  $_SESSION['checkout']['deliveryName'] = $deliveryName;
+  $_SESSION['checkout']['deliveryAddress'] = $delivery_address;
+  $_SESSION['checkout']['deliveryName'] = $delivery_name;
   
-  $totalPrice = $_SESSION['totalPrice'] * 100;
+  $total_price = $_SESSION['totalPrice'] * 100;
   
   // erzeugen einer zufallszahl für die bestellung
-  $randomOrderId = date('dmYHi');
+  $random_order_id = date('dmYHi');
   // bestellungs id zusammensetzen mit der zufallszahl und user id
-  $orderId = $randomOrderId . $userId;
-  $_SESSION['order_id'] = $orderId;
+  $order_id = $random_order_id . $user_id;
+  $_SESSION['order_id'] = $order_id;
   
   // bestellung speichern
-  $saveOrder = save_order($userId, $orderId, $deliveryId, $totalPrice);  
+  $save_order = save_order($user_id, $order_id, $delivery_id, $total_price);  
   
   // produkte vom warenkorb speichern
-  $saveOrderProducts = save_order_products($userId, $orderId);
+  $save_order_products = save_order_products($user_id, $order_id);
   
   // warenkorb leeren
-  $deleteCartProducts = delete_products_from_cart($userId);
+  $delete_cart_products = delete_products_from_cart($user_id);
  
   
-  unset($orderId);
-  unset($totalPrice);
-  unset($userId);
+  unset($order_id);
+  unset($total_price);
+  unset($user_id);
 
   header('Location: ' . '/views/checkout.php');
 }
-
-
-
-
-
-
-
-  
-  // $deliveryAddress = delivery_address_for_order($userId, $_SESSION['deliveryId']);
-  
-  
-  
-  // echo gettype($saveOrder);
-  // if ($saveOrder === 0) {
-  //   $_SESSION['order_saved'] = 'ORDER SAVED';
-  // }
-  // echo $_SESSION['order_saved'];
-  // exit();
-  // if ($saveOrder === true) {
-  //   $_SESSION['cart_products_saved'] = 'CART PRODUCTS SAVED';
-  // }
-
-  // if ($saveOrderProducts === true) {
-  //   $_SESSION['cart_products_deleted'] = 'CART PRODUCTS DELETED';
-  // }
-
-  
-  
-  
-
-
-  // fehler beim erzeugen der bestellung
-  // if ($deleteCart === false) {
-  //   header('Location: ' . '/shop/views/checkout.php');
-  // }

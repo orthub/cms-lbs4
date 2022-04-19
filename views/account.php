@@ -18,6 +18,7 @@ require_once __DIR__ . '/../controllers/getDeliveryAddress.php';
     <div class="space-small"></div>
     <h2 class="text-center">Account</h2>
     <div class="space-small"></div>
+
     <div class="row">
       <div class="col-6">
         <p class="text-bold">Neue Lieferadresse hinzufügen</p><br />
@@ -54,9 +55,10 @@ require_once __DIR__ . '/../controllers/getDeliveryAddress.php';
         </form>
       </div>
     </div>
-    <div class="space-small"></div>
-    <div class="space-small"></div>
+
+    <div class="space-big"></div>
     <p class="text-bold">Verfügbare Lieferadressen</p>
+
     <div class="row">
       <?php foreach ($deliveryAddress as $key => $value) : ?>
       <div class="col-2">
@@ -72,7 +74,9 @@ require_once __DIR__ . '/../controllers/getDeliveryAddress.php';
       </div>
       <?php endforeach ?>
     </div>
+
     <div class="space-small"></div>
+
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6 text-center">
@@ -82,6 +86,7 @@ require_once __DIR__ . '/../controllers/getDeliveryAddress.php';
       </div>
       <div class="col-3"></div>
     </div>
+
   </div>
   <div class="space-big"></div>
   <?php require_once __DIR__ . '/partials/footer.php' ?>

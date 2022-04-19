@@ -6,15 +6,15 @@ require_once __DIR__ . '/../models/userRights.php';
 require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 
 if (isset($_SESSION['user_id'])) {
-  $userId = $_SESSION['user_id'];
-  $user_role = check_user_role($userId);
+  $user_id = $_SESSION['user_id'];
+  $user_role = check_user_role($user_id);
   $role = $user_role['role'];
   
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once __DIR__ . '/../helpers/session.php';
     $errors = [];
-    $title = filter_input(INPUT_POST, 'new-title', FILTER_SANITIZE_SPECIAL_CHARS);
-    $body = filter_input(INPUT_POST, 'new-body', FILTER_SANITIZE_SPECIAL_CHARS);
+    $title = trim(filter_input(INPUT_POST, 'new-title', FILTER_SANITIZE_SPECIAL_CHARS));
+    $body = trim(filter_input(INPUT_POST, 'new-body', FILTER_SANITIZE_SPECIAL_CHARS));
 
     if ((bool)$title === false) {
       $_SESSION['error']['title'] = 'Titel darf nicht leer sein';
@@ -41,7 +41,7 @@ if (isset($_SESSION['user_id'])) {
 
     }
 
-    $create_new_post = new_post($title, $body, $userId);
+    $create_new_post = new_post($title, $body, $user_id);
 
     if ($create_new_post){
       $_SESSION['new-post'] = 'Neuer Post wurde erfolgreich erstellt';

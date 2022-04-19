@@ -2,40 +2,40 @@
 
 require_once __DIR__ . '/database.php';
 
-function get_delivery_address(string $userId)
+function get_delivery_address(string $user_id)
 {
-  $sql_get_delivery_address = 'SELECT `id`, `user_id`, `city`, `street`, `street_number`, `zip_code`
+  $sql = 'SELECT `id`, `user_id`, `city`, `street`, `street_number`, `zip_code`
                                 FROM `delivery_address`
                                 WHERE `user_id` = :userId';
-  $stmt_get_delivery_address = get_db()->prepare($sql_get_delivery_address);
-  $stmt_get_delivery_address->execute([':userId' => $userId]);
-  $res_get_delivery_address = $stmt_get_delivery_address->fetchAll();
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([':userId' => $user_id]);
+  $res = $stmt->fetchAll();
 
-  return $res_get_delivery_address;
+  return $res;
 }
 
-function save_delivery_address(string $userId, string $city, string $street, string $streetNumber, string $zipCode)
+function save_delivery_address(string $user_id, string $city, string $street, string $street_number, string $zip_code)
 {
-  $sql_save_delivery_address = 'INSERT INTO `delivery_address`
+  $sql = 'INSERT INTO `delivery_address`
                                 SET `user_id` = :userId, 
                                     `city` = :city, 
                                     `street` = :street, 
                                     `street_number` = :streetNumber, 
                                     `zip_code` = :zipCode';
-  $stmt_save_delivery_address = get_db()->prepare($sql_save_delivery_address);
-  $stmt_save_delivery_address->execute([
-    ':userId' => $userId,
+  $stmt = get_db()->prepare($sql);
+  $stmt->execute([
+    ':userId' => $user_id,
     ':city' => $city,
     ':street' => $street,
-    ':streetNumber' => $streetNumber,
-    ':zipCode' => $zipCode,
+    ':streetNumber' => $street_number,
+    ':zipCode' => $zip_code,
   ]);
-  $res_save_delivery_address = $stmt_save_delivery_address->fetchAll();
+  $res = $stmt->fetchAll();
 
-  return $res_save_delivery_address;
+  return $res;
 }
 
-function delete_address_by_id(string $userId, string $addressId)
+function delete_address_by_id(string $user_id, string $address_id)
 {
   try {
     $sql = 'DELETE FROM `delivery_address`
@@ -43,8 +43,8 @@ function delete_address_by_id(string $userId, string $addressId)
             AND `user_id` = :userId';
     $stmt = get_db()->prepare($sql);
     $stmt->execute([
-      ':addressId' => $addressId,
-      ':userId' => $userId
+      ':addressId' => $address_id,
+      ':userId' => $user_id
     ]);
   } catch (\Exception $e) {
     return false;

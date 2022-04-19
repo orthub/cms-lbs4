@@ -17,6 +17,7 @@ require_once __DIR__ . '/../controllers/products.php';
     <div class="space-small"></div>
     <h2 class="text-center"><?php echo $category_from_url ?></h2>
     <?php if(!$category_available) : ?>
+
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8">
@@ -24,8 +25,10 @@ require_once __DIR__ . '/../controllers/products.php';
       </div>
       <div class="col-2"></div>
     </div>
+
     <?php endif ?>
     <div class="space-small"></div>
+
     <div class="row">
       <?php if($category_available) : ?>
       <?php foreach ($category_products as $product) : ?>
@@ -46,10 +49,12 @@ require_once __DIR__ . '/../controllers/products.php';
       </div>
       <?php endforeach ?>
     </div>
+
     <?php endif ?>
   </div>
   </div>
   <div class="space-big"></div>
+
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

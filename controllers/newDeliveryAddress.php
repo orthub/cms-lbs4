@@ -8,12 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $errors = [];
   require_once __DIR__ . '/../models/addresses.php';
 
-  $userId = $_SESSION['user_id'];
+  $user_id = $_SESSION['user_id'];
   
-  $city = htmlspecialchars(filter_input(INPUT_POST, 'city'));
-  $street = htmlspecialchars(filter_input(INPUT_POST, 'street'));
-  $streetNumber = htmlspecialchars(filter_input(INPUT_POST, 'streetNumber'));
-  $zipCode = htmlspecialchars(filter_input(INPUT_POST, 'zip'));
+  $city = trim(filter_input(INPUT_POST, 'city', FILTER_SANITIZE_SPECIAL_CHARS));
+  $street = trim(filter_input(INPUT_POST, 'street', FILTER_SANITIZE_SPECIAL_CHARS));
+  $street_number = trim(filter_input(INPUT_POST, 'streetNumber', FILTER_SANITIZE_SPECIAL_CHARS));
+  $zip_code = trim(filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_SPECIAL_CHARS));
 
   if ((bool)$city === false) {
     $_SESSION['error']['new-city'] = 'Bitte Stadt angeben';
@@ -25,12 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors[] = 1;
   }
 
-  if ((bool)$streetNumber === false) {
+  if ((bool)$street_number === false) {
     $_SESSION['error']['new-streetNumber'] = 'Bitte Straßennummer angeben';
     $errors[] = 1;
   }
 
-  if ((bool)$zipCode === false) {
+  if ((bool)$zip_code === false) {
     $_SESSION['error']['new-zip'] = 'Bitte Postleitzahl angeben';
     $errors[] = 1;
   }
@@ -41,9 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if (count($errors) === 0) {
-      $newDeliveryAddress = save_delivery_address($userId, $city, $street, $streetNumber, $zipCode);
+      $new_delivery_address = save_delivery_address($user_id, $city, $street, $street_number, $zip_code);
      
-      if ($newDeliveryAddress === false) {
+      if ($new_delivery_address === false) {
         $_SESSION['error']['no-new-address'] = 'Neue Adresse konnte nicht angelegt werden, versuchen sie es später noch einmal!';
         
         header('Location: ' . '/views/address.php');

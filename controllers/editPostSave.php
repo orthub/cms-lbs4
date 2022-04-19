@@ -6,18 +6,17 @@ require_once __DIR__ . '/../models/userRights.php';
 require_once __DIR__ . '/../helpers/nonUserRedirect.php';
 
 if (isset($_SESSION['user_id'])) {
-  $userId = $_SESSION['user_id'];
-  $user_role = check_user_role($userId);
+  $user_id = $_SESSION['user_id'];
+  $user_role = check_user_role($user_id);
   $role = $user_role['role'];
   
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once __DIR__ . '/../helpers/session.php';
 
     $errors = [];
-
-    $postId = htmlspecialchars($_POST['postId']);
-    $title = trim(htmlspecialchars($_POST['title']));
-    $body = trim(htmlspecialchars($_POST['body']));
+    $post_id = trim(filter_input(INPUT_POST, 'postId', FILTER_SANITIZE_SPECIAL_CHARS));
+    $title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS));
+    $body = trim(filter_input(INPUT_POST, 'body', FILTER_SANITIZE_SPECIAL_CHARS));
 
     if ((bool)$title === false) {
       $_SESSION['error']['post-title'] = 'Bitte einen Titel eingeben';
@@ -34,7 +33,7 @@ if (isset($_SESSION['user_id'])) {
       exit();
     }
     
-    $save_product = save_edited_post($postId, $title, $body);
+    $save_product = save_edited_post($post_id, $title, $body);
 
     if ($save_product) {
       $_SESSION['success']['post-edited'] = 'Post erfolgreich bearbeitet';

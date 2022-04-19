@@ -14,6 +14,7 @@ require_once __DIR__ . '/../config/company_data.php';
   <?php require_once __DIR__ . '/partials/userbar.php' ?>
   <div class="content">
     <div class="space-small"></div>
+
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8">
@@ -24,6 +25,7 @@ require_once __DIR__ . '/../config/company_data.php';
       </div>
       <div class="col-2"></div>
     </div>
+
     <div class="row">
       <div class="col-2">
       </div>
@@ -36,6 +38,7 @@ require_once __DIR__ . '/../config/company_data.php';
       </div>
       <div class="col-2"></div>
     </div>
+
     <div class="row">
       <div class="col-2">
       </div>
@@ -78,11 +81,11 @@ require_once __DIR__ . '/../config/company_data.php';
       </div>
       <div class="col-2"></div>
     </div>
+
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8">
-        <h2>Gesamtpreis (inkl. MwSt) und Versand: <?php echo ($_SESSION['base-order']['order_price']) / 100 . '€' ?>
-        </h2>
+        <h2>Gesamtpreis (inkl. MwSt) und Versand: <?php echo ($_SESSION['base-order']['order_price']) / 100 . '€' ?></h2>
         <hr />
         <br />
         <form action="/controllers/downloadInvoice.php" method="POST">
@@ -93,8 +96,10 @@ require_once __DIR__ . '/../config/company_data.php';
       </div>
       <div class="col-2"></div>
     </div>
+
   </div>
   <div class="space-big"></div>
+
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

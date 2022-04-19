@@ -6,28 +6,26 @@ require_once __DIR__ . '/../models/userRights.php';
 
 
 if (isset($_SESSION['user_id'])) {
-  $userId = $_SESSION['user_id'];
-  $user_role = check_user_role($userId);
+  $user_id = $_SESSION['user_id'];
+  $user_role = check_user_role($user_id);
   $role = $user_role['role'];
   
   if ($_SERVER['REQUEST_METHOD'] === 'POST' && $role === 'ADMIN') {
     require_once __DIR__ . '/../helpers/session.php';
-    $productId = htmlspecialchars($_POST['delete-product']);
+    $product_id = htmlspecialchars($_POST['delete-product']);
     
     // pfad und slug aus der datenbank holen
-    $image_slug_url = get_slug_path_by_id($productId);
+    $image_slug_url = get_slug_path_by_id($product_id);
     $path_to_file = '/var/www/html' . $image_slug_url['img_url'];
   
     // aus der datenbank löschen, falls das produkt nicht schon verwendet wurde
-    $delete_from_database = delete_product_by_id($productId);
+    $delete_from_database = delete_product_by_id($product_id);
     
     if ($delete_from_database === false) {
       $_SESSION['error']['constraint'] = 'Produkt wird verwendet und kann nicht gelöscht werden';
       header('Location: ' . '/views/product-list.php');
       exit();
     }
-    
-    
 
     // wenn die datei existiert und nicht das standardbild verwendet wird, wird die datei gelöscht
     if (file_exists($path_to_file) && $path_to_file !== '/var/www/html/img/products/default.jpg') {

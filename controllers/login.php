@@ -13,25 +13,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $errors = [];
-  $emailExist = false;
-  $matchPasswd = false;
-  $loginEmail = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-  $loginPasswd = filter_input(INPUT_POST, 'passwd');
+  $email_exist = false;
+  $match_passwd = false;
+  $login_email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+  $login_password = trim(filter_input(INPUT_POST, 'passwd'));
 
-  if ((bool)$loginEmail === false) {
+  if ((bool)$login_email === false) {
     $_SESSION['error']['login-mail'] = 'Bitte Email eingeben';
     $errors[] = 1;
   }
-  if ((bool)$loginPasswd === false) {
+  if ((bool)$login_password === false) {
     $_SESSION['error']['login-passwd'] = 'Bitte Passwort eingeben';
     $errors[] = 1;
   }
 
-  if ((bool)$loginEmail) {
-    $_SESSION['login']['email'] = $loginEmail;
+  if ((bool)$login_email) {
+    $_SESSION['login']['email'] = $login_email;
   }
   if ((bool)$loginPasswd) {
-    $_SESSION['login']['passwd'] = $loginPasswd;
+    $_SESSION['login']['passwd'] = $login_password;
   }
 
   if (count($errors) > 0) {
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (count($errors) === 0) {
     require_once __DIR__ . '/../models/login.php';
     
-    $emailExist = search_mail($loginEmail, $loginPasswd);
+    $email_exist = search_mail($login_email, $login_password);
 
     if ((bool)$emailExist === false) {
       $_SESSION['error']['login-fail'] = 'Email oder Passwort stimmt nicht';
@@ -53,16 +53,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ((bool)$emailExist) {
-      $match = get_password_from_email($loginEmail);
-      $isValidLogin = password_verify($loginPasswd, $match);
+      $match = get_password_from_email($login_email);
+      $is_valid_login = password_verify($login_password, $match);
       
-      if (!$isValidLogin) {
+      if (!$is_valid_login) {
         $_SESSION['error']['login-fail'] = 'Email oder Passwort stimmt nicht';
         header('Location: ' . '/views/login.php');
       }
   
-      if ($isValidLogin) {
-        $user_id = get_user_id($loginEmail);
+      if ($is_valid_login) {
+        $user_id = get_user_id($login_email);
         $_SESSION['user_id'] = $user_id;
         unset($_SESSION['login']);
         header('Location: ' . '/views/main.php');

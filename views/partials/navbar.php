@@ -1,4 +1,5 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../config/company_data.php';
 require_once __DIR__ . '/../../models/cart.php';
 require_once __DIR__ . '/../../controllers/products.php';
 require_once __DIR__ . '/../../controllers/userRights.php';
@@ -17,7 +18,7 @@ if (isset($_SESSION['user_id'])) {
 
   <nav>
     <ul class="navigation">
-      <li><a href="/index.php"><i class="fas fa-house-damage"></i> Stiftl</a></li>
+      <li><a href="/index.php"><i class="fas fa-house-damage"></i><?php echo ' ' . COMPANY_NAME ?></a></li>
       <li><a href="/views/posts.php"><i class="fab fa-blogger-b"></i> Neues</a></li>
       <li><a href="/views/products.php"><i class="fas fa-store"></i> Shop</a></li>
       <div class="dropdown">

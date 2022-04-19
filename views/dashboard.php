@@ -15,6 +15,7 @@ require_once __DIR__ . '/../controllers/dashboard.php';
       <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
     </div>
     <div class="space-mid"></div>
+
     <div class="row">
       <div class="col-6">
         <h2>Benutzer</h2>
@@ -37,7 +38,9 @@ require_once __DIR__ . '/../controllers/dashboard.php';
         <a href="/views/message-list.php">Alle Nachrichten anzeigen</a>
       </div>
     </div>
+
     <div class="space-mid"></div>
+
     <div class="row">
       <div class="col-6">
         <h2>Produkte</h2>
@@ -66,7 +69,9 @@ require_once __DIR__ . '/../controllers/dashboard.php';
         <a href="/views/post-list.php">Alle Posts anzeigen</a>
       </div>
     </div>
+
     <div class="space-mid"></div>
+
     <div class="row">
       <div class="col-6">
         <h2>Gelöschte/Archivierte Benutzer</h2>
@@ -77,8 +82,10 @@ require_once __DIR__ . '/../controllers/dashboard.php';
       </div>
       <div class="col-6"></div>
     </div>
+
   </div>
   <div class="space-big"></div>
+
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

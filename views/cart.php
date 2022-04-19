@@ -12,6 +12,7 @@ require_once __DIR__ . '/../controllers/cart.php';
     <?php require_once __DIR__ . '/partials/navbar.php' ?>
     <?php require_once __DIR__ . '/partials/userbar.php' ?>
     <div class="space-mid"></div>
+
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6">
@@ -58,6 +59,7 @@ require_once __DIR__ . '/../controllers/cart.php';
       </div>
       <div class="col-3"></div>
     </div>
+
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6">
@@ -65,11 +67,13 @@ require_once __DIR__ . '/../controllers/cart.php';
       </div>
       <div class="col-3"></div>
     </div>
+
     <?php else : ?>
     <h2>Ihr Warenkorb ist leer</h2>
     <div class="space-small"></div>
     <a href="/views/products.php">Hier geht es zu unseren Produkten</a>
     <?php endif ?>
+
     <div class="space-big"></div>
   </div>
   <?php require_once __DIR__ .'/partials/footer.php' ?>

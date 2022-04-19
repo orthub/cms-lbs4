@@ -7,7 +7,6 @@ if (isset($_SESSION['user_id'])) {
   $cartItemsCount = count_products_for_user($_SESSION['user_id']);
 } ?>
 
-
 <div class="userbar">
   <?php
   require_once __DIR__ . '/../../models/login.php';

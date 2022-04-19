@@ -15,15 +15,13 @@ require_once __DIR__ . '/../controllers/editPost.php';
       <?php require_once __DIR__ . '/../helpers/flashMessage.php' ?>
     </div>
     <div class="space-small"></div>
+
     <div class="row">
       <div class="col-4"></div>
       <div class="col-4">
-        <a
-          href="/controllers/postStatus.php?postid=<?php echo $_SESSION['edit-post']['id'] . '&status=' . $_SESSION['edit-post']['published'] ?>">
-          <button
-            class="<?php echo ($_SESSION['edit-post']['published'] === 'LIVE') ? 'button-live' : 'button-draft' ?>">Veröffentlicht:
-            <?php echo ($_SESSION['edit-post']['published'] === 'LIVE') ? 'Ja' : 'Nein' ?>
-          </button></a>
+        <a href="/controllers/postStatus.php?postid=<?php echo $_SESSION['edit-post']['id'] . '&status=' . $_SESSION['edit-post']['published'] ?>">
+          <button class="<?php echo ($_SESSION['edit-post']['published'] === 'LIVE') ? 'button-live' : 'button-draft' ?>">Veröffentlicht: <?php echo ($_SESSION['edit-post']['published'] === 'LIVE') ? 'Ja' : 'Nein' ?></button>
+        </a>
         <br /><br />
         <form action="/controllers/editPostSave.php" method="POST">
           <label for="post-title">Titel</label>
@@ -37,8 +35,10 @@ require_once __DIR__ . '/../controllers/editPost.php';
       </div>
       <div class="col-4"></div>
     </div>
+
   </div>
   <div class="space-big"></div>
+
   <?php require_once __DIR__ . '/partials/footer.php' ?>
 </body>
 

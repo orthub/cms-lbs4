@@ -12,6 +12,7 @@ require_once __DIR__ . '/../controllers/archivedInvoices.php';
 
   <div class="space-mid"></div>
   <div class="content">
+
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6">
@@ -26,6 +27,7 @@ require_once __DIR__ . '/../controllers/archivedInvoices.php';
       </div>
       <div class="col-3"></div>
     </div>
+
   </div>
   <div class="space-big"></div>
   <?php require_once __DIR__ . '/partials/footer.php' ?>
